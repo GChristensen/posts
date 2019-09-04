@@ -37,7 +37,7 @@ Enso Launcher 0.4.5+ allows to create a command that will automatically move the
 specified as a command argument. NOTE: you need to enable
 Web UI in MPC settings. You may play with the following code in Enso command editor.
 
-<video src="/enso-portable/media/enso.webm" width="100%" type="video/webm" muted />
+<video src="/enso-portable/media/enso.webm" width="100%" style="max-width: 500px" type="video/webm" muted ></video>
 
 #### Obtaining category directories as command arguments
 
