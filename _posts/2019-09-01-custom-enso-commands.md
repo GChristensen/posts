@@ -37,7 +37,7 @@ Enso Launcher 0.4.5+ allows to create a command that will automatically move the
 specified as a command argument. NOTE: you need to enable
 Web UI in MPC settings.
 
-<video src="/posts/videos/enso-demo.webm" width="100%" type="video/webm" muted autoplay loop></video>
+<video src="/posts/videos/enso-demo.webm" width="100%" type="video/webm" controls></video>
 
 You may play with the following code in Enso command editor.
 
