@@ -9,16 +9,16 @@ Command interfaces - an integral part of life in 1980s -  gain a new breath with
 [Ubiquity Web Extension](https://gchristensen.github.io/ubiquitywe/). Although graphical user interfaces
 have opened a new world in computer industry, in certain domains text commands still offer
 advantages in usability and accessibility. If your subject area could be relatively easily formalized 
-and you have some API to act on, by using the tools mentioned above you can create powerful commands
+and you have some API to act on, with the tools mentioned above you can create powerful commands
 that will free you from routine GUI interactions.
 
 ### A little example
 
-Let's assume that you have a large dump of music videos which you want to sort to watch on your
+Let's assume that you have a large random dump of music videos which you want to sort to watch on your
 media-center PC using Enso Launcher [mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes).
-Normally, you will open a video in the player, assess it, stop playback and navigate to file explorer
-to move the video into the corresponding destination directory. To be more specific, let's assume that 
-you have the following directory tree of destination categories:
+Normally, to sort the videos you will open a video in the player, assess it, stop playback and navigate to 
+file explorer to move the video into the corresponding destination directory.
+To be more specific, let's assume that you made the following directory tree of destination categories:
 
 ```
 D:/music
@@ -33,7 +33,8 @@ D:/music
 ```
 
 Enso Launcher 0.4.5+ allows to create a command that will automatically move the file opened in 
-Media Player Classic to the directory specified as a command argument. NOTE: you need to enable
+[Media Player Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) to the directory 
+specified as a command argument. NOTE: you need to enable
 Web UI in MPC settings. You may play with the following code in Enso command editor.
 
 #### Obtaining category directories as command arguments
@@ -73,11 +74,13 @@ MPC_HOST = "127.0.0.1"
 MPC_PORT = "13579"
 
 def cmd_mv(ensoapi, cat):
-    # map the first letter of a super-category to its full name
+    # map the first letter of all super-categories to their full names
     supercats = dict(((sc[0], sc) for sc in os.listdir(MEDIA_ROOT)))
     
+    # get super-category of argument
     supercat = supercats[cat[0]]
-    # compose full destination path from the argument name
+    # compose full destination path from the argument name removing 
+    # command first letter
     dest = os.path.join(MEDIA_ROOT, supercat, cat[1:])
     
     # get the full path of the file currently opened in MPC
@@ -90,7 +93,7 @@ def cmd_mv(ensoapi, cat):
     mpc = mpcapi.MpcAPI(host=MPC_HOST, port=MPC_PORT)
     
     if not os.path.exists(dest_file):
-        mpc.close()      # close the current file
+        mpc.close()      # stop playback and close the current file
         time.sleep(1)
         shutil.move(file, dest)
         mpc.play()       # play the next file
@@ -106,7 +109,7 @@ def cmd_rm(ensoapi):
     mpcapi.MpcAPI(host=MPC_HOST, port=MPC_PORT).move_to_recycle_bin()
 ```
 
-#### Creating mediaprobes for d:/music
+#### Creating mediaprobes for d:/music subfolders
 
 ```python
 from enso.user import mediaprobe
