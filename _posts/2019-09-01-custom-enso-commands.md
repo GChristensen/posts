@@ -16,7 +16,7 @@ that will free you from routine GUI interactions.
 
 Let's assume that you have a large random dump of music videos which you want to sort to watch on your
 media-center PC using Enso Launcher [mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes).
-Normally, to sort files you will open a video in the player, assess it, stop playback and navigate to 
+Normally, to sort files you open a video in the player, assess it, stop playback and navigate to 
 file explorer to move the video into the corresponding destination directory.
 To be more specific, let's assume that you have made the following directory tree of destination categories:
 
@@ -35,9 +35,11 @@ D:/music
 Enso Launcher 0.4.5+ allows to create a command that will automatically move the file opened in 
 [Media Player Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) to the directory 
 specified as a command argument. NOTE: you need to enable
-Web UI in MPC settings. You may play with the following code in Enso command editor.
+Web UI in MPC settings.
 
-<video src="/enso-portable/media/enso.webm" width="100%" style="max-width: 500px" type="video/webm" muted ></video>
+<video src="videos/enso-demo.webm" width="100%" type="video/webm" muted autoplay loop></video>
+
+You may play with the following code in Enso command editor.
 
 #### Obtaining category directories as command arguments
 
