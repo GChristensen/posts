@@ -53,10 +53,10 @@ def generate_category_args():
         # get 'classical', 'heavy metal' and any other folders
         cats = os.listdir(os.path.join(MEDIA_ROOT, supercat))
 
-        # the resulting argument names will consist of the first letter of a super-category
-        # and the full sub-category name
-        # if some super-categories begin with the same letter, add more starting letters  
-        # to the argument name
+        # the resulting argument names will consist of the first letter of
+        # a super-category and the full sub-category name
+        # if some super-categories begin with the same letter, add more   
+        # starting letters to the argument name
         for cat in cats:
             result += [supercat[0] + cat]
 
@@ -96,4 +96,26 @@ def cmd_mv(ensoapi, cat):
         mpc.play()       # play the next file
 
 cmd_mv.valid_args = generate_category_args()
+
+# a little helper command which lists available video categories
+def cmd_wheremv(ensoapi):
+    ensoapi.display_message(", ".join(cmd_mv.valid_args))
+
+# MPC is also able to delete videos, so here is 'rm' command
+def cmd_rm(ensoapi):
+    mpcapi.MpcAPI(host=MPC_HOST, port=MPC_PORT).move_to_recycle_bin()
+```
+
+#### Creating mediaprobes for d:/music
+
+```python
+from enso.user import mediaprobe
+
+# the full MPC path may be different on your system
+PLAYER = "C:/Program Files (x86)/MPC-HC64/mpc-hc64.exe"
+
+mkcat = lambda c: os.path.join(MEDIA_ROOT, c)
+
+cmd_live = mediaprobe.directory_probe("cat", mkcat("live"), PLAYER)
+cmd_music_videos = mediaprobe.directory_probe("cat", mkcat("music videos"), PLAYER)
 ```
