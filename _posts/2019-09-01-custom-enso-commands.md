@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The new life of command interfaces\: simply add some API
+title: The new life of command interfaces, simply add some API
 categories: [Enso Launcher, Python]
 ---
 
