@@ -4,7 +4,7 @@ title: Reading huge files in plain JavaScript using ES6 async generators
 categories: [HTML, JavaScript]
 ---
 
-It sometimes happens that you need to read gigabyte-long files in web applications, and placing them as a whole 
+It sometimes happens that you need to read gigabyte-long files on the client side of web applications, and placing them as a whole 
 into memory is not an option. Of course, there is [File.slice](https://developer.mozilla.org/en-US/docs/Web/API/Blob/slice),
 but things get complicated when you have to read, for example, an [UTF-8-encoded](https://en.wikipedia.org/wiki/UTF-8#History) text file. You need to do some byte 
 juggling, and ES6 [async generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of)
