@@ -14,3 +14,86 @@ that will free you from routine GUI interactions.
 
 ### A little example
 
+Let's assume that you have a large dump of music videos which you want to sort to watch on your
+media-center PC using Enso Launcher [mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes).
+Normally, you will open a video in the player, assess it, stop playback and navigate to file explorer
+to move the video into the corresponding destination directory. To be more specific, let's assume that 
+you have the following directory tree of destination categories:
+
+```
+D:/music
+    ├───live
+    │   ├───classical
+    │   ├───heavy metal
+    │   └───pop music
+    └───music videos
+        ├───classical
+        ├───heavy metal
+        └───pop music
+```
+
+Enso Launcher 0.4.5+ allows to create a command that will automatically move the file opened in 
+Media Player Classic to the directory specified as a command argument. NOTE: you need to enable
+Web UI in MPC settings. You may play with the following code in Enso command editor.
+
+#### Obtaining category directories as command arguments
+
+```python
+import os
+
+MEDIA_ROOT = "d:/music"
+ 
+def generate_category_args():  
+    # get 'live', 'music videos' and any other folders
+    supercats = os.listdir(MEDIA_ROOT)
+    
+    result = []
+    
+    for supercat in supercats:
+        # get 'classical', 'heavy metal' and any other folders
+        cats = os.listdir(os.path.join(MEDIA_ROOT, supercat))
+
+        # the resulting argument names will consist of the first letter of a super-category
+        # and the full sub-category name
+        # if some super-categories begin with the same letter, add more starting letters  
+        # to the argument name
+        for cat in cats:
+            result += [supercat[0] + cat]
+
+    return result
+```
+
+#### Creating the 'mv' command
+
+```python
+import re, requests, shutil, time
+import mpcapi # you need to install Enso with MPC option enabled
+
+MPC_HOST = "127.0.0.1"
+MPC_PORT = "13579"
+
+def cmd_mv(ensoapi, cat):
+    # map the first letter of a super-category to its full name
+    supercats = dict(((sc[0], sc) for sc in os.listdir(MEDIA_ROOT)))
+    
+    supercat = supercats[cat[0]]
+    # compose full destination path from the argument name
+    dest = os.path.join(MEDIA_ROOT, supercat, cat[1:])
+    
+    # get the full path of the file currently opened in MPC
+    page = requests.get("http://" + MPC_HOST + ":" + MPC_PORT + "/variables.html")
+    file = re.search("id=\"filepath\">([^<]*)<", page.text).group(1)
+    # the full destination path
+    dest_file = os.path.join(dest, os.path.basename(file))
+    
+    # instantiate MPC client
+    mpc = mpcapi.MpcAPI(host=MPC_HOST, port=MPC_PORT)
+    
+    if not os.path.exists(dest_file):
+        mpc.close()      # close the current file
+        time.sleep(1)
+        shutil.move(file, dest)
+        mpc.play()       # play the next file
+
+cmd_mv.valid_args = generate_category_args()
+```
