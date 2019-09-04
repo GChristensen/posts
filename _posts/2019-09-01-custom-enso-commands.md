@@ -37,12 +37,14 @@ Enso Launcher 0.4.5+ allows to create a command that will automatically move the
 specified as a command argument. NOTE: you need to enable
 Web UI in MPC settings. You may play with the following code in Enso command editor.
 
+<video src="/enso-portable/media/enso.webm" width="100%" type="video/webm" muted />
+
 #### Obtaining category directories as command arguments
 
-Since there are two levels of categories we need to pack the both levels into a single argument name.
-Let take the first letter of the first level (for example 'l' for 'live) and prepend it to the full
+Since there are two levels of categories, we need to pack the both levels into a single argument name.
+Let's take the first letter of the first level (for example 'l' for 'live) and prepend it to the full
 name of the second level, so we get 'lclassical', 'mclassical', etc. as command arguments.
-The approach may be same (but utilize some separator character) if there are more levels. 
+The same approach is applicable if there are more levels, but it may utilize some separator character. 
 
 ```python
 import os
@@ -117,10 +119,10 @@ def cmd_rm(ensoapi):
     mpcapi.MpcAPI(host=MPC_HOST, port=MPC_PORT).move_to_recycle_bin()
 ```
 
-#### Creating mediaprobes for d:/music subfolders
+#### Creating mediaprobes for 'd:/music' subfolders
 
 In the snippet below we create two commands named: 'live' and 'music video' which automatically obtain 
-subcategories from the corresponding folders as arguments and pass them to MPC. 
+subcategories from the corresponding folders as arguments and pass them to MPC when called. 
 
 ```python
 from enso.user import mediaprobe
