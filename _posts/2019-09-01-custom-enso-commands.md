@@ -16,9 +16,9 @@ that will free you from routine GUI interactions.
 
 Let's assume that you have a large random dump of music videos which you want to sort to watch on your
 media-center PC using Enso Launcher [mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes).
-Normally, to sort the videos you will open a video in the player, assess it, stop playback and navigate to 
+Normally, to sort files you will open a video in the player, assess it, stop playback and navigate to 
 file explorer to move the video into the corresponding destination directory.
-To be more specific, let's assume that you made the following directory tree of destination categories:
+To be more specific, let's assume that you have made the following directory tree of destination categories:
 
 ```
 D:/music
@@ -38,6 +38,11 @@ specified as a command argument. NOTE: you need to enable
 Web UI in MPC settings. You may play with the following code in Enso command editor.
 
 #### Obtaining category directories as command arguments
+
+Since there are two levels of categories we need to pack the both levels into a single argument name.
+Let take the first letter of the first level (for example 'l' for 'live) and prepend it to the full
+name of the second level, so we get 'lclassical', 'mclassical', etc. as command arguments.
+The approach may be same (but utilize some separator character) if there are more levels. 
 
 ```python
 import os
@@ -65,6 +70,9 @@ def generate_category_args():
 ```
 
 #### Creating the 'mv' command
+
+It is possible to install Enso with a set of MPC-related commands bundled with 
+[mpcapi](https://github.com/Grokzen/mpcapi) library. We will use it in our 'mv' command below. 
 
 ```python
 import re, requests, shutil, time
@@ -110,6 +118,9 @@ def cmd_rm(ensoapi):
 ```
 
 #### Creating mediaprobes for d:/music subfolders
+
+In the snippet below we create two commands named: 'live' and 'music video' which automatically obtain 
+subcategories from the corresponding folders as arguments and pass them to MPC. 
 
 ```python
 from enso.user import mediaprobe
