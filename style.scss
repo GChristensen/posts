@@ -257,7 +257,7 @@ p > img {
   }
 }
 
-.site-avatar {
+.site-avatar, .software-avatar {
   float: left;
   width: 70px;
   height: 70px;
@@ -272,6 +272,12 @@ p > img {
   img {
     border-radius: 5px;
   }
+}
+
+.software-avatar {
+  float: right;
+  margin-top: -28px;
+  margin-left: 20px;
 }
 
 .site-info {
