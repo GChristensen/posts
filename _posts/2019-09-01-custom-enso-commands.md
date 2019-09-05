@@ -15,10 +15,19 @@ that will free you from routine GUI interactions.
 ### A little example
 
 Let's assume that you have a large random dump of music videos which you want to sort to watch on your
-media-center PC using Enso Launcher [mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes).
-Normally, to sort files you open a video in the player, assess it, stop playback and navigate to 
-file explorer to move the video into the corresponding destination directory.
-To be more specific, let's assume that you have made the following directory tree of destination categories:
+media-center PC.
+Normally, to sort files you open a video in a player, assess it, stop playback, close video and navigate to 
+file explorer to move the video into the corresponding destination directory. Obviously, this takes a fair
+amount of manual actions.
+
+With Enso Launcher (v0.4.5+) it is possible to create a command, let's call it 'mv', that will automatically
+move a file opened in [Media Player Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) 
+to the directory specified as a command argument. Moreover, by using Enso 
+[mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes)
+you can populate MPC playlist from filesystem with no more than one command.
+
+To be more specific, let's assume that you have made the following directory tree of destination 
+music video categories:
 
 ```
 D:/music
@@ -32,9 +41,8 @@ D:/music
         └───pop music
 ```
 
-Enso Launcher 0.4.5+ allows to create a command, let's call it 'mv', that will automatically move the 
-file opened in [Media Player Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) to the directory 
-specified as a command argument. NOTE: you need to enable Web UI in MPC settings.
+Below we create code that will help us to move files displayed in MPC to the directories shown above
+and open the result with mediaprobes:
 
 <video src="/posts/videos/enso-demo.webm" width="100%" type="video/webm" controls></video>
 
@@ -76,6 +84,7 @@ def generate_category_args():
 
 It is possible to install Enso with a set of MPC-related commands bundled with 
 [mpcapi](https://github.com/Grokzen/mpcapi) library. We will use it in our 'mv' command below. 
+NOTE: you need to enable Web UI in MPC settings.
 
 ```python
 import re, requests, shutil, time
