@@ -8,7 +8,7 @@ Command interfaces - an integral part of life in 1980s -  gain a new breath with
 [Enso Launcher](https://gchristensen.github.io/enso-portable/) and 
 [Ubiquity Web Extension](https://gchristensen.github.io/ubiquitywe/). Although graphical user interfaces
 have opened a new world in computer industry, in certain domains text commands still offer
-advantages in usability and accessibility. If your subject area could be relatively easily formalized 
+advantages in usability and accessibility. If your subject area could be relatively easy formalized 
 and you have some API to act on, with the tools mentioned above you can create powerful commands
 that will free you from routine GUI interactions.
 
@@ -32,10 +32,9 @@ D:/music
         └───pop music
 ```
 
-Enso Launcher 0.4.5+ allows to create a command that will automatically move the file opened in 
-[Media Player Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) to the directory 
-specified as a command argument. NOTE: you need to enable
-Web UI in MPC settings.
+Enso Launcher 0.4.5+ allows to create a command, let's call it 'mv', that will automatically move the 
+file opened in [Media Player Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) to the directory 
+specified as a command argument. NOTE: you need to enable Web UI in MPC settings.
 
 <video src="/posts/videos/enso-demo.webm" width="100%" type="video/webm" controls></video>
 
