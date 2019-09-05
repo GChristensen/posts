@@ -41,8 +41,8 @@ D:/music
         └───pop music
 ```
 
-Below we create code that will help us to move files displayed in MPC to the directories shown above
-and open the result with mediaprobes:
+Below we create all necessary commands that will help us to move files displayed in MPC 
+to the directories shown above and open the result with mediaprobes:
 
 <video src="/posts/videos/enso-demo.webm" width="100%" type="video/webm" controls></video>
 
@@ -131,7 +131,7 @@ def cmd_rm(ensoapi):
 
 #### Creating mediaprobes for 'd:/music' subfolders
 
-In the snippet below we create two commands named: 'live' and 'music video' which automatically obtain 
+In the snippet below we create two commands named: 'live' and 'music videos' which automatically obtain 
 subcategories from the corresponding folders as arguments and pass them to MPC when called. 
 
 ```python
