@@ -26,7 +26,7 @@ to the directory specified as a command argument. Moreover, by using Enso
 [mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes)
 you can populate MPC playlist from filesystem with no more than one command.
 
-To be more specific, let's assume that you have made the following directory tree of destination 
+To be more specific, let's assume that you have made the following directory tree of the destination 
 music video categories:
 
 ```
