@@ -132,7 +132,9 @@ def cmd_rm(ensoapi):
 #### Creating mediaprobes for 'd:/music' subfolders
 
 In the snippet below we create two commands named: 'live' and 'music videos' which automatically obtain 
-subcategories from the corresponding folders as arguments and pass them to MPC when called. 
+subcategories from the corresponding folders as arguments and pass them to MPC when called. There may be 
+as many probe commands as subdirectories in 'd:/music'. See Enso tutorial and API documentation for
+mofe details.
 
 ```python
 from enso.user import mediaprobe
@@ -142,6 +144,7 @@ PLAYER = "C:/Program Files (x86)/MPC-HC64/mpc-hc64.exe"
 
 mkcat = lambda c: os.path.join(MEDIA_ROOT, c)
 
-cmd_live = mediaprobe.directory_probe("cat", mkcat("live"), PLAYER)
-cmd_music_videos = mediaprobe.directory_probe("cat", mkcat("music videos"), PLAYER)
+for supercat in os.listdir(MEDIA_ROOT):
+    cmdname = "cmd_" + supercat.replace(" ", "_")
+    globals()[cmdname] = mediaprobe.directory_probe("cat", mkcat(supercat), PLAYER)
 ```
