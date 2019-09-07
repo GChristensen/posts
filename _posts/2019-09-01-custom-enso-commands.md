@@ -100,14 +100,13 @@ def cmd_mv(ensoapi, cat):
     
     # get super-category of argument
     supercat = supercats[cat[0]]
-    # compose full destination path from the argument name removing 
-    # command first letter
+    # compose destination directory path from the argument name
     dest = os.path.join(MEDIA_ROOT, supercat, cat[1:])
     
     # get the full path of the file currently opened in MPC
     page = requests.get("http://" + MPC_HOST + ":" + MPC_PORT + "/variables.html")
     file = re.search("id=\"filepath\">([^<]*)<", page.text).group(1)
-    # the full destination path
+    # the full destination path with file name
     dest_file = os.path.join(dest, os.path.basename(file))
     
     # instantiate MPC client
@@ -135,7 +134,7 @@ def cmd_rm(ensoapi):
 In the snippet below we create two commands named: 'live' and 'music videos' which automatically obtain 
 subcategories from the corresponding folders as arguments and pass them to MPC when called. There may be 
 as many probe commands as subdirectories in 'd:/music'. See Enso tutorial and API documentation for
-mofe details.
+more details.
 
 ```python
 from enso.user import mediaprobe
