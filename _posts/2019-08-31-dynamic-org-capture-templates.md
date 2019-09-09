@@ -203,7 +203,8 @@ The most of URL parameters obtained from Ubiquity are Base64-encoded to preserve
 In the case of HTML processing UTF-8 will be lost, since the text is need to
 be passed to `pandoc` command line utility and hence encoded into local coding system.
 
-Org capture template used to store links and text is completely dynamic and is composed
+Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
+used to store links and text is completely dynamic and is composed
 out of the org-protocol link parameters.
 
 Paste the following code into your `.emacs` configuration file:
