@@ -11,10 +11,11 @@ into Emacs [org-mode](https://orgmode.org/). But most of the tools you can find
 out there allow a little control over the capture process - usually it is
 possible to put only plain text into one hardcoded org file. Below we develop an
 [UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows to
-capture HTML transformed to org-formatted text into one of user-specified org
-files under any [headline](https://orgmode.org/manual/Headlines.html) in them.
-If you are interested only in Ubiquity or only in Org (or only in Windows), you
-may still skim through the code to find out how things work.
+capture HTML transformed to org-formatted text files under any
+[headline](https://orgmode.org/manual/Headlines.html) in one of the
+user-specified org files. If you are interested only in Ubiquity or only in Org
+(or only in Windows), you may still skim through the code to find out how things
+work.
 
 
 Work in progress...
@@ -31,16 +32,18 @@ to automatically maintain an index of all org-files and headlines and
 [obtain](https://github.com/eschulte/emacs-web-server)
 them in Ubiquity, this is a work for real aficionados.
 
-To pass captured items to Emacs we use two org-protocol:// subprotocol names:
-- capture-ubiquity - custom supbrotocol name used to pass plain utf-8 text, created in the 
-section "Configuring Emacs".
-- capture-html - custom subprotocol name used to process HTML which is defined by
+By default the command captures selection as plain text, but it is possible to
+capture HTML-selection as org-formatted text, if the corresponding parameter
+is specified in the command arguments.
+
+To pass captured items to Emacs we use two custom org-protocol:// subprotocol names:
+- `capture-ubiquity` - custom supbrotocol name defined in the 
+section "Configuring Emacs" and used to pass plain UTF-8 text.
+- `capture-html` - custom subprotocol name used to process HTML which is defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
 library.
 
 ```javascript
-{
-
 // list of target org files
 let ORG_FILES = {"foo": "~/org/foo.org", 
                  "bar": "~/org/bar.org"
@@ -53,7 +56,7 @@ let ORG_HEADLINES = ["Items", "Things", "Widgets"];
 let ORG_FORMATS = ["text", "org"];
 
 // a noun type that allows to enter not only suggested but also custom headline names
-var noun_open_headlines = {
+let noun_open_headlines = {
     label: "headline",
     noExternalCalls: true,
     cacheTime: -1,
@@ -148,7 +151,7 @@ CmdUtils.CreateCommand({
                         .replace(/\+/g, "-")
                         .replace(/\//g, "_");
         
-        // get and pack capture parameters to an org-protocol URL
+        // get and pack capture options to an org-protocol URL
         let title = b64enc(this._description);
         let url = b64enc(tab.url);
         let file = time && time.data? b64enc(time.data): "";
@@ -171,9 +174,8 @@ CmdUtils.CreateCommand({
             return;
         }
         
+        // launch Emacs client
         location.href = orgUrl;
     }
 });
-
-}
 ```
