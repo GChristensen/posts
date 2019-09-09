@@ -73,7 +73,6 @@ let noun_open_headlines = {
     }
 };
 
-
 CmdUtils.CreateCommand({
     name: "org-capture",
     uuid: "F36F51E1-60B3-4451-B08E-6A4372DA74DD",
@@ -149,7 +148,9 @@ CmdUtils.CreateCommand({
         // get and pack capture options to an org-protocol URL
         let title = b64enc(this._description);
         let url = b64enc(tab.url);
-        let file = time && time.data? b64enc(time.data): "";
+        let file = time && time.data
+                    ? b64enc(time.data)
+                    : b64enc(Object.values(ORG_FILES)[0]);
         let headline = format && format.text 
                 && format.text !== CmdUtils.getSelection()
                     ? b64enc(format.text)
@@ -163,7 +164,7 @@ CmdUtils.CreateCommand({
         let orgUrl = `org-protocol://${subprotocol}?template=P`
                    + `&title=${title}&url=${url}&body=${body}`
                    + `&file=${file}&headline=${headline}&format=${type}`;
-                   
+        
         if (orgUrl.length > 32500) {
             CmdUtils.notify("Selection is too long.")
             return;
@@ -195,8 +196,137 @@ is used.
 ### Configuring Emacs
 
 To pass captured items to Emacs we use two custom org-protocol:// subprotocol names:
-- `capture-ubiquity` - custom supbrotocol name defined in the 
-section "Configuring Emacs" and used to pass plain UTF-8 text.
+- `capture-ubiquity` - custom supbrotocol name used to pass plain UTF-8 text.
 - `capture-html` - custom subprotocol name used to process HTML which is defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
-library.
+library (it is already included in &rho;Emacs, but requires [pandoc](https://pandoc.org/)
+somewhere on the PATH).
+
+The most of URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8, 
+although UTF-8 will be lost in the case of HTML processing, since the text is need to
+be passed to `pandoc` command line utility and hence encoded into local coding system.
+
+Org capture template used to store links and text is completely dynamic and composed
+out of the org-protocol link parameters.
+
+Paste the following code into your `.emacs` configuration file:
+
+```lisp
+;; get the destination org file path specified in Ubiquity
+(defun capture-get-destination-file ()
+  ;; `capture-decoded-org-protocol-query' global variable contains
+  ;; org-protocol url query parameters, stored earlier (see below)
+  (plist-get capture-decoded-org-protocol-query :file))
+
+;; get the destination org headline specified in Ubiquity (or insert one
+;; if absent) and positon point near it in the buffer
+(defun capture-get-destination-headline ()
+  (let ((headline (plist-get capture-decoded-org-protocol-query :headline)))
+    (if (and headline (not (string= headline "")))
+        (progn
+          (goto-char (point-min))
+          (if (re-search-forward (format org-complex-heading-regexp-format
+                                         (regexp-quote headline))
+                                 nil t)
+              (beginning-of-line)
+            (goto-char (point-max))
+            (unless (bolp) (insert "\n"))
+            (insert "* " headline "\n")
+            (beginning-of-line 0)))
+      (goto-char (point-max)))))
+
+;; create dynamic template - append newline and selection text if it presents
+;; in org-protocol url or leave only captured link if none
+(defun capture-get-org-capture-template-body ()
+  (let ((content (plist-get capture-decoded-org-protocol-query :body)))
+    (let ((orglink "* %?[[%(capture-decode-local-string :link)]\
+[%(capture-decode-local-string :description)]] %U\n"))
+      (let ((finalizer "%(capture-finalize-capture)")
+            (template (concat orglink
+                              (if (and content (not (string= content "")))
+                                  "%(capture-decode-local-string :initial)\n"
+                                ""))))
+        (concat template finalizer)))))
+
+(defun capture-finalize-capture ()
+  (setf capture-decoded-org-protocol-query nil) ; free memory
+  "")
+
+;; the template is comprised entirely of functions
+(add-to-list 'org-capture-templates
+               '("P" "Advanced protocol"
+                 entry (file+function
+                        capture-get-destination-file
+                        capture-get-destination-headline)
+                 (function capture-get-org-capture-template-body)))
+
+;; envoke standard org-protocol-capture with decoded arguments
+(defun capture-org-protocol-ubiquity (args)
+  (org-protocol-capture
+   (capture-decode-base64-args args)))
+
+;; add `capture-ubiquity' org-protocol subprotocol
+(add-to-list 'org-protocol-protocol-alist
+             '("capture-ubiquity"
+               :protocol "capture-ubiquity"
+               :function capture-org-protocol-ubiquity
+               :kill-client t))
+
+;; decode Base 64-encoded arguments before passing them into
+;; org-protocol-capture-html--with-pandoc
+(defun advice-org-protocol-capture-html (orig-fun &rest args)
+       (apply orig-fun (list (capture-decode-base64-args (car args)))))
+
+(advice-add 'org-protocol-capture-html--with-pandoc
+            :around #'advice-org-protocol-capture-html)
+
+;; helper functions
+
+;; decode an unibyte string stored in system locale
+(defun capture-decode-local-string (key)
+    (let ((format (plist-get capture-decoded-org-protocol-query :format)))
+      (if nil (and format (string= format "org"))
+          ;; decode a string obtained from pandoc output
+          (decode-coding-string
+           (plist-get org-store-link-plist key)
+           locale-coding-system)
+        ;; or return as is 
+        (plist-get org-store-link-plist key))))
+
+;; transform URL-safe Base 64 to the regular Base 64
+(defun base64url-to-base64 (str)
+  (setq str (replace-regexp-in-string "-" "+" str))
+  (setq str (replace-regexp-in-string "_" "/" str))
+  (let ((mod (% (length str) 4)))
+    (cond 
+     ((= mod 1) (concat str "==="))
+     ((= mod 2) (concat str "=="))
+     ((= mod 3) (concat str "="))
+     (t str))))
+
+;; decode string in URL-safe Base 64
+(defun base64url-decode-string (str)
+  (base64-decode-string (base64url-to-base64 (string-trim str))))
+
+;; decode utf-8-encoded string contained in URL-safe Base 64
+(defun capture-decode-base64-utf-8 (str)
+  (decode-coding-string (base64url-decode-string str) 'utf-8))
+
+;; decode Base 64-encoded parameters obtained from Ubiquity 
+(defun capture-decode-base64-args (args)
+  (let ((format (plist-get args :format)))
+    ;; save parameters for later use
+    (setf capture-decoded-org-protocol-query
+      `(:format ,format
+        :template ,(plist-get args :template)
+        :title ,(capture-decode-base64-utf-8 (plist-get args :title))
+        :url ,(capture-decode-base64-utf-8 (plist-get args :url))
+        :headline ,(capture-decode-base64-utf-8 (plist-get args :headline))
+        :file ,(capture-decode-base64-utf-8 (plist-get args :file))
+        :body ,(let ((str (capture-decode-base64-utf-8 (plist-get args :body))))
+                     (if (and format (string= format "org"))
+                         ;; encode string to pass to pandoc
+                         (encode-coding-string str locale-coding-system)
+                       str))))
+    capture-decoded-org-protocol-query))
+```
