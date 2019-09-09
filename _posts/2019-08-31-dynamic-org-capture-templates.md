@@ -17,6 +17,8 @@ user-specified org files. If you are interested only in Ubiquity or only in Org
 (or only in Windows), you may still skim through the code to find out how things
 work.
 
+<video src="/posts/videos/ubiquity-demo.webm" width="100%" type="video/webm" controls></video>
+
 ### Creating Ubiquity command
 
 In the following command we refer to two fictional org files: `~/org/foo.org` and
@@ -197,11 +199,8 @@ To pass captured items to Emacs we use two custom org-protocol:// subprotocol na
 - `capture-html` - custom subprotocol name used to process HTML which is defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
 library (it is already included in &rho;Emacs, but requires [pandoc](https://pandoc.org/)
-somewhere on the PATH).
-
-The most of URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8. 
-In the case of HTML processing UTF-8 will be lost, since the text is need to
-be passed to `pandoc` command line utility and hence encoded into local coding system.
+somewhere on the PATH). The most of URL parameters obtained from Ubiquity are 
+Base64-encoded to preserve UTF-8. 
 
 Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
 used to store links and text is completely dynamic and is composed
@@ -217,7 +216,7 @@ Paste the following code into your `.emacs` configuration file:
   (plist-get capture-decoded-org-protocol-query :file))
 
 ;; find the destination org headline specified in Ubiquity (or insert one
-;; if absent) and positon point near it in the buffer
+;; if absent) and position point near it in the buffer
 ;; see more at org-mode source code: https://bit.ly/2lJqz1a
 (defun capture-get-destination-headline ()
   (let ((headline (plist-get capture-decoded-org-protocol-query :headline)))
@@ -238,12 +237,11 @@ Paste the following code into your `.emacs` configuration file:
 ;; in org-protocol URL parameters or leave only captured link if none
 (defun capture-get-org-capture-template-body ()
   (let ((content (plist-get capture-decoded-org-protocol-query :body)))
-    (let ((orglink (concat "* %?[[%(capture-decode-local-string :link)]"
-                           "[%(capture-decode-local-string :description)]] %U\n")))
+    (let ((orglink "* %?[[%:link][%:description]] %U\n"))
       (let ((finalizer "%(capture-finalize-capture)")
             (template (concat orglink
                               (if (and content (not (string= content "")))
-                                  "%(capture-decode-local-string :initial)\n"
+                                  "%:initial\n"
                                 ""))))
         (concat template finalizer)))))
 
@@ -274,23 +272,12 @@ Paste the following code into your `.emacs` configuration file:
 ;; decode Base64-encoded arguments before passing them into
 ;; org-protocol-capture-html--with-pandoc
 (defun advice-org-protocol-capture-html (orig-fun &rest args)
-       (apply orig-fun (list (capture-decode-base64-args (car args)))))
+  (apply orig-fun (list (capture-decode-base64-args (car args)))))
 
 (advice-add 'org-protocol-capture-html--with-pandoc
             :around #'advice-org-protocol-capture-html)
 
 ;; helper functions
-
-;; decode an unibyte string stored in system locale
-(defun capture-decode-local-string (key)
-    (let ((format (plist-get capture-decoded-org-protocol-query :format)))
-      (if nil (and format (string= format "org"))
-          ;; decode a string obtained from pandoc output
-          (decode-coding-string
-           (plist-get org-store-link-plist key)
-           locale-coding-system)
-        ;; or return as is 
-        (plist-get org-store-link-plist key))))
 
 ;; transform URL-safe Base64 to the regular Base64
 (defun base64url-to-base64 (str)
@@ -322,10 +309,6 @@ Paste the following code into your `.emacs` configuration file:
         :url ,(capture-decode-base64-utf-8 (plist-get args :url))
         :headline ,(capture-decode-base64-utf-8 (plist-get args :headline))
         :file ,(capture-decode-base64-utf-8 (plist-get args :file))
-        :body ,(let ((str (capture-decode-base64-utf-8 (plist-get args :body))))
-                     (if (and format (string= format "org"))
-                         ;; encode string to pass to pandoc
-                         (encode-coding-string str locale-coding-system)
-                       str))))
-    capture-decoded-org-protocol-query))
+        :body ,(capture-decode-base64-utf-8 (plist-get args :body))))
+      capture-decoded-org-protocol-query))
 ```
