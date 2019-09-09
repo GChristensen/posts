@@ -30,18 +30,13 @@ allows user to enter an arbitrary headline name. Although, in theory it is
 [possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
 to automatically maintain an index of all org-files and headlines and 
 [obtain](https://github.com/eschulte/emacs-web-server)
-them in Ubiquity, this is a work for real aficionados.
+it in Ubiquity, this is a work for real aficionados.
 
 By default the command captures selection as plain text, but it is possible to
 capture HTML-selection as org-formatted text, if the corresponding parameter
 is specified in the command arguments.
 
-To pass captured items to Emacs we use two custom org-protocol:// subprotocol names:
-- `capture-ubiquity` - custom supbrotocol name defined in the 
-section "Configuring Emacs" and used to pass plain UTF-8 text.
-- `capture-html` - custom subprotocol name used to process HTML which is defined by
- [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
-library.
+Paste the following code into UbiquityWE command editor: 
 
 ```javascript
 // list of target org files
@@ -180,3 +175,15 @@ CmdUtils.CreateCommand({
     }
 });
 ```
+
+### org-protocol in Windows
+
+
+### Configuring Emacs
+
+To pass captured items to Emacs we use two custom org-protocol:// subprotocol names:
+- `capture-ubiquity` - custom supbrotocol name defined in the 
+section "Configuring Emacs" and used to pass plain UTF-8 text.
+- `capture-html` - custom subprotocol name used to process HTML which is defined by
+ [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
+library.
