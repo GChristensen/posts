@@ -1,17 +1,19 @@
 ---
 layout: post
 title: Create dynamic capture templates to use with org-protocol. In Windows!
-categories: [Enso Launcher, Python]
+categories: [UbiquityWE, Emacs, elisp, JavaScript]
 ---
 
 
-[org-protocol](https://orgmode.org/manual/Protocols.html) offers a nice possibility to capture URLs 
-along with some selected text from many web-browsers into Emacs [org-mode](https://orgmode.org/) files. 
-But most of the tools you can find out there allow a little control over the capture process - usually 
-it is possible to put only plain text into the default capture file. Below we develop an 
-[UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows to capture 
-org-formatted text under any headline into the specified org file. If you are interested only in Ubiquity
-or only in Org (or only in Windows), you may still skim through the code to find out how things work.
+[org-protocol](https://orgmode.org/manual/Protocols.html) offers a nice
+possibility to capture URLs along with some selected text from many web-browsers
+into Emacs [org-mode](https://orgmode.org/) files. But most of the tools you can
+find out there allow a little control over the capture process - usually it is
+possible to put only plain text into the default capture file. Below we develop
+an [UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows
+to capture org-formatted text under any headline into the specified org file. If
+you are interested only in Ubiquity or only in Org (or only in Windows), you may
+still skim through the code to find out how things work.
 
 
 Work in progress...
@@ -40,10 +42,10 @@ var noun_open_headlines = {
         let matcher = new RegExp(text, "i");
         // make sugestions from predefined headlines
         let suggs = ORG_HEADLINES.map(h => ({name: h}))
-                                 .filter(i => (i.match = matcher.exec(i.name), !!i.match))
-                                 .map(i => CmdUtils.makeSugg(i.name, i.name, null,
-                                        CmdUtils.matchScore(i.match), selectionIndices));
-        // add a suggestion with argument text as is
+                        .filter(i => (i.match = matcher.exec(i.name), !!i.match))
+                        .map(i => CmdUtils.makeSugg(i.name, i.name, null,
+                                    CmdUtils.matchScore(i.match), selectionIndices));
+        // add a suggestion with the argument text as is
         suggs.push(CmdUtils.makeSugg(text, html, null, 
                         suggs.length? .1: 1, selectionIndices));
 
@@ -55,10 +57,11 @@ var noun_open_headlines = {
 CmdUtils.CreateCommand({
     name: "org-capture",
     uuid: "F36F51E1-60B3-4451-B08E-6A4372DA74DD",
-    arguments: [{role: "object", nountype: noun_arb_text, label: "text"},
-                {role: "time",   nountype: ORG_FILES, label: "file"}, // at
-                {role: "format", nountype: noun_open_headlines, label: "headline"}, // in
-                {role: "alias",  nountype: ORG_FORMATS, label: "type"}, // as
+    arguments: [
+        {role: "object", nountype: noun_arb_text, label: "text"},
+        {role: "time",   nountype: ORG_FILES, label: "file"}, // at
+        {role: "format", nountype: noun_open_headlines, label: "headline"}, // in
+        {role: "alias",  nountype: ORG_FORMATS, label: "type"}, // as
     ],
     description: "A short description of your command.",
     help: "This text is displayed at the command list page.",
@@ -86,7 +89,7 @@ CmdUtils.CreateCommand({
             html += "File: <span style='color: #FD7221;'>" 
                  + Utils.escapeHtml(time.data) + "</span><br>";
 
-        if (format && format.text)
+        if (format && format.text && format.text !== CmdUtils.getSelection())
             html += "Headline: <span style='color: #7DE22E;'>" 
                  + Utils.escapeHtml(format.text) + "</span><br>";
 
@@ -112,7 +115,10 @@ CmdUtils.CreateCommand({
         let title = b64enc(this._description);
         let url = b64enc(tab.url);
         let file = time && time.data? b64enc(time.data): "";
-        let headline = format && format.text? b64enc(format.text): "";
+        let headline = format && format.text 
+                && format.text !== CmdUtils.getSelection()
+                    ? b64enc(format.text)
+                    : "";
         let type = alias && alias.text? alias.text: "text";
         let subprotocol = type === "text"? "capture-ubiquity": "capture-html";
         let body = b64enc(type === "text"
