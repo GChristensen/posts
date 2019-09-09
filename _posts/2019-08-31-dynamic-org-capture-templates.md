@@ -175,6 +175,7 @@ CmdUtils.CreateCommand({
         }
         
         // launch Emacs client
+        // it is assumed that Emacs is running when you are trying to capture
         location.href = orgUrl;
     }
 });
