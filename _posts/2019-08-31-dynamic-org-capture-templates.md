@@ -208,7 +208,7 @@ out of the org-protocol link parameters.
 
 Paste the following code into your `.emacs` configuration file:
 
-```lisp
+```java
 ;; get the destination org file path specified in Ubiquity
 (defun capture-get-destination-file ()
   ;; `capture-decoded-org-protocol-query' global variable contains
