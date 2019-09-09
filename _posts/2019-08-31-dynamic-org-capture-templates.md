@@ -7,22 +7,44 @@ categories: [UbiquityWE, Emacs, elisp, JavaScript]
 
 [org-protocol](https://orgmode.org/manual/Protocols.html) offers a nice
 possibility to capture URLs along with some selected text from many web-browsers
-into Emacs [org-mode](https://orgmode.org/) files. But most of the tools you can
-find out there allow a little control over the capture process - usually it is
-possible to put only plain text into the default capture file. Below we develop
-an [UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows
-to capture org-formatted text under any headline into the specified org file. If
-you are interested only in Ubiquity or only in Org (or only in Windows), you may
-still skim through the code to find out how things work.
+into Emacs [org-mode](https://orgmode.org/). But most of the tools you can find
+out there allow a little control over the capture process - usually it is
+possible to put only plain text into one hardcoded org file. Below we develop an
+[UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows to
+capture HTML transformed to org-formatted text into one of user-specified org
+files under any [headline](https://orgmode.org/manual/Headlines.html) in them.
+If you are interested only in Ubiquity or only in Org (or only in Windows), you
+may still skim through the code to find out how things work.
 
 
 Work in progress...
+
+### Creating Ubiquity command
+
+In the following command we refer to two fictional org files: `~/org/foo.org` and
+`~/org/bar.org` (relative to user home directory) available through `foo` and `bar`
+shortcuts from Ubiquity. There are also three fictional headlines: "Items", "Things" 
+and "Widgets" predefined for Ubiquity autocompletion. The noun-type `noun_open_headlines`
+allows user to enter an arbitrary headline name. Although, in theory it is 
+[possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
+to automatically maintain an index of all org-files and headlines and 
+[obtain](https://github.com/eschulte/emacs-web-server)
+them in Ubiquity, this is a work for real aficionados.
+
+To pass captured items to Emacs we use two org-protocol:// subprotocol names:
+- capture-ubiquity - custom supbrotocol name used to pass plain utf-8 text, created in the 
+section "Configuring Emacs".
+- capture-html - custom subprotocol name used to process HTML which is defined by
+ [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
+library.
 
 ```javascript
 {
 
 // list of target org files
-let ORG_FILES = {"foo": "~/org/foo.org", "bar": "~/org/bar.org"};
+let ORG_FILES = {"foo": "~/org/foo.org", 
+                 "bar": "~/org/bar.org"
+                };
 
 // list of predefined org headlines to place captures under
 let ORG_HEADLINES = ["Items", "Things", "Widgets"];
@@ -88,7 +110,7 @@ CmdUtils.CreateCommand({
         let tab = CmdUtils.getActiveTab();
         
         if (!tab) {
-            pblock.innerHTML = "The current tab is unavailable for capture.";
+            pblock.innerHTML = "The current tab is unsuitable for capture.";
             return;
         }
 
@@ -126,7 +148,7 @@ CmdUtils.CreateCommand({
                         .replace(/\+/g, "-")
                         .replace(/\//g, "_");
         
-        // get and pack capture parameters to org-protocol URL
+        // get and pack capture parameters to an org-protocol URL
         let title = b64enc(this._description);
         let url = b64enc(tab.url);
         let file = time && time.data? b64enc(time.data): "";
@@ -148,8 +170,6 @@ CmdUtils.CreateCommand({
             CmdUtils.notify("Selection is too long.")
             return;
         }
-        
-        console.log(orgUrl);
         
         location.href = orgUrl;
     }
