@@ -9,7 +9,7 @@ categories: [UbiquityWE, Emacs, elisp, JavaScript]
 possibility to capture URLs along with some selected text from many web-browsers
 into Emacs [org-mode](https://orgmode.org/). But most of the tools you can find
 out there allow a little control over the capture process - usually it is
-possible to put only plain text into a hardcoded org file. Below we develop an
+only possible to put plain text into some hardcoded org file. Below we develop an
 [UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows to
 capture org-formatted text under any
 [headline](https://orgmode.org/manual/Headlines.html) in one of the
@@ -20,17 +20,17 @@ work.
 ### Creating Ubiquity command
 
 In the following command we refer to two fictional org files: `~/org/foo.org` and
-`~/org/bar.org` (relative to user home directory) available through `foo` and `bar`
+`~/org/bar.org` (relative to the user home directory) available through `foo` and `bar`
 shortcuts from Ubiquity. There are also three fictional headlines: "Items", "Things" 
 and "Widgets" predefined for Ubiquity autocompletion. The noun-type `noun_open_headlines`
-also allows user to enter an arbitrary headline name. Although, in theory it is 
+also allows a user to enter an arbitrary headline name. Although, in theory it is 
 [possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
 to automatically maintain an index of all org-files and headlines and 
 [obtain](https://github.com/eschulte/emacs-web-server)
 it in Ubiquity, this is a work for real aficionados.
 
-By default the command captures selection as plain text, but it is possible to
-capture HTML-selection as org-formatted text, if the corresponding parameter
+By default the command captures selection as plain text, but HTML-selection 
+could be captured as org-formatted text, if the corresponding parameter
 is specified in the command arguments.
 
 Paste the following code into UbiquityWE command editor: 
@@ -199,25 +199,25 @@ To pass captured items to Emacs we use two custom org-protocol:// subprotocol na
 library (it is already included in &rho;Emacs, but requires [pandoc](https://pandoc.org/)
 somewhere on the PATH).
 
-The most of URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8, 
-although UTF-8 will be lost in the case of HTML processing, since the text is need to
+The most of URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8. 
+In the case of HTML processing UTF-8 will be lost, since the text is need to
 be passed to `pandoc` command line utility and hence encoded into local coding system.
 
-Org capture template used to store links and text is completely dynamic and composed
+Org capture template used to store links and text is completely dynamic and is composed
 out of the org-protocol link parameters.
 
 Paste the following code into your `.emacs` configuration file:
 
 ```clojure
-
 ;; get the destination org file path specified in Ubiquity
 (defun capture-get-destination-file ()
   ;; `capture-decoded-org-protocol-query' global variable contains
   ;; org-protocol url query parameters, stored earlier (see below)
   (plist-get capture-decoded-org-protocol-query :file))
 
-;; get the destination org headline specified in Ubiquity (or insert one
+;; find the destination org headline specified in Ubiquity (or insert one
 ;; if absent) and positon point near it in the buffer
+;; see more at org-mode source code: https://bit.ly/2lJqz1a
 (defun capture-get-destination-headline ()
   (let ((headline (plist-get capture-decoded-org-protocol-query :headline)))
     (if (and headline (not (string= headline "")))
@@ -233,8 +233,8 @@ Paste the following code into your `.emacs` configuration file:
             (beginning-of-line 0)))
       (goto-char (point-max)))))
 
-;; create dynamic template - append newline and selection text if it presents
-;; in org-protocol url or leave only captured link if none
+;; create a dynamic template - append a newline and selection text if it presents
+;; in org-protocol URL parameters or leave only captured link if none
 (defun capture-get-org-capture-template-body ()
   (let ((content (plist-get capture-decoded-org-protocol-query :body)))
     (let ((orglink (concat "* %?[[%(capture-decode-local-string :link)]"
@@ -263,14 +263,14 @@ Paste the following code into your `.emacs` configuration file:
   (org-protocol-capture
    (capture-decode-base64-args args)))
 
-;; add `capture-ubiquity' org-protocol subprotocol
+;; add `capture-ubiquity' org-protocol subprotocol handler
 (add-to-list 'org-protocol-protocol-alist
              '("capture-ubiquity"
                :protocol "capture-ubiquity"
                :function capture-org-protocol-ubiquity
                :kill-client t))
 
-;; decode Base 64-encoded arguments before passing them into
+;; decode Base64-encoded arguments before passing them into
 ;; org-protocol-capture-html--with-pandoc
 (defun advice-org-protocol-capture-html (orig-fun &rest args)
        (apply orig-fun (list (capture-decode-base64-args (car args)))))
@@ -291,7 +291,7 @@ Paste the following code into your `.emacs` configuration file:
         ;; or return as is 
         (plist-get org-store-link-plist key))))
 
-;; transform URL-safe Base 64 to the regular Base 64
+;; transform URL-safe Base64 to the regular Base64
 (defun base64url-to-base64 (str)
   (setq str (replace-regexp-in-string "-" "+" str))
   (setq str (replace-regexp-in-string "_" "/" str))
@@ -302,15 +302,15 @@ Paste the following code into your `.emacs` configuration file:
      ((= mod 3) (concat str "="))
      (t str))))
 
-;; decode string in URL-safe Base 64
+;; decode string in URL-safe Base64
 (defun base64url-decode-string (str)
   (base64-decode-string (base64url-to-base64 (string-trim str))))
 
-;; decode utf-8-encoded string contained in URL-safe Base 64
+;; decode utf-8-encoded string contained in URL-safe Base64
 (defun capture-decode-base64-utf-8 (str)
   (decode-coding-string (base64url-decode-string str) 'utf-8))
 
-;; decode Base 64-encoded parameters obtained from Ubiquity 
+;; decode Base64-encoded parameters obtained from Ubiquity 
 (defun capture-decode-base64-args (args)
   (let ((format (plist-get args :format)))
     ;; save parameters for later use
