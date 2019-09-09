@@ -9,9 +9,9 @@ categories: [UbiquityWE, Emacs, elisp, JavaScript]
 possibility to capture URLs along with some selected text from many web-browsers
 into Emacs [org-mode](https://orgmode.org/). But most of the tools you can find
 out there allow a little control over the capture process - usually it is
-possible to put only plain text into one hardcoded org file. Below we develop an
+possible to put only plain text into a hardcoded org file. Below we develop an
 [UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows to
-capture HTML transformed to org-formatted text files under any
+capture org-formatted text under any
 [headline](https://orgmode.org/manual/Headlines.html) in one of the
 user-specified org files. If you are interested only in Ubiquity or only in Org
 (or only in Windows), you may still skim through the code to find out how things
@@ -26,7 +26,7 @@ In the following command we refer to two fictional org files: `~/org/foo.org` an
 `~/org/bar.org` (relative to user home directory) available through `foo` and `bar`
 shortcuts from Ubiquity. There are also three fictional headlines: "Items", "Things" 
 and "Widgets" predefined for Ubiquity autocompletion. The noun-type `noun_open_headlines`
-allows user to enter an arbitrary headline name. Although, in theory it is 
+also allows user to enter an arbitrary headline name. Although, in theory it is 
 [possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
 to automatically maintain an index of all org-files and headlines and 
 [obtain](https://github.com/eschulte/emacs-web-server)
@@ -178,6 +178,19 @@ CmdUtils.CreateCommand({
 
 ### org-protocol in Windows
 
+In Windows org-protocol URL is altered in various ways on its path from a browser to
+Emacs: 
+
+- A slash is appended to subprotocol name. For an example: `org-protocol://capture?url=...`
+becomes `org-protocol://capture/?url=...`. Because of this Emacs may not recognize a
+subprotocol.
+- The URL is encoded into local system character set, so Emacs will get unibyte characters
+instead of UTF-8.
+
+In addition, the URL should be no longer than 32kb. All this makes setup of org-protocol
+in Windows a non-trivial task, details of which lie beyond the scope of this post.
+We assume that the automatic configuration provided by [&rho;Emacs](https://rho-emacs.sourceforge.io/)
+is used.
 
 ### Configuring Emacs
 
