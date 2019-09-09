@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Reading huge files in plain JavaScript using ES6 async generators
+title: Reading huge files in plain JavaScript with the help of ES6 async generators
 categories: [HTML, JavaScript]
 ---
 
