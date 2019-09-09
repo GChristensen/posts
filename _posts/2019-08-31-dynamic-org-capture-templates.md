@@ -178,8 +178,8 @@ CmdUtils.CreateCommand({
 
 ### org-protocol in Windows
 
-In Windows org-protocol URL is altered in various ways on its path from a browser to
-Emacs: 
+When capturing from a browser in Windows org-protocol URL is altered in various ways 
+on its path to Emacs: 
 
 - A slash is appended to subprotocol name. For an example: `org-protocol://capture?url=...`
 becomes `org-protocol://capture/?url=...`. Because of this Emacs may not recognize a
