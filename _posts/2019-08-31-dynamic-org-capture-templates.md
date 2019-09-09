@@ -199,12 +199,14 @@ To pass captured items to Emacs we use two custom org-protocol:// subprotocol na
 - `capture-html` - custom subprotocol name used to process HTML which is defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
 library (it is already included in &rho;Emacs, but requires [pandoc](https://pandoc.org/)
-somewhere on the PATH). The most of URL parameters obtained from Ubiquity are 
-Base64-encoded to preserve UTF-8. 
+somewhere on the PATH).  
 
 Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
 used to store links and text is completely dynamic and is composed
-out of the org-protocol link parameters.
+out of the org-protocol link parameters. 
+The most of URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8.
+File path, headline name and text format are passed through three non-standard parameters:
+`file`, `headline` and `format`.
 
 Paste the following code into your `.emacs` configuration file:
 
