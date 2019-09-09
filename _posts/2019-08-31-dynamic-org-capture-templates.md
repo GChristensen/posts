@@ -65,9 +65,9 @@ CmdUtils.CreateCommand({
     ],
     description: "Captures the current tab URL or selected text to an org-file.",
     help: `<span class="syntax">Syntax</span>
-            <ul class="syntax">
-                <li><b>org-capture</b> [<i>title</i> | <b>this</b>] [<b>at</b> <i>file</i>] 
-                [<b>in</b> <i>headline</i>] [<b>as</b> <i>format</i>]</li>
+            <ul class="syntax"><li><b>org-capture</b> [<i>title</i> | <b>this</b>] 
+                    [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>] 
+                    [<b>as</b> <i>format</i>]</li>
             </ul>
             <span class="arguments">Arguments</span><br>
             <ul class="syntax">
