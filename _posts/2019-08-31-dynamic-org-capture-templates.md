@@ -17,9 +17,6 @@ user-specified org files. If you are interested only in Ubiquity or only in Org
 (or only in Windows), you may still skim through the code to find out how things
 work.
 
-
-Work in progress...
-
 ### Creating Ubiquity command
 
 In the following command we refer to two fictional org files: `~/org/foo.org` and
