@@ -239,8 +239,7 @@ Paste the following code into your `.emacs` configuration file:
 ;; in org-protocol url or leave only captured link if none
 (defun capture-get-org-capture-template-body ()
   (let ((content (plist-get capture-decoded-org-protocol-query :body)))
-    (let ((orglink "* %?[[%(capture-decode-local-string :link)]\
-[%(capture-decode-local-string :description)]] %U\n"))
+    (let ((orglink "* %?[[%(capture-decode-local-string :link)][%(capture-decode-local-string :description)]] %U\n"))
       (let ((finalizer "%(capture-finalize-capture)")
             (template (concat orglink
                               (if (and content (not (string= content "")))
