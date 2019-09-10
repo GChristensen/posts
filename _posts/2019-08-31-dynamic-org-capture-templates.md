@@ -210,10 +210,10 @@ is used.
 
 To pass captured items to Emacs we use two custom org-protocol:// subprotocol names:
 - `capture-ubiquity` - custom supbrotocol name used to pass plain UTF-8 text.
-- `capture-html` - custom subprotocol name used to process HTML which is defined by
+- `capture-html` - custom subprotocol name used to process HTML (it is defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
 library which is included in &rho;Emacs when org-protocol is configured in installer
-options.  
+options).  
 
 NOTE: you need to manually install `org-protocol-capture-html` if you are using 
 a regular emacs distribution. It also requires [pandoc](https://pandoc.org/)
