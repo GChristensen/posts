@@ -192,8 +192,8 @@ CmdUtils.CreateCommand({
 
 ### org-protocol in Windows
 
-org-protocol URL is altered in various ways 
-on its path to Emacs When capturing from a browser in Windows: 
+org-protocol URL is altered in various ways on its path to Emacs when capturing
+from a browser in Windows:
 
 - A slash is appended to subprotocol name. For an example:<br> `org-protocol://capture?url=...`
 becomes `org-protocol://capture/?url=...`<br> Because of this Emacs may not recognize a
@@ -212,11 +212,12 @@ To pass captured items to Emacs we use two custom org-protocol:// subprotocol na
 - `capture-ubiquity` - custom supbrotocol name used to pass plain UTF-8 text.
 - `capture-html` - custom subprotocol name used to process HTML which is defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
-library which is included in &rho;Emacs.  
+library which is included in &rho;Emacs when org-protocol is configured in installer
+options.  
 
 NOTE: you need to manually install `org-protocol-capture-html` if you are using 
 a regular emacs distribution. It also requires [pandoc](https://pandoc.org/)
-somewhere on the PATH (`pandoc` is `not` included in &rho;Emacs). 
+binary somewhere on the PATH (pandoc is `not` included in &rho;Emacs). 
 
 Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
 used to store links and text is completely dynamic and is composed
