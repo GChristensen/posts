@@ -99,19 +99,18 @@ CmdUtils.CreateCommand({
     help: `<span class="syntax">Syntax</span>
             <ul class="syntax"><li><b>org-capture</b> [<i>title</i> | <b>this</b>] 
                     [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>] 
-                    [<b>as</b> <i>format</i>]</li>
+                    [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]</li>
             </ul>
             <span class="arguments">Arguments</span><br>
-            <ul class="syntax">
-                <li>- <i>title</i> - captured URL title.</li>
-            </ul>
+            <ul class="syntax"><li>- <i>title</i> - captured URL title.</li></ul>
             <ul class="syntax">
                 <li>- <i>org file</i> - org-file to place the capture in.</li>
-            </ul>
-            <ul class="syntax">
+            </ul><ul class="syntax">
                 <li>- <i>headline</i> - headline to palce the capture under.</li>
-            </ul>
-            <ul class="syntax">
+            </ul><ul class="syntax">
+                <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
+                <b>POSTPONED</b>}.</li>
+            </ul><ul class="syntax">
                 <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
             </ul>`,
     // preview the capture options
