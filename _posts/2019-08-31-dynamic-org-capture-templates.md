@@ -31,6 +31,10 @@ to automatically maintain an index of all org-files and headlines and
 [obtain](https://github.com/eschulte/emacs-web-server)
 it in Ubiquity, this is a work for real aficionados.
 
+NOTE: Ubiquity parser requires to specify `this` keyword if you capture selected
+text into a custom headline which contains spaces (generally, if there is 
+a selection and argument values with spaces).
+
 By default the command captures selection as plain text, but HTML-selection 
 could be captured as org-formatted text, if the corresponding parameter
 is specified in the command arguments.
@@ -48,6 +52,9 @@ let ORG_HEADLINES = ["Items", "Things", "Widgets"];
 
 // capture formats
 let ORG_FORMATS = ["text", "org"];
+
+// TODO states
+let TODO_STATES = ["TODO", "WAITING", "POSTPONED"];
 
 // a noun type that allows to enter not only suggested but also custom headline names
 let noun_open_headlines = {
@@ -72,14 +79,21 @@ let noun_open_headlines = {
     }
 };
 
+// a helper function to safely get argument text
+let getArgumentText = arg => 
+    arg && arg.text && arg.text !== CmdUtils.getSelection()
+        ? arg.text
+        : "";
+
 CmdUtils.CreateCommand({
     name: "org-capture",
     uuid: "F36F51E1-60B3-4451-B08E-6A4372DA74DD",
     arguments: [
-        {role: "object", nountype: noun_arb_text, label: "text"},
+        {role: "object", nountype: noun_arb_text, label: "title"},
         {role: "time",   nountype: ORG_FILES, label: "file"}, // at
         {role: "format", nountype: noun_open_headlines, label: "headline"}, // in
-        {role: "alias",  nountype: ORG_FORMATS, label: "type"}, // as
+        {role: "alias",  nountype: ORG_FORMATS, label: "format"}, // as
+        {role: "instrument", nountype: TODO_STATES, label: "todo"}, // with
     ],
     description: "Captures the current tab URL or selected text to an org-file.",
     help: `<span class="syntax">Syntax</span>
@@ -101,7 +115,7 @@ CmdUtils.CreateCommand({
                 <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
             </ul>`,
     // preview the capture options
-    preview: function(pblock, {object, time, format, alias}) {
+    preview: function(pblock, {object, time, format, alias, instrument}) {
         let html = "";
         let tab = CmdUtils.getActiveTab();
         
@@ -110,66 +124,66 @@ CmdUtils.CreateCommand({
             return;
         }
 
-        this._description = object && object.text
-            ? object.text === CmdUtils.getSelection()? tab.title: object.text
-            : tab.title;
+        let text = getArgumentText(object)? object.text: tab.title;
 
-        if (tab.title)
-            html += "Description: <span style='color: #45BCFF;'>" 
-                 + Utils.escapeHtml(this._description) + "</span><br>";
+        html += "Title: <span style='color: #45BCFF;'>" 
+             + Utils.escapeHtml(text) + "</span><br>";
 
         if (time && time.data)
             html += "File: <span style='color: #FD7221;'>" 
                  + Utils.escapeHtml(time.data) + "</span><br>";
 
-        if (format && format.text && format.text !== CmdUtils.getSelection())
+        if (text = getArgumentText(format)) // beware of assignments in condition
             html += "Headline: <span style='color: #7DE22E;'>" 
-                 + Utils.escapeHtml(format.text) + "</span><br>";
+                 + Utils.escapeHtml(text) + "</span><br>";
 
-        if (alias && alias.text)
-            html += "Format: <span style='color: #FC6DAC;'>" 
-                 + alias.text + "</span><br>";
+        if (text = getArgumentText(instrument))
+            html += "TODO state: <span style='color: #FC6DAC;'>" 
+                 + text + "</span><br>";
+                 
+        if (text = getArgumentText(alias))
+            html += "Format: <span style='color: white;'>" 
+                 + text + "</span><br>";
+
                 
         pblock.innerHTML = html;
     },
-    execute: function({object, time, format, alias}) {
+    execute: function({object, time, format, alias, instrument}) {
         let tab = CmdUtils.getActiveTab();
         
         if (!tab)
             return;
             
         // URL-safe Base 64 encoding
-        b64enc = s => btoa(unescape(encodeURIComponent(s)))
+        let b64enc = s => btoa(unescape(encodeURIComponent(s)))
                         .replace(/=+$/g, "")
                         .replace(/\+/g, "-")
                         .replace(/\//g, "_");
         
         // get and pack capture options to an org-protocol URL
-        let title = b64enc(this._description);
+        let title = b64enc(getArgumentText(object)? object.text: tab.title);
         let url = b64enc(tab.url);
         let file = time && time.data
                     ? b64enc(time.data)
                     : b64enc(Object.values(ORG_FILES)[0]);
-        let headline = format && format.text 
-                && format.text !== CmdUtils.getSelection()
-                    ? b64enc(format.text)
-                    : "";
-        let type = alias && alias.text? alias.text: "text";
-        let subprotocol = type === "text"? "capture-ubiquity": "capture-html";
+        let headline = b64enc(getArgumentText(format));
+        let type = getArgumentText(alias)? alias.text: "text";
+        let todo = getArgumentText(instrument);
         let body = b64enc(type === "text"
                             ? CmdUtils.getSelection()
                             : CmdUtils.getHtmlSelection());
 
+        let subprotocol = type === "text"? "capture-ubiquity": "capture-html";
         let orgUrl = `org-protocol://${subprotocol}?template=P`
-                   + `&title=${title}&url=${url}&body=${body}`
+                   + `&title=${title}&url=${url}&body=${body}&todo=${todo}`
                    + `&file=${file}&headline=${headline}&format=${type}`;
         
         if (orgUrl.length > 32500) {
-            CmdUtils.notify("Selection is too long.")
+            CmdUtils.notify("Selection is too long.");
             return;
         }
         
-        // launch Emacs client
+        // launch emacsclient
         // it is assumed that Emacs is running when you are trying to capture
         location.href = orgUrl;
     }
@@ -198,8 +212,11 @@ To pass captured items to Emacs we use two custom org-protocol:// subprotocol na
 - `capture-ubiquity` - custom supbrotocol name used to pass plain UTF-8 text.
 - `capture-html` - custom subprotocol name used to process HTML which is defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
-library (it is already included in &rho;Emacs, but requires [pandoc](https://pandoc.org/)
-somewhere on the PATH).  
+library which is included in &rho;Emacs.  
+
+NOTE: you need to manually install `org-protocol-capture-html` if you are using 
+a regular emacs distribution. It also requires [pandoc](https://pandoc.org/)
+somewhere on the PATH (`pandoc` is `not` included in &rho;Emacs). 
 
 Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
 used to store links and text is completely dynamic and is composed
@@ -222,29 +239,32 @@ Paste the following code into your `.emacs` configuration file:
 ;; see more at org-mode source code: https://bit.ly/2lJqz1a
 (defun capture-get-destination-headline ()
   (let ((headline (plist-get capture-decoded-org-protocol-query :headline)))
-    (if (and headline (not (string= headline "")))
-        (progn
-          (goto-char (point-min))
-          (if (re-search-forward (format org-complex-heading-regexp-format
-                                         (regexp-quote headline))
-                                 nil t)
-              (beginning-of-line)
-            (goto-char (point-max))
-            (unless (bolp) (insert "\n"))
-            (insert "* " headline "\n")
-            (beginning-of-line 0)))
-      (goto-char (point-max)))))
+    (if (string= headline "")
+        (goto-char (point-max))
+      (progn
+        (goto-char (point-min))
+        (if (re-search-forward (format org-complex-heading-regexp-format
+                                       (regexp-quote headline))
+                               nil t)
+            (beginning-of-line)
+          (goto-char (point-max))
+          (unless (bolp) (insert "\n"))
+          (insert "* " headline "\n")
+          (beginning-of-line 0))))))
 
-;; create a dynamic template - append a newline and selection text if it presents
-;; in org-protocol URL parameters or leave only captured link if none
+;; create a dynamic template - TODO and body are inserted only if
+;; they are present in org-protocol URL parameters 
 (defun capture-get-org-capture-template-body ()
-  (let ((content (plist-get capture-decoded-org-protocol-query :body)))
-    (let ((orglink "* %?[[%:link][%:description]] %U\n"))
-      (let ((finalizer "%(capture-finalize-capture)")
-            (template (concat orglink
-                              (if (and content (not (string= content "")))
-                                  "%:initial\n"
-                                ""))))
+  (let ((content (plist-get capture-decoded-org-protocol-query :body))
+        (todo (plist-get capture-decoded-org-protocol-query :todo))
+        (finalizer "%(capture-finalize-capture)"))
+    (let ((orglink (concat "* "
+                           (unless (string= todo "")
+                             (concat todo " "))
+                           "%?[[%:link][%:description]] %U\n")))
+      (let ((template (concat orglink
+                              (unless (string= content "")
+                                  "%:initial\n"))))
         (concat template finalizer)))))
 
 (defun capture-finalize-capture ()
@@ -306,6 +326,7 @@ Paste the following code into your `.emacs` configuration file:
     ;; save parameters for later use
     (setf capture-decoded-org-protocol-query
       `(:format ,format
+        :todo ,(plist-get args :todo)
         :template ,(plist-get args :template)
         :title ,(capture-decode-base64-utf-8 (plist-get args :title))
         :url ,(capture-decode-base64-utf-8 (plist-get args :url))
