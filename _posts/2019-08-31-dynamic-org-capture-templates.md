@@ -203,7 +203,7 @@ instead of UTF-8.
 In addition, the URL should be no longer than 32kb. All this makes setup of org-protocol
 in Windows a non-trivial task.
 
-To address the first problem you may advice org-protocol-check-filename-for-protocol function,
+To address the first problem you may advice `org-protocol-check-filename-for-protocol` function,
 for example, in the following way:
 
 ```clojure
@@ -225,12 +225,11 @@ The second problem requires recoding of the obtained capture URL components insi
   (decode-coding-string (plist-get org-store-link-plist c) 
                          locale-coding-system))
 
-(setq org-capture-templates '())
-  (add-to-list 'org-capture-templates
-               '("p" "Protocol" entry (file "")
-                 "* %?[[%(decode-capture-component :link)]\
+(add-to-list 'org-capture-templates
+             '("p" "Protocol" entry (file "")
+               "* %?[[%(decode-capture-component :link)]\
 [%(decode-capture-component :description)]] %U\n\
-%(decode-capture-component :initial)\n" :prepend t)) 
+%(decode-capture-component :initial)\n")) 
 ``` 
  
 But you may just install [&rho;Emacs](https://rho-emacs.sourceforge.io/) which does all this automatically.
