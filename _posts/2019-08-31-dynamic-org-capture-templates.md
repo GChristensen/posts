@@ -201,9 +201,39 @@ subprotocol.
 instead of UTF-8.
 
 In addition, the URL should be no longer than 32kb. All this makes setup of org-protocol
-in Windows a non-trivial task, details of which lie beyond the scope of this post.
-We assume that the automatic configuration provided by [&rho;Emacs](https://rho-emacs.sourceforge.io/)
-is used.
+in Windows a non-trivial task.
+
+To address the first problem you may advice org-protocol-check-filename-for-protocol function,
+for example, in the following way:
+
+```clojure
+(defun advice-org-protocol-check-filename (orig-fun &rest args)
+  (let ((fname (car args)))
+    (let ((correct-url
+           (replace-regexp-in-string (regexp-quote "/?")
+                                     "?" fname nil 'literal)))
+      (apply orig-fun (cons correct-url (cdr args))))))
+  
+(advice-add 'org-protocol-check-filename-for-protocol
+            :around #'advice-org-protocol-check-filename) 
+```
+
+The second problem requires recoding of the obtained capture URL components inside capture templates:
+
+```clojure
+(defun decode-capture-component (c)
+  (decode-coding-string (plist-get org-store-link-plist c) 
+                         locale-coding-system))
+
+(setq org-capture-templates '())
+  (add-to-list 'org-capture-templates
+               '("p" "Protocol" entry (file "")
+                 "* %?[[%(decode-capture-component :link)]\
+[%(decode-capture-component :description)]] %U\n\
+%(decode-capture-component :initial)\n" :prepend t)) 
+``` 
+ 
+But you may just install [&rho;Emacs](https://rho-emacs.sourceforge.io/) which does all this automatically.
 
 ### Configuring Emacs
 
