@@ -218,7 +218,7 @@ for example, in the following way:
             :around #'advice-org-protocol-check-filename) 
 ```
 
-The second problem requires recoding of the obtained capture URL components inside capture templates:
+The second problem requires recoding of the obtained URL components inside capture templates:
 
 ```clojure
 (defun decode-capture-component (c)
@@ -240,8 +240,7 @@ To pass captured items to Emacs we use two custom org-protocol:// subprotocol na
 - `capture-ubiquity` - custom supbrotocol name used to pass plain UTF-8 text.
 - `capture-html` - custom subprotocol name used to process HTML (it is defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
-library which is included in &rho;Emacs when org-protocol is configured in installer
-options).  
+library which is included in &rho;Emacs when it is installed with `org-protocol` option).  
 
 NOTE: you need to manually install `org-protocol-capture-html` if you are using 
 a regular emacs distribution. It also requires [pandoc](https://pandoc.org/)
