@@ -192,11 +192,11 @@ CmdUtils.CreateCommand({
 
 ### org-protocol in Windows
 
-When capturing from a browser in Windows org-protocol URL is altered in various ways 
-on its path to Emacs: 
+org-protocol URL is altered in various ways 
+on its path to Emacs When capturing from a browser in Windows: 
 
-- A slash is appended to subprotocol name. For an example: `org-protocol://capture?url=...`
-becomes `org-protocol://capture/?url=...`. Because of this Emacs may not recognize a
+- A slash is appended to subprotocol name. For an example:<br> `org-protocol://capture?url=...`
+becomes `org-protocol://capture/?url=...`<br> Because of this Emacs may not recognize a
 subprotocol.
 - The URL is encoded into local system character set, so Emacs will get unibyte characters
 instead of UTF-8.
