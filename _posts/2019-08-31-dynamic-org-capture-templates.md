@@ -32,7 +32,7 @@ to automatically maintain an index of all org-files and headlines and
 it in Ubiquity, this is a work for real aficionados.
 
 NOTE: Ubiquity parser requires to specify `this` keyword if you capture selected
-text into a custom headline which contains spaces (generally, if there is 
+text into a custom headline which name contains spaces (generally, if there is 
 a selection and argument values with spaces).
 
 By default the command captures selection as plain text, but HTML-selection 
