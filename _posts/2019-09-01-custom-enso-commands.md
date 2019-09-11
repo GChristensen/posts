@@ -46,7 +46,7 @@ to the directories shown above and open the result with mediaprobes:
 
 <video src="/posts/videos/enso-demo.webm" width="100%" type="video/webm" controls></video>
 
-You may explore the following code in Enso command editor. The commands are completely
+You may explore the code in the Enso command editor. The commands are completely
 data-driven - the result will change whenever you modify the directory tree.
 
 #### Obtaining category directories as command arguments
