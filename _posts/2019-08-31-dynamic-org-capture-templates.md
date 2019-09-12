@@ -25,19 +25,24 @@ In the following command we refer to two fictional org files: `~/org/foo.org` an
 `~/org/bar.org` (relative to the user home directory) available through `foo` and `bar`
 shortcuts from Ubiquity. There are also three fictional headlines: "Items", "Things" 
 and "Widgets" predefined for Ubiquity autocompletion. The noun-type `noun_open_headlines`
-also allows a user to enter an arbitrary headline name. Although, in theory it is 
+also allows to enter an arbitrary headline name. Although, in theory it is 
 [possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
 to automatically maintain an index of all org-files and headlines and 
 [obtain](https://github.com/eschulte/emacs-web-server)
 it in Ubiquity, this is a work for real aficionados.
 
-NOTE: Ubiquity parser requires to specify `this` keyword if you capture selected
-text into a custom headline which name contains spaces (generally, if there is 
-a selection and argument values with spaces).
+We need `getArgumentText` helper function to go around two Ubiquity parser quirks:
+- It substitutes empty arbitrary-text argument values for selection.
+- It requires to specify special `this` keyword if there is a selection and argument 
+  values contain spaces.
+ 
+Thanks to `getArgumentText` it is possible to capture text or link (when there is
+no selection) under a custom headline with spaces in its name using `this` keyword.
+The process is shown at the video above.
 
-By default the command captures selection as plain text, but HTML-selection 
-could be captured as org-formatted text, if the corresponding parameter
-is specified in the command arguments.
+By default the command captures selection as plain text, but it could be
+captured as org-formatted text, if the corresponding parameter is specified in
+the command arguments.
 
 Paste the following code into UbiquityWE command editor: 
 
@@ -81,7 +86,7 @@ let noun_open_headlines = {
 
 // a helper function to safely get argument text
 let getArgumentText = arg => 
-    arg && arg.text && arg.text !== CmdUtils.getSelection()
+    arg && arg.text && arg.text !== CmdUtils.getSelection() && arg.text !== "this"
         ? arg.text
         : "";
 
