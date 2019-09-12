@@ -34,7 +34,7 @@ it in Ubiquity, this is a work for real aficionados.
 We need `getArgumentText` helper function to go around two Ubiquity parser quirks:
 - It substitutes empty arbitrary-text argument values for selection.
 - It requires to specify special `this` keyword if there is a selection and argument 
-  values contain spaces.
+  values that contain spaces.
  
 Thanks to `getArgumentText` it is possible to capture text or link (when there is
 no selection) under a custom headline with spaces in its name using `this` keyword.
