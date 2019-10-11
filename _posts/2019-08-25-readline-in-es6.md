@@ -4,14 +4,19 @@ title: Reading huge files in plain JavaScript with the help of ES6 async generat
 categories: [HTML, JavaScript]
 ---
 
-It sometimes happens that you need to read gigabyte-long files on the client side of web applications, and placing them as a whole 
-into memory is not an option. Of course, there is [File.slice](https://developer.mozilla.org/en-US/docs/Web/API/Blob/slice),
-but things get complicated when you have to read, for example, an [UTF-8-encoded](https://en.wikipedia.org/wiki/UTF-8#History) text file. You need to do some byte 
-juggling, and ES6 [async generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of)
- allow to perform this in a pretty elegant way.
+It sometimes happens that you need to read gigabyte-long files on the client
+side of a web application, and placing them as a whole into memory is not an
+option. Of course, there is
+[File.slice](https://developer.mozilla.org/en-US/docs/Web/API/Blob/slice), but
+things get complicated when you have to read, for example, an
+[UTF-8-encoded](https://en.wikipedia.org/wiki/UTF-8#History) text file. You need
+to do some byte juggling, and ES6 [async
+generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of)
+allow to perform this in a pretty elegant way.
 
-In other words, is it possible to read a standard JavaScript [File](https://developer.mozilla.org/en-US/docs/Web/API/File)
-line by line as shown in the snippet below?
+In other words, is it possible to read a standard JavaScript
+[File](https://developer.mozilla.org/en-US/docs/Web/API/File) line by line as
+shown in the snippet below?
 
 ```javascript
 for await (let line of ReadLine(file).lines()) {

@@ -4,30 +4,31 @@ title: The new life of command interfaces
 categories: [Enso Launcher, Python]
 ---
 
-Command interfaces - an integral part of life in 1980s -  gain a new breath with the advent of 
-[Enso Launcher](https://gchristensen.github.io/enso-portable/) and 
-[Ubiquity Web Extension](https://gchristensen.github.io/ubiquitywe/). Although graphical user interfaces
-have opened a new world in computer industry, in certain domains text commands still offer
-advantages in usability and accessibility. If your subject area could be relatively easy formalized 
-and you have some API to act on, with the tools mentioned above you can create powerful commands
-that will free you from routine GUI interactions.
+Command interfaces - an integral part of life in 1980s -  gain a new breath with
+the advent of [Enso Launcher](https://gchristensen.github.io/enso-portable/) and
+[Ubiquity Web Extension](https://gchristensen.github.io/ubiquitywe/). Although
+graphical user interfaces have opened a new world in computer industry, in
+certain domains text commands still offer advantages in usability and
+accessibility. With the tools mentioned above you can create powerful
+commands that will free you from routine GUI interactions.
 
 ### A little example
 
-Let's assume that you have a large random dump of music videos which you want to sort to watch on your
-media-center PC.
-Normally, to sort files you open a video in a player, assess it, stop playback, close video and navigate to 
-file explorer to move the video into the corresponding destination directory. Obviously, this takes a fair
-amount of manual actions.
+Let's assume that you have a large random dump of music videos which you want to
+sort to watch on your media-center PC. Normally, to sort files you open a video
+in a player, assess it, stop playback, close video and navigate to the file explorer
+to move the video into the corresponding destination directory. Obviously, this
+takes a fair amount of manual actions.
 
-With Enso Launcher (v0.4.5+) it is possible to create a command, let's call it 'mv', that will automatically
-move a file opened in [Media Player Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) 
-to the directory specified as a command argument. Moreover, by using Enso 
-[mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes)
-you can populate MPC playlist from filesystem with no more than one command.
+Enso Launcher (v0.4.5+) allows to create a command, let's call it
+'mv', that will automatically move a file opened in [Media Player
+Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) to the directory
+specified as a command argument. Moreover, by using Enso
+[mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes) you can
+populate MPC playlist from filesystem with no more than one command.
 
-To be more specific, let's assume that you have made the following directory tree of the destination 
-music video categories:
+To be more specific, let's assume that you have made the following directory
+tree of the destination music video categories:
 
 ```
 D:/music
@@ -41,20 +42,23 @@ D:/music
         └───pop music
 ```
 
-Below we create all necessary commands that will help us to move files displayed in MPC 
-to the directories shown above and open the result with mediaprobes:
+Below we create all the necessary commands that will help us to move files
+currently displayed in MPC to the directories shown above and open the result with 
+mediaprobes:
 
 <video src="/posts/videos/enso-demo.webm" width="100%" type="video/webm" controls></video>
 
-You may explore the code in the Enso command editor. The commands are completely
+You may explore the code in Enso command editor. The commands are completely
 data-driven - the result will change whenever you modify the directory tree.
 
 #### Obtaining category directories as command arguments
 
-Since there are two levels of categories, we need to pack the both levels into a single argument name.
-Let's take the first letter of the first level (for example 'l' for 'live) and prepend it to the full
-name of the second level, so we get 'lclassical', 'mclassical', etc. as command arguments.
-The same approach is applicable if there are more levels, but it may utilize some separator character. 
+Since there are two levels of categories, we need to pack the both into a
+single argument name. Let's take the first letter of the first level (for
+example 'l' for 'live) and prepend it to the full name of the second level, so
+we get 'lclassical', 'mclassical', etc. as command arguments. The same approach
+is applicable if there are more levels, but it may utilize some separator
+character.
 
 ```python
 import os
@@ -131,9 +135,10 @@ def cmd_rm(ensoapi):
 
 #### Creating mediaprobes for 'd:/music' subfolders
 
-In the snippet below we create two commands named: 'live' and 'music videos' which automatically obtain 
-subcategories from the corresponding folders as arguments and pass them to MPC when called. There may be 
-as many probe commands as subdirectories in 'd:/music'. See Enso tutorial and API documentation for
+In the snippet below we create two commands named: 'live' and 'music videos'
+which automatically obtain subcategories from the corresponding folders as
+their own arguments and pass them to MPC when called. There may be as many probe commands
+as subdirectories in 'd:/music'. See Enso tutorial and API documentation for
 more details.
 
 ```python

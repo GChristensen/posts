@@ -8,11 +8,11 @@ categories: [UbiquityWE, Emacs, elisp, JavaScript]
 [org-protocol](https://orgmode.org/manual/Protocols.html) offers a nice
 possibility to capture URLs along with some selected text from many web-browsers
 into Emacs [org-mode](https://orgmode.org/). But most of the tools you can find
-out there allow a little control over the capture process - usually it is
-only possible to put plain text into some hardcoded org file. Below we develop an
+out there allow a little control over the process - usually it is
+only possible to put just plain text into a some hard-coded org file. Below we develop an
 [UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows to
 capture org-formatted text under any
-[headline](https://orgmode.org/manual/Headlines.html) in one of the
+[headline](https://orgmode.org/manual/Headlines.html) in one of the several 
 user-specified org files. If you are interested only in Ubiquity or only in Org
 (or only in Windows), you may still skim through the code to find out how things
 work.
@@ -22,22 +22,22 @@ work.
 ### Creating Ubiquity command
 
 In the following command we refer to two fictional org files: `~/org/foo.org` and
-`~/org/bar.org` (relative to the user home directory) available through `foo` and `bar`
+`~/org/bar.org` (relative to the user home directory) available through the `foo` and `bar`
 shortcuts from Ubiquity. There are also three fictional headlines: "Items", "Things" 
-and "Widgets" predefined for Ubiquity autocompletion. The noun-type `noun_open_headlines`
+and "Widgets" provided for Ubiquity autocompletion. The noun-type `noun_open_headlines`
 also allows to enter an arbitrary headline name. Although, in theory it is 
 [possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
 to automatically maintain an index of all org-files and headlines and 
 [obtain](https://github.com/eschulte/emacs-web-server)
 it in Ubiquity, this is a work for real aficionados.
 
-We need `getArgumentText` helper function to go around two Ubiquity parser quirks:
+We also need `getArgumentText` helper function to go around two Ubiquity parser quirks:
 - It substitutes empty arbitrary-text argument values for selection.
 - It requires to specify special `this` keyword if there is a selection and argument 
   values that contain spaces.
  
 Thanks to `getArgumentText` it is possible to capture text or link (when there is
-no selection) under a custom headline with spaces in its name using `this` keyword.
+no selection) under any custom headline using `this` keyword.
 The process is shown at the video above.
 
 By default the command captures selection as plain text, but it could be
@@ -52,7 +52,7 @@ let ORG_FILES = {"foo": "~/org/foo.org",
                  "bar": "~/org/bar.org"
                 };
 
-// list of predefined org headlines to place captures under
+// list of predefined org headlines
 let ORG_HEADLINES = ["Items", "Things", "Widgets"];
 
 // capture formats
@@ -71,7 +71,7 @@ let noun_open_headlines = {
             return {};
             
         let matcher = new RegExp(text, "i");
-        // make sugestions from predefined headlines
+        // make suggestions from predefined headlines
         let suggs = ORG_HEADLINES.map(h => ({name: h}))
                         .filter(i => (i.match = matcher.exec(i.name), !!i.match))
                         .map(i => CmdUtils.makeSugg(i.name, i.name, null,
@@ -164,7 +164,7 @@ CmdUtils.CreateCommand({
                         .replace(/\+/g, "-")
                         .replace(/\//g, "_");
         
-        // get and pack capture options to an org-protocol URL
+        // get and pack capture options as an org-protocol URL
         let title = b64enc(getArgumentText(object)? object.text: tab.title);
         let url = b64enc(tab.url);
         let file = time && time.data
@@ -208,8 +208,7 @@ instead of UTF-8.
 In addition, the URL should be no longer than 32kb. All this makes setup of org-protocol
 in Windows a non-trivial task.
 
-To address the first problem you may advice `org-protocol-check-filename-for-protocol` function,
-for example, in the following way:
+To address the first problem you may advice `org-protocol-check-filename-for-protocol` function:
 
 ```clojure
 (defun advice-org-protocol-check-filename (orig-fun &rest args)
@@ -241,11 +240,11 @@ But you may just install [&rho;Emacs](https://rho-emacs.sourceforge.io/) which d
 
 ### Configuring Emacs
 
-To pass captured items to Emacs we use two custom org-protocol:// subprotocol names:
+To pass captured items to Emacs we define two custom org-protocol:// subprotocol names:
 - `capture-ubiquity` - custom supbrotocol name used to pass plain UTF-8 text.
-- `capture-html` - custom subprotocol name used to process HTML (it is defined by
+- `capture-html` - custom subprotocol name used to process HTML (it is actually defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
-library which is included in &rho;Emacs when it is installed with `org-protocol` option).  
+library which is included in &rho;Emacs installed with `org-protocol` option).  
 
 NOTE: you need to manually install `org-protocol-capture-html` if you are using 
 a regular emacs distribution. It also requires [pandoc](https://pandoc.org/)
@@ -255,8 +254,6 @@ Org [capture template](https://orgmode.org/manual/Capture-templates.html)
 used to store links and text is completely dynamic and is composed
 out of the org-protocol link parameters. 
 The most of URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8.
-File path, headline name and text format are passed through three non-standard parameters:
-`file`, `headline` and `format`.
 
 Paste the following code into your `.emacs` configuration file:
 
@@ -317,7 +314,7 @@ Paste the following code into your `.emacs` configuration file:
   (org-protocol-capture
    (capture-decode-base64-args args)))
 
-;; add `capture-ubiquity' org-protocol subprotocol handler
+;; define `capture-ubiquity' org-protocol subprotocol handler
 (add-to-list 'org-protocol-protocol-alist
              '("capture-ubiquity"
                :protocol "capture-ubiquity"
