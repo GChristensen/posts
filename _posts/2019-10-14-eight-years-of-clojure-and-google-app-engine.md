@@ -132,7 +132,7 @@ of frontend instances to one:
 
 To perform some time-demanding work you need to redirect requests to the backend instances.
 The good news are that you can deploy the same code as you use at your frontend
-to the backend instances (for example, through queues with a backend target).
+to the backend servies (for example, through queues with a backend target).
 To accomplish this, before deployment comment out the configuration of the default service
 (which is shown above) and add the following section to your `appengine-web.xml`: 
 
@@ -144,6 +144,9 @@ To accomplish this, before deployment comment out the configuration of the defau
     <idle-timeout>1m</idle-timeout>
   </basic-scaling>
 ```
+
+This will work, although the [default](https://cloud.google.com/appengine/docs/standard/java/configuration-files)
+manual requires a dedicated directory for each service in the application.
 
 #### appengine-magic local development server is a phony
 
