@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 8 Years of Clojure and Google App Engine: it's like a candy. Although, a bittersweet one.
+title: "8 Years of Clojure and Google App Engine: it's like a candy. Although, a bittersweet one."
 categories: [Clojure, Web, Google App Engine]
 ---
 
