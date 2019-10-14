@@ -5,7 +5,7 @@ categories: [Clojure, Web, Google App Engine]
 ---
 
 Below are some highligths from my eight-years-long experience of 
-the maintaining of the [feedxcavator](https://github.com/GChristensen/feedxcavator2)
+the maintaining of the [feedxcavator](https://gchristensen.github.io/#feedxcavator2)
 application.
 
 ### Why Clojure? Why on Google App Engine?
