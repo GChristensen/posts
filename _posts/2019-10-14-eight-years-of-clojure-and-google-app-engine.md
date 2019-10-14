@@ -4,6 +4,10 @@ title: 8 Years of Clojure and Google App Engine: it's like a candy. Although, a 
 categories: [Clojure, Web, Google App Engine]
 ---
 
+Below are some highligths from my eight-years-long experience of 
+the maintaining of the [feedxcavator](https://github.com/GChristensen/feedxcavator2)
+application.
+
 ### Why Clojure? Why on Google App Engine?
 
 [Clojure](https://clojure.org/) is a dynamically-typed language with almost 
@@ -25,10 +29,6 @@ are at the pinnacle of the art, which still remains largely a Terra Incognita.
 But because this post is about Clojure and App Engine, we leave meditations on these matters
 for some other time. It is enough to say, that [GAE](https://cloud.google.com/appengine/) is
 the most affordable, feature-rich and permissive web-hosting platform you can find for free.
-
-Below are some highligths from my eight-years-long experience of 
-the maintaining of the [feedxcavator](https://github.com/GChristensen/feedxcavator2)
-application.
  
 ### The sweet part
  
