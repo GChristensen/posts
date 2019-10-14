@@ -94,7 +94,7 @@ the server will start automatically each time you run REPL with leiningen.
 Before the deployment, build the application WAR folder with the `lein appengine-prepare`
 command. Then execute the following line from the project root folder: 
 
-```shell script
+```shell
 gcloud app deploy war/WEB-INF/appengine-web.xml --version=gae_app_version --project=your_gae_project_name 
 ```
 
