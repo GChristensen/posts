@@ -22,7 +22,7 @@ improvements on this part).
 An experienced developer should not fear such things.
 Being guided by her vision as her best tool, she should be able to successfully manage
 complexity, creating hierarchical layers of abstractions which are optimally balanced 
-in the domains of brevity and extensibility. While [design patters](https://en.wikipedia.org/wiki/Design_pattern)
+in the domains of clarity and extensibility. While [design patters](https://en.wikipedia.org/wiki/Design_pattern)
 are well researched set of complexity management paradigms in the object-oriented world, 
 in the realm of dynamic languages [DSLs](https://en.wikipedia.org/wiki/Domain-specific_language)
 are at the pinnacle of the art, which still remains largely a Terra Incognita. 
