@@ -36,12 +36,12 @@ We also need `getArgumentText` helper function to go around two Ubiquity parser 
 - It requires to specify special `this` keyword if there are a selection and argument 
   values that contain spaces.
  
-Thanks to `getArgumentText` it is possible to capture text or link (when there is
+Thanks to `getArgumentText` it is possible capturing text or link (when there is
 no selection) under any custom headline using `this` keyword.
 The process is shown in the video above.
 
-By default, the command captures selection as plain text, but it could be
-captured as org-formatted text, if the corresponding parameter is specified in
+By default, the command extracts selection as plain text, but it could be
+obtained as org-formatted text, if the corresponding parameter is specified in
 the command arguments.
 
 Paste the following code into UbiquityWE command editor: 
