@@ -15,19 +15,20 @@ ideal blend of functional and object-oriented primitives. This allows to create
 quality software in almost no-time. With Clojure you can concentrate on the logic and 
 leave the troubles about which functional interface to use with this particular
 lambda for Java programmers. Of course, such approach has its well-known disadvantages, 
-because the interrelations and specifications of the comprising interfaces are left 
+because the interrelations and specifications of the created interfaces are left 
 mostly in the mind of the author (although there are [some](https://clojure.org/guides/spec)
 improvements on this part). 
 
-An experienced developer should not fear such things.
+But an experienced developer should not fear such things.
 Being guided by her vision as her best tool, she should be able to successfully manage
 complexity, creating hierarchical layers of abstractions which are optimally balanced 
-in the domains of clarity and extensibility. While [design patters](https://en.wikipedia.org/wiki/Design_pattern)
-are well researched set of complexity management paradigms in the object-oriented world, 
+in the domains of clarity and extensibility. While  in the object-oriented world 
+[design patters](https://en.wikipedia.org/wiki/Design_pattern)
+are a well established set of complexity management paradigms, 
 in the realm of dynamic languages [DSLs](https://en.wikipedia.org/wiki/Domain-specific_language)
 are at the pinnacle of the art, which still remains largely a Terra Incognita. 
-But because this post is about Clojure and App Engine, we leave meditations on these matters
-for some other time. It is enough to say, that [GAE](https://cloud.google.com/appengine/) is
+But because this post is about Clojure and App Engine, we avoid meditations on these matters here.
+It is enough to say, that [GAE](https://cloud.google.com/appengine/) is
 the most affordable, feature-rich and permissive web-hosting platform you can find for free.
  
 ### The sweet part
@@ -67,10 +68,10 @@ Because you are using Clojure, you do not need to recompile the project and rest
 the server each time you have made a modification. This probably is the main 
 reason why it is such a fun to use Clojure for web development. Just load the modified files 
 into leiningen [REPL](https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md#running-code)
-from your favorite Clojure IDE. But the REPL should run an App Engine development server
-to make your application to be able to process HTTP requests. 
+from your favorite Clojure IDE. But the REPL should run an *App Engine development server*
+to make your application to be able to process HTTP requests using App Engine facilities. 
 
-Good news: appengine-magic can start App Engine development server for you
+There are good news: you can start appengine-magic App Engine development server 
 at the default 8080 port with the following code: 
 
 ```clojure
@@ -98,8 +99,8 @@ command. Then execute the following line from the project root folder:
 gcloud app deploy war/WEB-INF/appengine-web.xml --version=gae_app_version --project=your_gae_project_name 
 ```
 
-If you are using `cron.yaml` or `queue.yaml` files which define cron jobs or queue properties, 
-each of them should be deployed separately with the same command as above, but where
+If you have `cron.yaml` or `queue.yaml` files which define cron jobs or queue properties, 
+each of them should be deployed separately by using the same command as above, but where
 `war/WEB-INF/appengine-web.xml` is substituted to the appropriate file path.
 
 ### The bitter part
@@ -153,8 +154,8 @@ manual requires a dedicated directory for each service in the application.
 The real local development server which you can invoke with Cloud SDK uses complex
 preliminary initialization, that is absent in appengine-magic (it should be
 reverse-engineered to appear there). So, there are some missing features, such as
-services or BlobStore API ([Cloud Storage](https://cloud.google.com/storage/) is 
-recommended by Google instead of it, anyway). Use the server from Cloud SDK for
+services or BlobStore ([Cloud Storage](https://cloud.google.com/storage/) is 
+recommended by Google instead of it, anyway). Use the local server from Cloud SDK for
 production-grade testing.
 
 #### appengine-magic lacks modern Google APIs
