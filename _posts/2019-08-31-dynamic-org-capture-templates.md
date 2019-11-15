@@ -8,8 +8,8 @@ categories: [UbiquityWE, Emacs, elisp, JavaScript]
 [org-protocol](https://orgmode.org/manual/Protocols.html) offers a nice
 possibility to capture URLs along with some selected text from many web-browsers
 into Emacs [org-mode](https://orgmode.org/). But most of the tools you can find
-out there allow a little control over the process - usually it is
-only possible to put just plain text into a some hard-coded org file. Below we develop an
+out there allow a little control over the process - usually, it is
+only possible to put just plain text into some hard-coded org file. Below we develop an
 [UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows to
 capture org-formatted text under any
 [headline](https://orgmode.org/manual/Headlines.html) in one of the several 
@@ -21,11 +21,11 @@ work.
 
 ### Creating Ubiquity command
 
-In the following command we refer to two fictional org files: `~/org/foo.org` and
+In the following command, we refer to two fictional org files: `~/org/foo.org` and
 `~/org/bar.org` (relative to the user home directory) available through the `foo` and `bar`
 shortcuts from Ubiquity. There are also three fictional headlines: "Items", "Things" 
 and "Widgets" provided for Ubiquity autocompletion. The noun-type `noun_open_headlines`
-also allows to enter an arbitrary headline name. Although, in theory it is 
+also allows to enter an arbitrary headline name. Although, in theory, it is 
 [possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
 to automatically maintain an index of all org-files and headlines and 
 [obtain](https://github.com/eschulte/emacs-web-server)
@@ -33,14 +33,14 @@ it in Ubiquity, this is a work for real aficionados.
 
 We also need `getArgumentText` helper function to go around two Ubiquity parser quirks:
 - It substitutes empty arbitrary-text argument values for selection.
-- It requires to specify special `this` keyword if there is a selection and argument 
+- It requires to specify special `this` keyword if there are a selection and argument 
   values that contain spaces.
  
 Thanks to `getArgumentText` it is possible to capture text or link (when there is
 no selection) under any custom headline using `this` keyword.
-The process is shown at the video above.
+The process is shown in the video above.
 
-By default the command captures selection as plain text, but it could be
+By default, the command captures selection as plain text, but it could be
 captured as org-formatted text, if the corresponding parameter is specified in
 the command arguments.
 
@@ -199,10 +199,10 @@ CmdUtils.CreateCommand({
 org-protocol URL is altered in various ways on its path to Emacs when capturing
 from a browser in Windows:
 
-- A slash is appended to subprotocol name. For an example:<br> `org-protocol://capture?url=...`
+- A slash is appended to the subprotocol name. For an example:<br> `org-protocol://capture?url=...`
 becomes `org-protocol://capture/?url=...`<br> Because of this Emacs may not recognize a
 subprotocol.
-- The URL is encoded into local system character set, so Emacs will get unibyte characters
+- The URL is encoded into the local system character set, so Emacs will get unibyte characters
 instead of UTF-8.
 
 In addition, the URL should be no longer than 32kb. All this makes setup of org-protocol
@@ -222,7 +222,7 @@ To address the first problem you may advice `org-protocol-check-filename-for-pro
             :around #'advice-org-protocol-check-filename) 
 ```
 
-The second problem requires recoding of the obtained URL components inside capture templates:
+The second problem requires recoding of the obtained URL components:
 
 ```clojure
 (defun decode-capture-component (c)
@@ -240,7 +240,7 @@ But you may just install [&rho;Emacs](https://rho-emacs.sourceforge.io/) which d
 
 ### Configuring Emacs
 
-To pass captured items to Emacs we define two custom org-protocol:// subprotocol names:
+To pass captured items to Emacs we define two custom org-protocol:// subprotocols:
 - `capture-ubiquity` - custom supbrotocol name used to pass plain UTF-8 text.
 - `capture-html` - custom subprotocol name used to process HTML (it is actually defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
@@ -253,7 +253,7 @@ binary somewhere on the PATH (pandoc is `not` included in &rho;Emacs).
 Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
 used to store links and text is completely dynamic and is composed
 out of the org-protocol link parameters. 
-The most of URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8.
+The most of the URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8.
 
 Paste the following code into your `.emacs` configuration file:
 
