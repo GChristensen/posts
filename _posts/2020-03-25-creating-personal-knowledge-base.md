@@ -48,7 +48,7 @@ resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
 I use it to store and organize bookmarks to online resources and save
 local archives of web-pages and PDF documents.
 
-Let's consider the knowledge-base related features of this software in more
+Let's consider the knowledge-keeping features of this software in more
 detail.
 
 
@@ -92,3 +92,46 @@ Both Scrapyard and Emacs provide search as a built-in feature in the former
 case and, for example, through the `lgrep` command in the recent.
 
 ### Hyperlinking from org-wiki to Scrpayard and vice versa
+
+If necessary, it is possible to create links from org-wiki to archives and
+documents in Scrapyard and vice versa. I assume that you are using [RHO Emacs](https://rho-emacs.sourceforge.io) distribution in Windows with 
+the preinstalled org-protocol.
+
+#### Referencing from org-wiki to Scrapyard
+
+At first you need to register `ext+scrapyard` protocol in Windows registry
+using a .reg file with the following content: 
+
+```
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\ext+scrapyard]
+@="URL:Scrapyard Protocol"
+"URL Protocol"=""
+[HKEY_CLASSES_ROOT\ext+scrapyard\shell]
+[HKEY_CLASSES_ROOT\ext+scrapyard\shell\open]
+[HKEY_CLASSES_ROOT\ext+scrapyard\shell\open\command]
+@="\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" \"%1\""
+```
+
+Then add the following code to your .emacs configuration file:
+
+```clojure
+(defcustom scrapyard-url-protocol "scrapyard"
+  "Scrapyard protocol"
+  :group 'scrapyard
+  :type 'string)
+
+(defun scrapyard-follow (uuid)
+  "Open Scrapyard URL"
+  (browse-url (concat "ext+scrapyard://" uuid)))
+
+(org-link-set-parameters scrapyard-url-protocol :follow #'scrapyard-follow)
+```
+
+Now you may use the following links (which include an UUID of the reffered item)
+in your org markup:
+
+```
+[[scrapyard:B79C8A274D0B4378835976C2B2554ACD][link text]]
+```
