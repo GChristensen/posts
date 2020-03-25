@@ -135,4 +135,19 @@ Now you may use the following links in your org markup:
 [[scrapyard:B79C8A274D0B4378835976C2B2554ACD][link text]]
 ```
 
-The link include a Scrapyard UUID of the reffered item, which is available from the extended item properties.
+The link includes a Scrapyard UUID of the reffered item which is available from the extended item properties.
+
+#### Referencing from Scrapyard to org-wiki
+
+Then add the following code to your `.emacs` configuration file:
+
+```clojure
+(defun org-protocol-open-reference (args)
+  (org-open-link-from-string  (plist-get args :link)))
+
+(add-to-list 'org-protocol-protocol-alist
+             '("open-reference"
+               :protocol "open-reference"
+               :function org-protocol-open-reference
+               :kill-client t))
+```
