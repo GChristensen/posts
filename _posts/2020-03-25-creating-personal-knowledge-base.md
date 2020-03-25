@@ -139,7 +139,7 @@ The link includes a Scrapyard UUID of the referred item which is available from 
 
 #### Referencing from Scrapyard to org-wiki
 
-Since we assume that org-protocol is already configured system-wide, 
+Since we assume that org-protocol is already configured in your system, 
 just add the following code to your `.emacs` configuration file:
 
 ```clojure
@@ -153,7 +153,7 @@ just add the following code to your `.emacs` configuration file:
                :kill-client t))
 ```
 
-Add a unique CUSTOM_ID property to the headline being referred, for example, 
+Add a unique `CUSTOM_ID` property to the headline being referred, for example, 
 with the value `my_headline`.
 
 Now you can use the following links from Scrapyard notes in the Org format:
