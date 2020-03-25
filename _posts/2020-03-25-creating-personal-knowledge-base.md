@@ -24,11 +24,25 @@ main work by elaborately wringing notes on the read material and implemented
 a sophisticated system of links and indexes to keep the notes together. 
 
 Additionaly, I have one more requirement: there should be an ability to
-easily attach and open arbitrary documents, such as PDF files or files 
-produced by concept mapping software.
+easily attach and open large quantities of arbitrary documents, 
+such as PDF files or files produced by concept mapping software.
 
-All my demands are fulfilled by the two following sets of programs:
+All my demands are fulfilled by the two following sets of tools:
 
 * [Emacs org-mode](https://orgmode.org/) + [org-wiki](https://github.com/caiorss/org-wiki)
 * [Firefox](http://firefox.com) + [Scrapyard bookmark manager](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/)
 
+[org-wiki](https://github.com/caiorss/org-wiki), which requires 
+[Emacs](http://emacs.org) (an instance of org-wiki may be automatically 
+installed and preconfigured along with [RHO Emacs](https://rho-emacs.sourceforge.io) distribution) utilizes 
+[org-mode markup](http://ergoemacs.org/emacs/emacs_org_markup.html)
+and [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
+for wiki-related manipulations, for example the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) for downloading
+and inserting attachment files.
+
+
+
+1. Hierarchical grouping
+
+
+![](/posts/images/org-wiki-hierarchy.png)
