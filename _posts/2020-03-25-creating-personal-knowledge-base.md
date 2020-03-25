@@ -18,12 +18,12 @@ for a usable knowledge base:
 * Search
 
 Occasionally you may also need a [concept mapping](https://en.wikipedia.org/wiki/Concept_map) tool, and utilize an
-advanced note taking system, such as the one used by [Niklas Luhmann](https://en.wikipedia.org/wiki/Niklas_Luhmann),
+advanced note-taking system, such as the one used by [Niklas Luhmann](https://en.wikipedia.org/wiki/Niklas_Luhmann),
 which is described in the book [How to Take Smart Notes](https://www.goodreads.com/en/book/show/34507927). Luhmann did his
-main work by elaborately wringing notes on the read material and implemented
+main work by elaborately wringing notes on the reading material and implemented
 a sophisticated system of links and indexes to keep the notes together. 
 
-Additionaly, I have one more requirement: there should be an ability to
+Additionally, I have one more requirement: there should be an ability to
 easily attach and open large quantities of arbitrary documents, 
 such as PDF files or files produced by concept mapping software.
 
@@ -32,13 +32,21 @@ All my demands are fulfilled by the two following sets of tools:
 * [Emacs org-mode](https://orgmode.org/) + [org-wiki](https://github.com/caiorss/org-wiki)
 * [Firefox](http://firefox.com) + [Scrapyard bookmark manager](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/)
 
-[org-wiki](https://github.com/caiorss/org-wiki) is a [Emacs](http://emacs.org) module which utilizes
+[org-wiki](https://github.com/caiorss/org-wiki) is an [Emacs](http://emacs.org) module that utilizes
 [org-mode markup](http://ergoemacs.org/emacs/emacs_org_markup.html)
 and [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
-for wiki-related manipulations, for example the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) for downloading and inserting attachment files.
+for wiki-related manipulations, for example, the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) to download and insert attachment files.
 In Windows, an instance of org-wiki may be automatically 
 installed and configured as a part of [RHO Emacs](https://rho-emacs.sourceforge.io) distribution.
+I use it to keep any long-term files and notes that I need less often than, 
+for example, web-resources available online.
 
+[Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), that
+reqires [Firefox](http://firefox.com) is an advanced bookmark manager with 
+the abilities of web-clipping, cloud-bookmarking and note-taking which 
+resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
+I use it to store and organize bookmarks to online resources and save 
+archives of web-pages and PDF documents.
 
 
 1. Hierarchical grouping
