@@ -9,7 +9,7 @@ from the recipes of managing a bunch of markdown files on GitHub to
 the manuals for setting up a local MediaWiki server, I'll describe 
 a solution that works for me.
 
-Basically, any software tool with the following four features is suitable 
+Basically, any note-taking tool with the following four features is suitable 
 for a usable knowledge base:
 
 * Hierarchical data organization
@@ -70,13 +70,13 @@ be grouped in a hierarchical tree of folders.
 **2. Hyperlinking and cross-referencing**
 
 org-mode provides a wide [variety](https://orgmode.org/guide/Hyperlinks.html)
-of hyperlinking possibilities to files and headings in them 
-(usually you need an unique ID in the property drawer of a heading 
-to be able to refer to it from a link).
+of hyperlinking possibilities to files and headings in them.
+Usually you need an unique ID in the property drawer of a heading 
+to be able to refer to it from a link.
 
-Scrapyard allows to refer any bookmark or page archive throught a link
-with `ext+scrapyard://` protocol which requires an UUID of a referred item
-(see the addon help for more details).
+Scrapyard allows to refer any bookmark or page archive from notes throught
+a link with `ext+scrapyard://` protocol which requires an UUID of a 
+referred item (see the addon help for more details).
 
 **3. Tagging**
 
@@ -90,3 +90,5 @@ provides a special tag search mode.
 
 Both Scrapyard and Emacs provide search as a built-in feature in the former
 case and, for example, through the `lgrep` command in the recent.
+
+### Hyperlinking from org-wiki to Scrpayard and vice versa
