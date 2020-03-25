@@ -62,7 +62,7 @@ file could be quiclky accessed through the Emacs [SpeedBar](https://www.emacswik
 ![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
 
 Scrapyard uses shelves at its top level. Bookmarks and page archives could
-be grouped in an hierarchical set of folders.
+be grouped in a hierarchical tree of folders.
 
 ![Scrapyard hierarchy](/posts/images/scrapyard-hierarchy.png)
 
@@ -70,5 +70,10 @@ be grouped in an hierarchical set of folders.
 2. Hyperlinking and cross-referencing
 
 org-mode provides a wide [variety](https://orgmode.org/guide/Hyperlinks.html)
-of hyperlinking to files and headings in them (usually you need an unique ID in 
-the property drawer of a heading to be able to refer to it from a link).
+of hyperlinking possibilities to files and headings in them 
+(usually you need an unique ID in the property drawer of a heading 
+to be able to refer to it from a link).
+
+Scrapyard allows to refer any bookmark or page archive throught a link
+with `ext+scrapyard://` protocol which requires an UUID of a referred item
+(see the addon help for more details).
