@@ -22,7 +22,13 @@ advanced note taking system, such as the one used by [Niklas Luhmann](https://en
 which is described in the book [How to Take Smart Notes](https://www.goodreads.com/en/book/show/34507927) (Luhmann did his
 main work by elaborately wringing notes on the read material and implemented
 a sophisticated system of links and indexes to keep the notes together). 
+
 Additionaly, I have
 one more requirement: arbitrary documents, such as PDF files or files 
 produced by concept mapping software should be easily attached and opened.
+
+All my demands are fulfilled by the two following sets of software:
+
+* [Emacs org-mode](https://orgmode.org/) + [org-wiki](https://github.com/caiorss/org-wiki)
+* [Firefox](firefox.com) + [Scrapyard bookmark manager](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/)
 
