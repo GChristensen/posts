@@ -32,13 +32,12 @@ All my demands are fulfilled by the two following sets of tools:
 * [Emacs org-mode](https://orgmode.org/) + [org-wiki](https://github.com/caiorss/org-wiki)
 * [Firefox](http://firefox.com) + [Scrapyard bookmark manager](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/)
 
-[org-wiki](https://github.com/caiorss/org-wiki), which requires 
-[Emacs](http://emacs.org) (an instance of org-wiki may be automatically 
-installed and preconfigured along with [RHO Emacs](https://rho-emacs.sourceforge.io) distribution) utilizes 
+[org-wiki](https://github.com/caiorss/org-wiki) is a [Emacs](http://emacs.org) module which utilizes
 [org-mode markup](http://ergoemacs.org/emacs/emacs_org_markup.html)
 and [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
-for wiki-related manipulations, for example the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) for downloading
-and inserting attachment files.
+for wiki-related manipulations, for example the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) for downloading and inserting attachment files.
+In Windows, an instance of org-wiki may be automatically 
+installed and configured as a part of [RHO Emacs](https://rho-emacs.sourceforge.io) distribution.
 
 
 
