@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Creating a personal knowledge base
-categories: [Emacs, Firefox, org-wiki, Scrapyard, elisp]
+categories: [Emacs, Firefox, org-mode, org-wiki, Scrapyard, elisp]
 ---
 
 Despite that there are gigabytes of writings on this topic, ranging
@@ -19,5 +19,10 @@ for a usable knowledge base:
 
 Occasionally you may also need a [concept mapping](https://en.wikipedia.org/wiki/Concept_map) tool, and utilize an
 advanced note taking system, such as the one used by [Niklas Luhmann](https://en.wikipedia.org/wiki/Niklas_Luhmann),
-which is described in the book [How to Take Smart Notes](https://www.goodreads.com/en/book/show/34507927).
+which is described in the book [How to Take Smart Notes](https://www.goodreads.com/en/book/show/34507927) (Luhmann did his
+main work by elaborately wringing notes on the read material and a
+sophisticated system of links and indexes to keep them together). 
+Additionaly, I have
+one more requirement: arbitrary documents, such as PDF files or files 
+produced by concept mapping software should be easily attached and opened.
 
