@@ -9,7 +9,7 @@ from the recipes of managing a bunch of markdown files on GitHub to
 the manuals for setting up a local MediaWiki server, I'll describe 
 a solution that works for me.
 
-Basically, any note-taking tool with the following four features is suitable 
+Any note-taking tool with the following four features is suitable 
 for a usable knowledge base:
 
 * Hierarchical data organization
@@ -42,8 +42,8 @@ I use it to keep any long-term files and notes that I need less often than,
 for example, any web-resources available online.
 
 [Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), that
-reqires [Firefox](http://firefox.com), is an advanced bookmark manager with 
-the abilities of web-clipping, cloud-bookmarking and note-taking which 
+requires [Firefox](http://firefox.com), is an advanced bookmark manager with 
+the abilities of web-clipping, cloud-bookmarking, and note-taking which 
 resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
 I use it to store and organize bookmarks to online resources and save
 local archives of web-pages and PDF documents.
@@ -57,7 +57,7 @@ detail.
 org-wiki uses files at the top level of its organizational structure. 
 Links to the topic files are placed in a single index file. The topic files
 are divided into headings and subheadings of various levels. If necessary, any
-file could be quiclky accessed through the Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar) module.
+file could be quickly accessed through the Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar) module.
 
 ![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
 
@@ -71,16 +71,16 @@ be grouped in a hierarchical tree of folders.
 
 org-mode provides a wide [variety](https://orgmode.org/guide/Hyperlinks.html)
 of hyperlinking possibilities to files and headings in them.
-Usually you need an unique ID in the property drawer of a heading 
+Usually, you need a unique ID in the property drawer of a heading 
 to be able to refer to it from a link.
 
-Scrapyard allows to refer any bookmark or page archive from notes throught
-a link with `ext+scrapyard://` protocol which requires an UUID of a 
+Scrapyard allows referring any bookmark or page archive from notes through
+a link with `ext+scrapyard://` protocol which requires a UUID of a 
 referred item (see the addon help for more details).
 
 **3. Tagging**
 
-org-mode allows to add [tags](https://orgmode.org/manual/Tags.html) at the end 
+org-mode allows adding [tags](https://orgmode.org/manual/Tags.html) at the end 
 of a headline, separated by colons and [search](https://orgmode.org/manual/Tag-Searches.html#Tag-Searches) by them.
 
 Scrapyard also allows to specify tags inside bookmark properties and 
@@ -91,11 +91,10 @@ provides a special tag search mode.
 Both Scrapyard and Emacs provide search as a built-in feature in the former
 case and, for example, through the `lgrep` command in the recent.
 
-### Hyperlinking from org-wiki to Scrpayard and vice versa
+### Hyperlinking from org-wiki to Scrapyard and vice versa
 
 If necessary, it is possible to create links from org-wiki to archives and
-documents in Scrapyard and vice versa. I assume that you are using [RHO Emacs](https://rho-emacs.sourceforge.io) distribution in Windows with 
-the preinstalled org-protocol (you need to configure org-protocol manually
+documents in Scrapyard and vice versa. I assume that you are using [RHO Emacs](https://rho-emacs.sourceforge.io) distribution in Windows with the preinstalled org-protocol (you need to configure org-protocol manually
 otherwise).
 
 #### Referencing from org-wiki to Scrapyard
@@ -136,12 +135,12 @@ Now you may use the following links in your org markup:
 [[scrapyard:B79C8A274D0B4378835976C2B2554ACD][link text]]
 ```
 
-The link includes a Scrapyard UUID of the reffered item which is available from the extended item properties.
+The link includes a Scrapyard UUID of the referred item which is available from the extended item properties.
 
 #### Referencing from Scrapyard to org-wiki
 
 Since we assume that org-protocol is already configured system-wide, 
-jsut add the following code to your `.emacs` configuration file:
+just add the following code to your `.emacs` configuration file:
 
 ```clojure
 (defun org-protocol-open-reference (args)
@@ -154,7 +153,7 @@ jsut add the following code to your `.emacs` configuration file:
                :kill-client t))
 ```
 
-Add an unique CUSTOM_ID property to the headline being referred, for example, 
+Add a unique CUSTOM_ID property to the headline being referred, for example, 
 with the value `my_headline`.
 
 Now you can use the following links from Scrapyard notes in the Org format:
