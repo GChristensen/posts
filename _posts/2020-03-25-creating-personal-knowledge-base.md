@@ -48,11 +48,22 @@ resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
 I use it to store and organize bookmarks to online resources and save
 local archives of web-pages and PDF documents.
 
-Let's consider the knowledge-keeping features of the described software in more
+Let's consider the knowledge-base related features of this software in more
 detail.
 
 
 1. Hierarchical grouping
 
+org-wiki uses files at the top level of its organizational structure. 
+Lins to the topic files are placed in a single index file. The topic files
+are divided into headings and subheadings of various levels. If necessary, any
+file could be quiclky accessed through the Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar) module.
 
-![](/posts/images/org-wiki-hierarchy.png)
+![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
+
+Scrapyard uses shelves at its top level. Bookmarks and page archives could
+be grouped in an hierarchical set of folders.
+
+![Scrapyard hierarchy](/posts/images/scrapyard-hierarchy.png)
+
+
