@@ -55,7 +55,7 @@ detail.
 1. Hierarchical grouping
 
 org-wiki uses files at the top level of its organizational structure. 
-Lins to the topic files are placed in a single index file. The topic files
+Links to the topic files are placed in a single index file. The topic files
 are divided into headings and subheadings of various levels. If necessary, any
 file could be quiclky accessed through the Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar) module.
 
@@ -67,3 +67,8 @@ be grouped in an hierarchical set of folders.
 ![Scrapyard hierarchy](/posts/images/scrapyard-hierarchy.png)
 
 
+2. Hyperlinking and cross-referencing
+
+org-mode provides a wide [variety](https://orgmode.org/guide/Hyperlinks.html)
+of hyperlinking to files and headings in them (usually you need an unique ID in 
+the property drawer of a heading to be able to refer to it from a link).
