@@ -39,14 +39,17 @@ for wiki-related manipulations, for example, the [commands](https://github.com/c
 In Windows, an instance of org-wiki may be automatically 
 installed and configured as a part of [RHO Emacs](https://rho-emacs.sourceforge.io) distribution.
 I use it to keep any long-term files and notes that I need less often than, 
-for example, web-resources available online.
+for example, any web-resources available online.
 
 [Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), that
-reqires [Firefox](http://firefox.com) is an advanced bookmark manager with 
+reqires [Firefox](http://firefox.com), is an advanced bookmark manager with 
 the abilities of web-clipping, cloud-bookmarking and note-taking which 
 resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
-I use it to store and organize bookmarks to online resources and save 
-archives of web-pages and PDF documents.
+I use it to store and organize bookmarks to online resources and save
+local archives of web-pages and PDF documents.
+
+Let's consider the knowledge-keeping features of the described software in more
+detail.
 
 
 1. Hierarchical grouping
