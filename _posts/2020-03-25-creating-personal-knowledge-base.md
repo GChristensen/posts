@@ -95,7 +95,8 @@ case and, for example, through the `lgrep` command in the recent.
 
 If necessary, it is possible to create links from org-wiki to archives and
 documents in Scrapyard and vice versa. I assume that you are using [RHO Emacs](https://rho-emacs.sourceforge.io) distribution in Windows with 
-the preinstalled org-protocol.
+the preinstalled org-protocol (you need to configure org-protocol manually
+otherwise).
 
 #### Referencing from org-wiki to Scrapyard
 
@@ -139,7 +140,8 @@ The link includes a Scrapyard UUID of the reffered item which is available from 
 
 #### Referencing from Scrapyard to org-wiki
 
-Then add the following code to your `.emacs` configuration file:
+Since we assume that org-protocol is already configured system-wide, 
+jsut add the following code to your `.emacs` configuration file:
 
 ```clojure
 (defun org-protocol-open-reference (args)
@@ -150,4 +152,13 @@ Then add the following code to your `.emacs` configuration file:
                :protocol "open-reference"
                :function org-protocol-open-reference
                :kill-client t))
+```
+
+Add an unique CUSTOM_ID property to the headline being referred, for example, 
+with the value `my_headline`.
+
+Now you can use the following links from Scrapyard notes in the Org format:
+
+```
+[[org-protocol://open-reference?link=file:path/to/file.org::#my_headline][link text]]
 ```
