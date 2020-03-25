@@ -52,7 +52,7 @@ Let's consider the knowledge-base related features of this software in more
 detail.
 
 
-1. Hierarchical grouping
+**1. Hierarchical grouping**
 
 org-wiki uses files at the top level of its organizational structure. 
 Links to the topic files are placed in a single index file. The topic files
@@ -67,7 +67,7 @@ be grouped in a hierarchical tree of folders.
 ![Scrapyard hierarchy](/posts/images/scrapyard-hierarchy.png)
 
 
-2. Hyperlinking and cross-referencing
+**2. Hyperlinking and cross-referencing**
 
 org-mode provides a wide [variety](https://orgmode.org/guide/Hyperlinks.html)
 of hyperlinking possibilities to files and headings in them 
@@ -77,3 +77,16 @@ to be able to refer to it from a link).
 Scrapyard allows to refer any bookmark or page archive throught a link
 with `ext+scrapyard://` protocol which requires an UUID of a referred item
 (see the addon help for more details).
+
+**3. Tagging**
+
+org-mode allows to add [tags](https://orgmode.org/manual/Tags.html) at the end 
+of a headline, separated by colons and [search](https://orgmode.org/manual/Tag-Searches.html#Tag-Searches) by them.
+
+Scrapyard also allows to specify tags inside bookmark properties and 
+provides a special tag search mode.
+
+**4. Search** 
+
+Both Scrapyard and Emacs provide search as a built-in feature in the former
+case and, for example, through the `lgrep` command in the recent.
