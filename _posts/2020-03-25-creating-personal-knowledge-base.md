@@ -114,7 +114,7 @@ REGEDIT4
 @="\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" \"%1\""
 ```
 
-Then add the following code to your .emacs configuration file:
+Then add the following code to your `.emacs` configuration file:
 
 ```clojure
 (defcustom scrapyard-url-protocol "scrapyard"
@@ -129,9 +129,10 @@ Then add the following code to your .emacs configuration file:
 (org-link-set-parameters scrapyard-url-protocol :follow #'scrapyard-follow)
 ```
 
-Now you may use the following links (which include an UUID of the reffered item)
-in your org markup:
+Now you may use the following links in your org markup:
 
 ```
 [[scrapyard:B79C8A274D0B4378835976C2B2554ACD][link text]]
 ```
+
+The link include a Scrapyard UUID of the reffered item, which is available from the extended item properties.
