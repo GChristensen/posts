@@ -6,8 +6,8 @@ categories: [Emacs, Firefox, org-mode, org-wiki, Scrapyard, elisp]
 
 Despite that there are gigabytes of writings on this topic, ranging
 from the recipes of managing a bunch of markdown files on GitHub to
-the manuals for setting up a local MediaWiki server, I'll describe 
-a solution that works for me.
+the manuals for setting up a local MediaWiki server, I will describe 
+the solution that works for me.
 
 Any note-taking tool with the following four features is suitable 
 for a usable knowledge base:
@@ -42,7 +42,7 @@ I use it to keep any long-term files and notes that I need less often than,
 for example, any web-resources available online.
 
 [Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), that
-requires [Firefox](http://firefox.com), is an advanced bookmark manager with 
+currently works only in [Firefox](http://firefox.com), is an advanced bookmark manager with 
 the abilities of web-clipping, cloud-bookmarking, and note-taking which 
 resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
 I use it to store and organize bookmarks to online resources and save
@@ -55,7 +55,7 @@ detail.
 **1. Hierarchical grouping**
 
 org-wiki uses files at the top level of its organizational structure. 
-Links to the topic files are placed in a single index file. The topic files
+Links to the topic files are placed in a wiki index file. The topic files
 are divided into headings and subheadings of various levels. If necessary, any
 file could be quickly accessed through the Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar) module.
 
