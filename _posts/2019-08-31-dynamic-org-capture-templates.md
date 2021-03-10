@@ -62,7 +62,7 @@ let ORG_FORMATS = ["text", "org"];
 let TODO_STATES = ["TODO", "WAITING", "POSTPONED"];
 
 
-/**  @nountype */
+/** @nountype */
 function noun_org_headline(text, html, callback, selectionIndices) {
     if (text === cmdAPI.getSelection()) // mute stray selection
         return {};
@@ -90,20 +90,20 @@ let getArgumentText = arg =>
  <!-- command syntax help -->
  <span class="syntax">Syntax</span>
  <ul class="syntax"><li><b>org-capture</b> [<i>title</i> | <b>this</b>]
- [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
- [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]</li>
+    [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
+    [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]</li>
  </ul>
  <span class="syntax">Arguments</span><br>
  <ul class="syntax"><li>- <i>title</i> - captured URL title.</li></ul>
  <ul class="syntax">
- <li>- <i>org file</i> - org-file to place the capture in.</li>
+    <li>- <i>org file</i> - org-file to place the capture in.</li>
  </ul><ul class="syntax">
- <li>- <i>headline</i> - headline to palce the capture under.</li>
+    <li>- <i>headline</i> - headline to palce the capture under.</li>
  </ul><ul class="syntax">
- <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
-        <b>POSTPONED</b>}.</li>
+    <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
+            <b>POSTPONED</b>}.</li>
  </ul><ul class="syntax">
- <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
+    <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
  </ul>
 
  @command
