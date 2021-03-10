@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Create dynamic capture templates to use with org-protocol. In Windows!
-categories: [UbiquityWE, Emacs, elisp, JavaScript]
+categories: [iShell Extension, Emacs, elisp, JavaScript]
 ---
 
 
@@ -10,33 +10,33 @@ possibility to capture URLs along with some selected text from many web-browsers
 into Emacs [org-mode](https://orgmode.org/). But most of the tools you can find
 out there allow a little control over the process - usually, it is
 only possible to put just plain text into some hard-coded org file. Below we develop an
-[UbiquityWE](https://gchristensen.github.io/ubiquitywe/) command which allows to
+[iShell Extension](https://gchristensen.github.io/ishell/) command which allows to
 capture org-formatted text under any
 [headline](https://orgmode.org/manual/Headlines.html) in one of the several 
-user-specified org files. If you are interested only in Ubiquity or only in Org
+user-specified org files. If you are interested only in iShell or only in Org
 (or only in Windows), you may still skim through the code to find out how things
 work.
 
-<video src="/posts/videos/ubiquity-demo.webm" width="100%" type="video/webm" controls></video>
+<video src="/posts/videos/ishell-demo.webm" width="100%" type="video/webm" controls></video>
 
-### Creating Ubiquity command
+### Creating an iShell command
 
 In the following command, we refer to two fictional org files: `~/org/foo.org` and
 `~/org/bar.org` (relative to the user home directory) available through the `foo` and `bar`
-shortcuts from Ubiquity. There are also three fictional headlines: "Items", "Things" 
-and "Widgets" provided for Ubiquity autocompletion. The noun-type `noun_open_headlines`
+shortcuts from iShell. There are also three fictional headlines: "Items", "Things" 
+and "Widgets" provided for iShell autocompletion. The noun-type `noun_org_headline`
 also allows to enter an arbitrary headline name. Although, in theory, it is 
 [possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
 to automatically maintain an index of all org-files and headlines and 
 [obtain](https://github.com/eschulte/emacs-web-server)
-it in Ubiquity, this is a work for real aficionados.
+it in iShell, this is a work for real aficionados.
 
-We also need `getArgumentText` helper function to go around two Ubiquity parser quirks:
+We also need `getArgumentText` helper function to go around two iShell parser quirks:
 - It substitutes empty arbitrary-text argument values for selection.
 - It requires to specify special `this` keyword if there are a selection and argument 
   values that contain spaces.
  
-Thanks to `getArgumentText` it is possible capturing text or link (when there is
+Thanks to `getArgumentText` it is possible to capture selected text or link (when there is
 no selection) under any custom headline using `this` keyword.
 The process is shown in the video above.
 
@@ -44,15 +44,15 @@ By default, the command extracts selection as plain text, but it could be
 obtained as org-formatted text, if the corresponding parameter is specified in
 the command arguments.
 
-Paste the following code into UbiquityWE command editor: 
+Paste the following code into iShell command editor: 
 
 ```javascript
 // list of target org files
-let ORG_FILES = {"foo": "~/org/foo.org", 
-                 "bar": "~/org/bar.org"
-                };
+let ORG_FILES = {"foo": "~/org/foo.org",
+    "bar": "~/org/bar.org"
+};
 
-// list of predefined org headlines
+// list of predefined org headlines to place captures under
 let ORG_HEADLINES = ["Items", "Things", "Widgets"];
 
 // capture formats
@@ -61,137 +61,137 @@ let ORG_FORMATS = ["text", "org"];
 // TODO states
 let TODO_STATES = ["TODO", "WAITING", "POSTPONED"];
 
-// a noun type that allows to enter not only suggested but also custom headline names
-let noun_open_headlines = {
-    label: "headline",
-    noExternalCalls: true,
-    cacheTime: -1,
-    suggest: function (text, html, cb, selectionIndices) {
-        if (text === CmdUtils.getSelection()) // mute stray selection
-            return {};
-            
-        let matcher = new RegExp(text, "i");
-        // make suggestions from predefined headlines
-        let suggs = ORG_HEADLINES.map(h => ({name: h}))
-                        .filter(i => (i.match = matcher.exec(i.name), !!i.match))
-                        .map(i => CmdUtils.makeSugg(i.name, i.name, null,
-                                    CmdUtils.matchScore(i.match), selectionIndices));
-        // add a suggestion with the argument text as is
-        suggs.push(CmdUtils.makeSugg(text, html, null, 
-                        suggs.length? .1: 1, selectionIndices));
 
-        return suggs;
-    }
-};
+/**  @nountype */
+function noun_org_headline(text, html, callback, selectionIndices) {
+    if (text === cmdAPI.getSelection()) // mute stray selection
+        return {};
+
+    let matcher = new RegExp(text, "i");
+    // make sugestions from predefined headlines
+    let suggs = ORG_HEADLINES.map(h => ({name: h}))
+        .filter(i => (i.match = matcher.exec(i.name), !!i.match))
+        .map(i => cmdAPI.makeSugg(i.name, i.name, null,
+            cmdAPI.matchScore(i.match), selectionIndices));
+    // additionally, add a suggestion with the custom argument text
+    suggs.push(cmdAPI.makeSugg(text, html, null,
+        suggs.length? .1: 1, selectionIndices));
+
+    return suggs;
+}
 
 // a helper function to safely get argument text
-let getArgumentText = arg => 
-    arg && arg.text && arg.text !== CmdUtils.getSelection() && arg.text !== "this"
+let getArgumentText = arg =>
+    arg?.text && arg.text !== cmdAPI.getSelection() && arg.text !== "this"
         ? arg.text
         : "";
 
-CmdUtils.CreateCommand({
-    name: "org-capture",
-    uuid: "F36F51E1-60B3-4451-B08E-6A4372DA74DD",
-    arguments: [
-        {role: "object", nountype: noun_arb_text, label: "title"},
-        {role: "time",   nountype: ORG_FILES, label: "file"}, // at
-        {role: "format", nountype: noun_open_headlines, label: "headline"}, // in
-        {role: "alias",  nountype: ORG_FORMATS, label: "format"}, // as
-        {role: "instrument", nountype: TODO_STATES, label: "todo"}, // with
-    ],
-    description: "Captures the current tab URL or selected text to an org-file.",
-    help: `<span class="syntax">Syntax</span>
-            <ul class="syntax"><li><b>org-capture</b> [<i>title</i> | <b>this</b>] 
-                    [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>] 
-                    [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]</li>
-            </ul>
-            <span class="arguments">Arguments</span><br>
-            <ul class="syntax"><li>- <i>title</i> - captured URL title.</li></ul>
-            <ul class="syntax">
-                <li>- <i>org file</i> - org-file to place the capture in.</li>
-            </ul><ul class="syntax">
-                <li>- <i>headline</i> - headline to palce the capture under.</li>
-            </ul><ul class="syntax">
-                <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
-                <b>POSTPONED</b>}.</li>
-            </ul><ul class="syntax">
-                <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
-            </ul>`,
-    // preview the capture options
-    preview: function(pblock, {object, time, format, alias, instrument}) {
+/**
+ <!-- command syntax help -->
+ <span class="syntax">Syntax</span>
+ <ul class="syntax"><li><b>org-capture</b> [<i>title</i> | <b>this</b>]
+ [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
+ [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]</li>
+ </ul>
+ <span class="syntax">Arguments</span><br>
+ <ul class="syntax"><li>- <i>title</i> - captured URL title.</li></ul>
+ <ul class="syntax">
+ <li>- <i>org file</i> - org-file to place the capture in.</li>
+ </ul><ul class="syntax">
+ <li>- <i>headline</i> - headline to palce the capture under.</li>
+ </ul><ul class="syntax">
+ <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
+        <b>POSTPONED</b>}.</li>
+ </ul><ul class="syntax">
+ <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
+ </ul>
+
+ @command
+ @descripiton Captures the current tab URL or selected text to an org-file.
+ @uuid: F36F51E1-60B3-4451-B08E-6A4372DA74DD
+ */
+class OrgCapture {
+    constructor(args) {
+        args[OBJECT] = {nountype: noun_arb_text, label: "title"};
+        args[AT]     = {nountype: ORG_FILES, label: "file"};
+        args[IN]     = {nountype: noun_org_headline, label: "headline"};
+        args[AS]     = {nountype: ORG_FORMATS, label: "format"};
+        args[WITH]   = {nountype: TODO_STATES, label: "todo"};
+    }
+
+    preview(args, display) {
         let html = "";
-        let tab = CmdUtils.getActiveTab();
-        
+        let tab = cmdAPI.getActiveTab();
+
         if (!tab) {
-            pblock.innerHTML = "The current tab is unsuitable for capture.";
+            display.set("The current tab is unsuitable for capture.");
             return;
         }
 
-        let text = getArgumentText(object)? object.text: tab.title;
+        let text = getArgumentText(args[OBJECT])? args[OBJECT].text: tab.title;
 
-        html += "Title: <span style='color: #45BCFF;'>" 
-             + Utils.escapeHtml(text) + "</span><br>";
+        html += "Title: <span style='color: #45BCFF;'>"
+            + cmdAPI.escapeHtml(text) + "</span><br>";
 
-        if (time && time.data)
-            html += "File: <span style='color: #FD7221;'>" 
-                 + Utils.escapeHtml(time.data) + "</span><br>";
+        if (args[AT]?.data)
+            html += "File: <span style='color: #FD7221;'>"
+                + cmdAPI.escapeHtml(args[AT].data) + "</span><br>";
 
-        if (text = getArgumentText(format)) // beware of assignments in condition
-            html += "Headline: <span style='color: #7DE22E;'>" 
-                 + Utils.escapeHtml(text) + "</span><br>";
+        if (text = getArgumentText(args[IN])) // beware of assignments in condition
+            html += "Headline: <span style='color: #7DE22E;'>"
+                + cmdAPI.escapeHtml(text) + "</span><br>";
 
-        if (text = getArgumentText(instrument))
-            html += "TODO state: <span style='color: #FC6DAC;'>" 
-                 + text + "</span><br>";
-                 
-        if (text = getArgumentText(alias))
-            html += "Format: <span style='color: white;'>" 
-                 + text + "</span><br>";
+        if (text = getArgumentText(args[WITH]))
+            html += "TODO state: <span style='color: #FC6DAC;'>"
+                + text + "</span><br>";
 
-                
-        pblock.innerHTML = html;
-    },
-    execute: function({object, time, format, alias, instrument}) {
-        let tab = CmdUtils.getActiveTab();
-        
+        if (text = getArgumentText(args[AS]))
+            html += "Format: <span style='color: white;'>"
+                + text + "</span><br>";
+
+        display.set(html);
+    }
+
+    execute(args) {
+        let tab = cmdAPI.getActiveTab();
+
         if (!tab)
             return;
-            
+
         // URL-safe Base 64 encoding
         let b64enc = s => btoa(unescape(encodeURIComponent(s)))
-                        .replace(/=+$/g, "")
-                        .replace(/\+/g, "-")
-                        .replace(/\//g, "_");
-        
-        // get and pack capture options as an org-protocol URL
-        let title = b64enc(getArgumentText(object)? object.text: tab.title);
-        let url = b64enc(tab.url);
-        let file = time && time.data
-                    ? b64enc(time.data)
-                    : b64enc(Object.values(ORG_FILES)[0]);
-        let headline = b64enc(getArgumentText(format));
-        let type = getArgumentText(alias)? alias.text: "text";
-        let todo = getArgumentText(instrument);
-        let body = b64enc(type === "text"
-                            ? CmdUtils.getSelection()
-                            : CmdUtils.getHtmlSelection());
+            .replace(/=+$/g, "")
+            .replace(/\+/g, "-")
+            .replace(/\//g, "_");
 
-        let subprotocol = type === "text"? "capture-ubiquity": "capture-html";
+        // get and pack capture options to an org-protocol URL
+        let title = b64enc(getArgumentText(args[OBJECT])? args[OBJECT].text: tab.title);
+        let url = b64enc(tab.url);
+        let file = args[AT]?.data
+            ? b64enc(args[AT].data)
+            : b64enc(Object.values(ORG_FILES)[0]);
+        let headline = b64enc(getArgumentText(args[IN]));
+        let type = getArgumentText(args[AS])? args[AS].text: "text";
+        let todo = getArgumentText(args[WITH]);
+        let body = b64enc(type === "text"
+            ? cmdAPI.getSelection()
+            : cmdAPI.getHtmlSelection());
+
+        let subprotocol = type === "text"? "capture-ishell": "capture-html";
         let orgUrl = `org-protocol://${subprotocol}?template=P`
-                   + `&title=${title}&url=${url}&body=${body}&todo=${todo}`
-                   + `&file=${file}&headline=${headline}&format=${type}`;
-        
+            + `&title=${title}&url=${url}&body=${body}&todo=${todo}`
+            + `&file=${file}&headline=${headline}&format=${type}`;
+
         if (orgUrl.length > 32500) {
-            CmdUtils.notify("Selection is too long.");
+            cmdAPI.notify("Selection is too long.");
             return;
         }
-        
+
         // launch emacsclient
         // it is assumed that Emacs is running when you are trying to capture
         location.href = orgUrl;
     }
-});
+}
 ```
 
 ### org-protocol in Windows
@@ -241,7 +241,7 @@ But you may just install [&rho;Emacs](https://rho-emacs.sourceforge.io/) which d
 ### Configuring Emacs
 
 To pass captured items to Emacs we define two custom org-protocol:// subprotocols:
-- `capture-ubiquity` - custom supbrotocol name used to pass plain UTF-8 text.
+- `capture-ishell` - custom supbrotocol name used to pass plain UTF-8 text.
 - `capture-html` - custom subprotocol name used to process HTML (it is actually defined by
  [org-protocol-capture-html](https://github.com/alphapapa/org-protocol-capture-html)
 library which is included in &rho;Emacs installed with `org-protocol` option).  
@@ -251,20 +251,20 @@ a regular emacs distribution. It also requires [pandoc](https://pandoc.org/)
 binary somewhere on the PATH (pandoc is `not` included in &rho;Emacs). 
 
 Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
-used to store links and text is completely dynamic and is composed
+used to store links and text is completely dynamic and composed
 out of the org-protocol link parameters. 
-The most of the URL parameters obtained from Ubiquity are Base64-encoded to preserve UTF-8.
+The most of the URL parameters obtained from iShell are Base64-encoded to preserve UTF-8.
 
 Paste the following code into your `.emacs` configuration file:
 
 ```clojure
-;; get the destination org file path specified in Ubiquity
+;; get the destination org file path specified in iShell
 (defun capture-get-destination-file ()
   ;; `capture-decoded-org-protocol-query' global variable contains
   ;; org-protocol url query parameters, stored earlier (see below)
   (plist-get capture-decoded-org-protocol-query :file))
 
-;; find the destination org headline specified in Ubiquity (or insert one
+;; find the destination org headline specified in iShell (or insert one
 ;; if absent) and position point near it in the buffer
 ;; see more at org-mode source code: https://bit.ly/2lJqz1a
 (defun capture-get-destination-headline ()
@@ -310,15 +310,15 @@ Paste the following code into your `.emacs` configuration file:
                  (function capture-get-org-capture-template-body)))
 
 ;; envoke standard org-protocol-capture with decoded arguments
-(defun capture-org-protocol-ubiquity (args)
+(defun capture-org-protocol-ishell (args)
   (org-protocol-capture
    (capture-decode-base64-args args)))
 
-;; define `capture-ubiquity' org-protocol subprotocol handler
+;; define `capture-iShell' org-protocol subprotocol handler
 (add-to-list 'org-protocol-protocol-alist
-             '("capture-ubiquity"
-               :protocol "capture-ubiquity"
-               :function capture-org-protocol-ubiquity
+             '("capture-ishell"
+               :protocol "capture-ishell"
+               :function capture-org-protocol-ishell
                :kill-client t))
 
 ;; decode Base64-encoded arguments before passing them into
@@ -350,7 +350,7 @@ Paste the following code into your `.emacs` configuration file:
 (defun capture-decode-base64-utf-8 (str)
   (decode-coding-string (base64url-decode-string str) 'utf-8))
 
-;; decode Base64-encoded parameters obtained from Ubiquity 
+;; decode Base64-encoded parameters obtained from iShell 
 (defun capture-decode-base64-args (args)
   (let ((format (plist-get args :format)))
     ;; save parameters for later use
