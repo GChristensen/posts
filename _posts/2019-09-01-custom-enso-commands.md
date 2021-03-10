@@ -6,7 +6,7 @@ categories: [Enso Launcher, Python]
 
 Command interfaces - an integral part of life in 1980s -  gain a new breath with
 the advent of [Enso Launcher](https://gchristensen.github.io/enso-portable/) and
-[Ubiquity Web Extension](https://gchristensen.github.io/ubiquitywe/). Although
+[iShell Extension](https://gchristensen.github.io/ishell/). Although
 graphical user interfaces have opened a new world in computer industry, in
 certain domains text commands still offer advantages in usability and
 accessibility. With the tools mentioned above you can create powerful
