@@ -61,7 +61,6 @@ let ORG_FORMATS = ["text", "org"];
 // TODO states
 let TODO_STATES = ["TODO", "WAITING", "POSTPONED"];
 
-
 /** @nountype */
 function noun_org_headline(text, html, callback, selectionIndices) {
     if (text === cmdAPI.getSelection()) // mute stray selection
@@ -165,7 +164,8 @@ class OrgCapture {
             .replace(/\//g, "_");
 
         // get and pack capture options to an org-protocol URL
-        let title = b64enc(getArgumentText(args[OBJECT])? args[OBJECT].text: tab.title);
+        let title = getArgumentText(args[OBJECT])? args[OBJECT].text: tab.title;
+        title = b64enc(title)
         let url = b64enc(tab.url);
         let file = args[AT]?.data
             ? b64enc(args[AT].data)
