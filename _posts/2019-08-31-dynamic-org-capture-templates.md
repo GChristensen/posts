@@ -21,27 +21,27 @@ work.
 
 ### Creating an iShell command
 
-In the following command, we refer to two fictional org files: `~/org/foo.org` and
+In the following command we refer to two fictional org files: `~/org/foo.org` and
 `~/org/bar.org` (relative to the user home directory) available through the `foo` and `bar`
-shortcuts from iShell. There are also three fictional headlines: "Items", "Things" 
-and "Widgets" provided for iShell autocompletion. The noun-type `noun_org_headline`
+autocompletion shortcuts from iShell. There are also three fictional org headlines: "Items", "Things" 
+and "Widgets" available to autocompletion. The noun-type `noun_org_headline`
 also allows to enter an arbitrary headline name. Although, in theory, it is 
 [possible](http://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/)
 to automatically maintain an index of all org-files and headlines and 
 [obtain](https://github.com/eschulte/emacs-web-server)
 it in iShell, this is a work for real aficionados.
 
-We also need `getArgumentText` helper function to go around two iShell parser quirks:
-- It substitutes empty arbitrary-text argument values for selection.
-- It requires to specify special `this` keyword if there are a selection and argument 
-  values that contain spaces.
+Because we have several arbitrary-text arguments, we also need `getArgumentText` helper function to go around two iShell parser quirks:
+- It substitutes empty arbitrary-text argument values for selection. 
+- It requires specifying special `this` keyword if there is a selection and arbitrary-text argument 
+  values entered at the command line contain spaces.
  
-Thanks to `getArgumentText` it is possible to capture selected text or link (when there is
-no selection) under any custom headline using `this` keyword.
+Thanks to `getArgumentText` and `this` parser predefined keyword it is possible to capture selected text or link (when there is
+no selection) under any custom headline with spaces in its name.
 The process is shown in the video above.
 
 By default, the command extracts selection as plain text, but it could be
-obtained as org-formatted text, if the corresponding parameter is specified in
+marked for processing to org-formatted text, if the `format` parameter is specified in
 the command arguments.
 
 Paste the following code into iShell command editor: 
@@ -202,13 +202,13 @@ from a browser in Windows:
 - A slash is appended to the subprotocol name. For an example:<br> `org-protocol://capture?url=...`
 becomes `org-protocol://capture/?url=...`<br> Because of this Emacs may not recognize a
 subprotocol.
-- The URL is encoded into the local system character set, so Emacs will get unibyte characters
+- The URL is encoded into the local unibyte system character set, so Emacs will get single byte characters
 instead of UTF-8.
 
 In addition, the URL should be no longer than 32kb. All this makes setup of org-protocol
 in Windows a non-trivial task.
 
-To address the first problem you may advice `org-protocol-check-filename-for-protocol` function:
+To address the problem with URL you may advice `org-protocol-check-filename-for-protocol` function:
 
 ```clojure
 (defun advice-org-protocol-check-filename (orig-fun &rest args)
@@ -222,7 +222,7 @@ To address the first problem you may advice `org-protocol-check-filename-for-pro
             :around #'advice-org-protocol-check-filename) 
 ```
 
-The second problem requires recoding of the obtained URL components:
+The character set problem requires recoding of the obtained URL components:
 
 ```clojure
 (defun decode-capture-component (c)
@@ -251,7 +251,7 @@ a regular emacs distribution. It also requires [pandoc](https://pandoc.org/)
 binary somewhere on the PATH (pandoc is `not` included in &rho;Emacs). 
 
 Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
-used to store links and text is completely dynamic and composed
+used to store links and text in the code below is completely dynamic and is composed
 out of the org-protocol link parameters. 
 The most of the URL parameters obtained from iShell are Base64-encoded to preserve UTF-8.
 
@@ -365,3 +365,5 @@ Paste the following code into your `.emacs` configuration file:
         :body ,(capture-decode-base64-utf-8 (plist-get args :body))))
       capture-decoded-org-protocol-query))
 ```
+
+Now you have everything set up for the command to work.
