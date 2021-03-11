@@ -36,7 +36,7 @@ Because we have several arbitrary-text arguments, we also need `getArgumentText`
 - It requires specifying special `this` keyword if there is a selection and arbitrary-text argument 
   values entered at the command line contain spaces.
  
-Thanks to `getArgumentText` and `this` parser predefined keyword it is possible to capture selected text or link (when there is
+Thanks to `getArgumentText` and `this` parser predefined keyword it is possible to capture the selected text or a link (when there is
 no selection) under any custom headline with spaces in its name.
 The process is shown in the video above.
 
