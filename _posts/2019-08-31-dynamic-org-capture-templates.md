@@ -107,7 +107,7 @@ let getArgumentText = arg =>
 
  @command
  @descripiton Captures the current tab URL or selected text to an org-file.
- @uuid: F36F51E1-60B3-4451-B08E-6A4372DA74DD
+ @uuid F36F51E1-60B3-4451-B08E-6A4372DA74DD
  */
 class OrgCapture {
     constructor(args) {
