@@ -72,7 +72,7 @@ function noun_org_headline(text, html, callback, selectionIndices) {
         .filter(i => (i.match = matcher.exec(i.name), !!i.match))
         .map(i => cmdAPI.makeSugg(i.name, i.name, null,
             cmdAPI.matchScore(i.match), selectionIndices));
-    // additionally, add a suggestion with the custom argument text
+    // additionally, add a suggestion with the arbitrary argument text
     suggs.push(cmdAPI.makeSugg(text, html, null,
         suggs.length? .1: 1, selectionIndices));
 
