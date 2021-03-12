@@ -89,20 +89,20 @@ let getArgumentText = arg =>
  <!-- command syntax help -->
  <span class="syntax">Syntax</span>
  <ul class="syntax"><li><b>org-capture</b> [<i>title</i> | <b>this</b>]
-    [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
-    [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]</li>
+ [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
+ [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]</li>
  </ul>
  <span class="syntax">Arguments</span><br>
  <ul class="syntax"><li>- <i>title</i> - captured URL title.</li></ul>
  <ul class="syntax">
-    <li>- <i>org file</i> - org-file to place the capture in.</li>
+ <li>- <i>org file</i> - org-file to place the capture in.</li>
  </ul><ul class="syntax">
-    <li>- <i>headline</i> - headline to palce the capture under.</li>
+ <li>- <i>headline</i> - headline to palce the capture under.</li>
  </ul><ul class="syntax">
-    <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
+ <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
             <b>POSTPONED</b>}.</li>
  </ul><ul class="syntax">
-    <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
+ <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
  </ul>
 
  @command
@@ -118,7 +118,7 @@ class OrgCapture {
         args[WITH]   = {nountype: TODO_STATES, label: "todo"};
     }
 
-    preview(args, display) {
+    preview({object, AT, IN, AS, WITH}, display) {
         let html = "";
         let tab = cmdAPI.getActiveTab();
 
@@ -127,31 +127,31 @@ class OrgCapture {
             return;
         }
 
-        let text = getArgumentText(args[OBJECT])? args[OBJECT].text: tab.title;
+        let text = getArgumentText(object)? object.text: tab.title;
 
         html += "Title: <span style='color: #45BCFF;'>"
             + cmdAPI.escapeHtml(text) + "</span><br>";
 
-        if (args[AT]?.data)
+        if (AT?.data)
             html += "File: <span style='color: #FD7221;'>"
-                + cmdAPI.escapeHtml(args[AT].data) + "</span><br>";
+                + cmdAPI.escapeHtml(AT.data) + "</span><br>";
 
-        if (text = getArgumentText(args[IN])) // beware of assignments in condition
+        if (text = getArgumentText(IN)) // beware of assignments in condition
             html += "Headline: <span style='color: #7DE22E;'>"
                 + cmdAPI.escapeHtml(text) + "</span><br>";
 
-        if (text = getArgumentText(args[WITH]))
+        if (text = getArgumentText(WITH))
             html += "TODO state: <span style='color: #FC6DAC;'>"
                 + text + "</span><br>";
 
-        if (text = getArgumentText(args[AS]))
+        if (text = getArgumentText(AS))
             html += "Format: <span style='color: white;'>"
                 + text + "</span><br>";
 
         display.set(html);
     }
 
-    execute(args) {
+    execute({object, AT, IN, AS, WITH}) {
         let tab = cmdAPI.getActiveTab();
 
         if (!tab)
@@ -164,15 +164,14 @@ class OrgCapture {
             .replace(/\//g, "_");
 
         // get and pack capture options to an org-protocol URL
-        let title = getArgumentText(args[OBJECT])? args[OBJECT].text: tab.title;
-        title = b64enc(title)
+        let title = b64enc(getArgumentText(object)? object.text: tab.title);
         let url = b64enc(tab.url);
-        let file = args[AT]?.data
-            ? b64enc(args[AT].data)
+        let file = AT?.data
+            ? b64enc(AT.data)
             : b64enc(Object.values(ORG_FILES)[0]);
-        let headline = b64enc(getArgumentText(args[IN]));
-        let type = getArgumentText(args[AS])? args[AS].text: "text";
-        let todo = getArgumentText(args[WITH]);
+        let headline = b64enc(getArgumentText(IN));
+        let type = getArgumentText(AS)? AS.text: "text";
+        let todo = getArgumentText(WITH);
         let body = b64enc(type === "text"
             ? cmdAPI.getSelection()
             : cmdAPI.getHtmlSelection());
