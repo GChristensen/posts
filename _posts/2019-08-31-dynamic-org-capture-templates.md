@@ -47,13 +47,13 @@ the command arguments.
 Paste the following code into iShell command editor: 
 
 ```javascript
-// list of target org files
+// the list of target org files
 let ORG_FILES = {
     "foo": "~/org/foo.org",
     "bar": "~/org/bar.org"
 };
 
-// list of predefined org headlines to place captures under
+// the list of predefined org headlines to place captures under
 let ORG_HEADLINES = ["Items", "Things", "Widgets"];
 
 // capture formats
@@ -62,63 +62,23 @@ let ORG_FORMATS = ["text", "org"];
 // TODO states
 let TODO_STATES = ["TODO", "WAITING", "POSTPONED"];
 
-/** @nountype */
-function noun_org_headline(text, html, callback, selectionIndices) {
-    if (text === cmdAPI.getSelection()) // mute stray selection
-        return {};
-
-    let matcher = new RegExp(text, "i");
-    // make sugestions from predefined headlines
-    let suggs = ORG_HEADLINES.map(h => ({name: h}))
-        .filter(i => (i.match = matcher.exec(i.name), !!i.match))
-        .map(i => cmdAPI.makeSugg(i.name, i.name, null,
-            cmdAPI.matchScore(i.match), selectionIndices));
-    // additionally, add a suggestion with the arbitrary argument text
-    suggs.push(cmdAPI.makeSugg(text, html, null,
-        suggs.length? .1: 1, selectionIndices));
-
-    return suggs;
-}
-
-// a helper function to safely get argument text
-let getArgumentText = arg =>
-    arg?.text && arg.text !== cmdAPI.getSelection() && arg.text !== "this"
-        ? arg.text
-        : "";
-
-/**
- // list of target org files
- let ORG_FILES = {
-    "foo": "~/org/foo.org",
-    "bar": "~/org/bar.org"
-};
-
- // list of predefined org headlines to place captures under
- let ORG_HEADLINES = ["Items", "Things", "Widgets"];
-
- // capture formats
- let ORG_FORMATS = ["text", "org"];
-
- // TODO states
- let TODO_STATES = ["TODO", "WAITING", "POSTPONED"];
-
-/**
-    A noun type that allows to obtain argument values either from the
-    predefined list or as entered by user.
-    
-    @nountype
+/** 
+    A noun type that allows to generate suggestions taken from the 
+    predefined list combined with user input.
+ 
+    @nountype 
  */
 function noun_org_headline(text, html, callback, selectionIndices) {
     if (text === cmdAPI.getSelection()) // mute stray selection
         return {};
 
     let matcher = new RegExp(text, "i");
-    // take sugestions from the predefined list ORG_HEADLINES
+    // generate predefined suggestions (from ORG_HEADLINES)
     let suggs = ORG_HEADLINES.map(h => ({name: h}))
         .filter(i => (i.match = matcher.exec(i.name), !!i.match))
         .map(i => cmdAPI.makeSugg(i.name, i.name, null,
             cmdAPI.matchScore(i.match), selectionIndices));
-    // additionally, add the suggestion entered by user (text arguments)
+    // add a suggestion as it was entered by the user (from the text argument)
     suggs.push(cmdAPI.makeSugg(text, html, null,
         suggs.length? .1: 1, selectionIndices));
 
