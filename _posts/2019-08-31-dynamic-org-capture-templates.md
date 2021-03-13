@@ -87,31 +87,71 @@ let getArgumentText = arg =>
         : "";
 
 /**
- <!-- command syntax help -->
- <span class="syntax">Syntax</span>
- <ul class="syntax"><li><b>org-capture</b> [<i>title</i> | <b>this</b>]
-   [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
-   [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]</li>
- </ul>
- <span class="syntax">Arguments</span><br>
- <ul class="syntax"><li>- <i>title</i> - captured URL title.</li></ul>
- <ul class="syntax">
-   <li>- <i>org file</i> - org-file to place the capture in.</li>
- </ul>
- <ul class="syntax">
-   <li>- <i>headline</i> - headline to palce the capture under.</li>
- </ul>
- <ul class="syntax">
-   <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
-              <b>POSTPONED</b>}.</li>
- </ul>
- <ul class="syntax">
-   <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
- </ul>
+ // list of target org files
+ let ORG_FILES = {
+    "foo": "~/org/foo.org",
+    "bar": "~/org/bar.org"
+};
 
- @command
- @descripiton Captures the current tab URL or selected text to an org-file.
- @uuid F36F51E1-60B3-4451-B08E-6A4372DA74DD
+ // list of predefined org headlines to place captures under
+ let ORG_HEADLINES = ["Items", "Things", "Widgets"];
+
+ // capture formats
+ let ORG_FORMATS = ["text", "org"];
+
+ // TODO states
+ let TODO_STATES = ["TODO", "WAITING", "POSTPONED"];
+
+/**
+    A noun type that allows to obtain argument values either from the
+    predefined list or as entered by user.
+
+    @nountype
+ */
+function noun_org_headline(text, html, callback, selectionIndices) {
+    if (text === cmdAPI.getSelection()) // mute stray selection
+        return {};
+
+    let matcher = new RegExp(text, "i");
+    // take sugestions from the predefined list ORG_HEADLINES
+    let suggs = ORG_HEADLINES.map(h => ({name: h}))
+        .filter(i => (i.match = matcher.exec(i.name), !!i.match))
+        .map(i => cmdAPI.makeSugg(i.name, i.name, null,
+            cmdAPI.matchScore(i.match), selectionIndices));
+    // additionally, add the suggestion entered by user (text arguments)
+    suggs.push(cmdAPI.makeSugg(text, html, null,
+        suggs.length? .1: 1, selectionIndices));
+
+    return suggs;
+}
+
+// a helper function to safely get argument text
+let getArgumentText = arg =>
+    arg?.text && arg.text !== cmdAPI.getSelection() && arg.text !== "this"
+        ? arg.text
+        : "";
+
+/**
+    <!-- command syntax help -->
+    <span class="syntax">Syntax</span>
+    <p class="syntax">
+      <b>org-capture</b> [<i>title</i> | <b>this</b>]
+      [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
+      [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]
+    </p>
+    <span class="syntax">Arguments</span>
+    <ul class="syntax">
+      <li>- <i>title</i> - captured URL title.</li>
+      <li>- <i>org file</i> - org-file to place the capture in.</li>
+      <li>- <i>headline</i> - headline to palce the capture under.</li>
+      <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
+            <b>POSTPONED</b>}.</li>
+      <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
+    </ul>
+    
+    @command
+    @descripiton Captures the current tab URL or selected text to an org-file.
+    @uuid F36F51E1-60B3-4451-B08E-6A4372DA74DD
  */
 class OrgCapture {
     constructor(args) {
