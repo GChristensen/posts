@@ -105,7 +105,7 @@ let getArgumentText = arg =>
 /**
     A noun type that allows to obtain argument values either from the
     predefined list or as entered by user.
-
+    
     @nountype
  */
 function noun_org_headline(text, html, callback, selectionIndices) {
