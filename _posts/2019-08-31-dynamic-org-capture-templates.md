@@ -122,7 +122,7 @@ class OrgCapture {
         args[WITH]   = {nountype: TODO_STATES, label: "todo"};
     }
 
-    preview({object, AT, IN, AS, WITH}, display) {
+    preview({OBJECT, AT, IN, AS, WITH}, display) {
         let html = "";
         let tab = cmdAPI.getActiveTab();
 
@@ -131,7 +131,7 @@ class OrgCapture {
             return;
         }
 
-        let text = getArgumentText(object)? object.text: tab.title;
+        let text = getArgumentText(OBJECT)? OBJECT.text: tab.title;
 
         html += "Title: <span style='color: #45BCFF;'>"
             + cmdAPI.escapeHtml(text) + "</span><br>";
@@ -155,7 +155,7 @@ class OrgCapture {
         display.set(html);
     }
 
-    execute({object, AT, IN, AS, WITH}) {
+    execute({OBJECT, AT, IN, AS, WITH}) {
         let tab = cmdAPI.getActiveTab();
 
         if (!tab)
@@ -168,7 +168,7 @@ class OrgCapture {
             .replace(/\//g, "_");
 
         // get and pack capture options to an org-protocol URL
-        let title = b64enc(getArgumentText(object)? object.text: tab.title);
+        let title = b64enc(getArgumentText(OBJECT)? OBJECT.text: tab.title);
         let url = b64enc(tab.url);
         let file = AT?.data
             ? b64enc(AT.data)
