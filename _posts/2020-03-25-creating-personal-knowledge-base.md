@@ -37,7 +37,7 @@ All my demands are fulfilled by the two following sets of tools:
 and [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
 for wiki-related manipulations, for example, the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) to download and insert attachment files.
 In Windows, an instance of org-wiki may be automatically 
-installed and configured as a part of [RHO Emacs](https://rho-emacs.sourceforge.io) distribution.
+installed and configured as a part of [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution.
 I use it to keep any long-term files and notes that I need less often than, 
 for example, any web-resources available online.
 
@@ -94,7 +94,7 @@ case and, for example, through the `lgrep` command in the recent.
 ### Hyperlinking from org-wiki to Scrapyard and vice versa
 
 If necessary, it is possible to create links from org-wiki to archives and
-documents in Scrapyard and vice versa. I assume that you are using [RHO Emacs](https://rho-emacs.sourceforge.io) distribution in Windows with the preinstalled org-protocol (you need to configure org-protocol manually
+documents in Scrapyard and vice versa. I assume that you are using [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution in Windows with the preinstalled org-protocol (you need to configure org-protocol manually
 otherwise).
 
 #### Referencing from org-wiki to Scrapyard
@@ -113,6 +113,8 @@ REGEDIT4
 [HKEY_CLASSES_ROOT\ext+scrapyard\shell\open\command]
 @="\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" \"%1\""
 ```
+
+RHO Emacs adds this registry entry automatically.
 
 Then add the following code to your `.emacs` configuration file:
 
