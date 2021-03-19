@@ -239,7 +239,7 @@ The character set problem requires recoding of the obtained URL components:
 %(decode-capture-component :initial)\n")) 
 ``` 
  
-But you may just install [&rho;Emacs](https://rho-emacs.sourceforge.io/) which does all this automatically.
+But you may just install [&rho;Emacs](https://gchristensen.github.io/rho-emacs/) which does all this automatically.
 
 ### Configuring Emacs
 
@@ -251,7 +251,7 @@ library which is included in &rho;Emacs installed with `org-protocol` option).
 
 NOTE: you need to manually install `org-protocol-capture-html` if you are using 
 a regular emacs distribution. It also requires [pandoc](https://pandoc.org/)
-binary somewhere on the PATH (pandoc is `not` included in &rho;Emacs). 
+binary somewhere on the PATH (pandoc is included in &rho;Emacs). 
 
 Org [capture template](https://orgmode.org/manual/Capture-templates.html) 
 used to store links and text in the code below is completely dynamic and is composed
