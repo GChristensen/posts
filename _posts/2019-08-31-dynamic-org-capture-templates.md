@@ -32,7 +32,7 @@ to automatically maintain an index of all org-files and headlines and
 it in iShell, this is a work for real aficionados.
 
 Because we have several arbitrary-text arguments, we also need `getArgumentText` helper function to go around two iShell parser quirks:
-- It passes the current selection, if it presents, as an argument value to the custom noun-types. 
+- It passes the current selection, if it presents, as an argument value to the custom [noun-types](https://gchristensen.github.io/ishell/res/tutorial.html#Introduction_to_Noun_Types). 
 - It requires specifying special `this` [anaphoric pronoun](https://gchristensen.github.io/ishell/res/tutorial.html#anaphora) 
   in place of the first arbitrary-text argument value 
   if there is an active selection and values of other arbitrary-text arguments, if there are more than one,
