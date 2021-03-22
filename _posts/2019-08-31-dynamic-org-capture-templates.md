@@ -36,7 +36,7 @@ Because we have several arbitrary-text arguments, we also need `getArgumentText`
 - It requires specifying special `this` [anaphoric pronoun](https://gchristensen.github.io/ishell/res/tutorial.html#anaphora) 
   in place of the first arbitrary-text argument value 
   if there is an active selection and values of other arbitrary-text arguments, if there are more than one,
-  contain spaces. If there is no selection, `this` is considered as a literal value of an argument.
+  contain spaces. If there is no selection, `this` is considered as the literal value of an argument.
  
 Thanks to `getArgumentText` and `this` parser predefined keyword it is possible to capture the selected text or a link (when there is
 no selection) under any custom headline with spaces in its name.
