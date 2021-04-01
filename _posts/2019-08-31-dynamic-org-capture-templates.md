@@ -95,21 +95,23 @@ let getArgumentText = arg =>
 
 /**
     <!-- command syntax help -->
-    <span class="syntax">Syntax</span>
-    <p class="syntax">
-      <b>org-capture</b> [<i>title</i> | <b>this</b>]
-      [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
-      [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]
-    </p>
-    <span class="syntax">Arguments</span>
-    <ul class="syntax">
-      <li>- <i>title</i> - captured URL title.</li>
-      <li>- <i>org file</i> - org-file to place the capture in.</li>
-      <li>- <i>headline</i> - headline to palce the capture under.</li>
-      <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
-            <b>POSTPONED</b>}.</li>
-      <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
-    </ul>
+    <div class="syntax">
+      <h1>Syntax</h1>
+      <p>
+        <b>org-capture</b> [<i>title</i> | <b>this</b>]
+        [<b>at</b> <i>file</i>] [<b>in</b> <i>headline</i>]
+        [<b>with</b> <i>todo</i>] [<b>as</b> <i>format</i>]
+      </p>
+      <h1>Arguments</h1>
+      <ul>
+        <li>- <i>title</i> - captured URL title.</li>
+        <li>- <i>org file</i> - org-file to place the capture in.</li>
+        <li>- <i>headline</i> - headline to palce the capture under.</li>
+        <li>- <i>todo</i> - todo state: {<b>TODO</b> | <b>WAITING</b> |
+              <b>POSTPONED</b>}.</li>
+        <li>- <i>format</i> - {<b>text</b> | <b>org</b>}.</li>
+      </ul>
+    </div>
     
     @command
     @descripiton Captures the current tab URL or selected text to an org-file.
