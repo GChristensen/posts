@@ -31,20 +31,9 @@ to automatically maintain an index of all org-files and headlines and
 [obtain](https://github.com/eschulte/emacs-web-server)
 it in iShell, this is a work for real aficionados.
 
-Because we have several arbitrary-text arguments, we also need `getArgumentText` helper function to go around two iShell parser quirks:
-- It passes the current selection, if it presents, as an argument value to the custom [noun-types](https://gchristensen.github.io/ishell/res/tutorial.html#Introduction_to_Noun_Types). 
-- It requires specifying special `this` [anaphoric pronoun](https://gchristensen.github.io/ishell/res/tutorial.html#Anaphora) 
-  in place of the first arbitrary-text argument value 
-  if there is an active selection and values of other arbitrary-text arguments, if there are more than one,
-  contain spaces. If there is no selection, `this` is considered as the literal value of an argument.
- 
-Thanks to `getArgumentText` and `this` parser predefined keyword it is possible to capture the selected text or a link (when there is
-no selection) under any custom headline with spaces in its name.
-The process is shown in the video above.
-
 By default, the command extracts selection as plain text, but it could be
-marked for processing to org-formatted text, if the `format` parameter is specified in
-the command arguments.
+marked for processing to org-formatted text, if the value of `format` parameter is specified in
+command arguments.
 
 Paste the following code into iShell command editor: 
 
@@ -195,6 +184,18 @@ class OrgCapture {
     }
 }
 ```
+
+Because we have several arbitrary-text arguments, we also need `getArgumentText` helper function to go around two iShell parser quirks:
+- It passes the current selection, if it presents, as an argument value to the custom [noun-types](https://gchristensen.github.io/ishell/res/tutorial.html#Introduction_to_Noun_Types).
+- It requires special `this` [anaphoric pronoun](https://gchristensen.github.io/ishell/res/tutorial.html#Anaphora)
+  in place of the first arbitrary-text argument value
+  if there is an active selection and values of other arbitrary-text arguments contain spaces. 
+  If there is no selection, `this` is considered as the literal value of an argument.
+
+Thanks to `getArgumentText` and `this` parser predefined keyword it is possible to capture the selected text, or a link (when there is
+no selection) under any custom headline with spaces in its name.
+The process is shown in the video above.
+
 
 ### org-protocol in Windows
 
