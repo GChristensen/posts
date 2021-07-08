@@ -281,7 +281,7 @@ considered harmful.
 
 #### SOLID Principles
 
-These are five related principles are considered a crucial discipline in the building of abstractions that are clear,
+These five related principles are considered a crucial discipline in the building of abstractions that are clear,
 flexible, and maintainable:
 
 * The [Single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle) -
@@ -297,8 +297,8 @@ flexible, and maintainable:
   This principle promotes the consistency of the behavior in type hierarchies, which results in simple clear semantics.
 
 * The [Interface segregation principle](https://en.wikipedia.org/wiki/Interface_segregation_principle) -
-  "No client of a module should be forced to depend on methods it does not use."  
-  This principle facilitates the separation of concerns (interfaces) and high cohesion, increasing code maintainability.
+  "No client of a module should be forced to depend on methods it does not use." This principle facilitates the separation 
+  of concerns (interfaces) and high cohesion, increasing code maintainability.
 
 * The [Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) -
   "A client module should not depend on other modules directly, but through abstract interfaces." 
