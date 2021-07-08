@@ -66,8 +66,8 @@ Several principles help to write code that is immune to changes:
   functionality in a dedicated module you make the possible changes easier, increasing maintainability of the code. 
   Two software quality metrics often used
   in this context: [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) - the degree to which the
-  elements inside a module belong together and [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_programming))
-    - the degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling.
+  elements inside a module belong together and [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_programming)) - 
+  the degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling.
     
 * [Layers of abstraction](https://en.wikipedia.org/wiki/Abstraction_layer) - by isolating functionality into layers
   and by using lower-level layers only from the higher-level ones, you minimize the impact of the changes in any given layer
@@ -78,12 +78,13 @@ Several principles help to write code that is immune to changes:
 #### Anti-patterns
 
 * "Smart UI" - a tendency to implement all application logic in UI event handlers, which may violate all the
-  principles listed above. [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) design pattern
+  principles listed above. This inevitably results in unmaintainable error-prone code. 
+  [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) design pattern
   or its variations should be used instead.
 
 ### Complexity Management
 
-The quality of the used abstractions is very important in managing complexity, which is characterized by the cognitive
+The quality of the used abstractions is very important in managing complexity. The complexity is characterized by the cognitive
 effort necessary to understand the program. You can differ a good abstraction
 from a bad one by its depth (this is a technical term: John Ousterhout, "A Philosophy of Software Design"). The depth
 is measured by the ratio of elaboration of the abstraction interface to its functionality. A good abstraction has a succinct
@@ -215,10 +216,10 @@ Although functional programming was not developed as a direct response to the pr
 [category-theory](https://en.wikipedia.org/wiki/Category_theory) and [lambda-calculus](https://en.wikipedia.org/wiki/Lambda_calculus)
 of Alonso Church, it can successfully eliminate some hurdles of OOP by severely restricting programmers at the level of the language.
 For example, side effects are prohibited in most places, and looping constructs are replaced by recursion, which is usually done through folding.
-Abstractions are built through functional composition.
+Abstractions are built through higher-order functions.
 To successfully use the functional approach, a programmer needs to learn how to bypass these restrictions (often referenced
-by the technical term "purity") by utilizing and [accustoming](https://hub.packtpub.com/a-five-level-learning-roadmap-for-functional-programmers/)  
-to a dozen of mind-boggling concepts with gut-wrenching names, such as:
+by the technical term "purity") by utilizing and [accustoming](https://hub.packtpub.com/a-five-level-learning-roadmap-for-functional-programmers) to
+a dozen of mind-boggling concepts with gut-wrenching names, such as:
 
 * [Immutable data structures](https://en.wikipedia.org/wiki/Persistent_data_structure)
 * [Referential transparency](https://en.wikipedia.org/wiki/Referential_transparency)
