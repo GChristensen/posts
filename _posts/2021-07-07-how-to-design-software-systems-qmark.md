@@ -364,8 +364,8 @@ you may find a good brief description of each pattern, of the problem it solves,
   combinatorial breeding of the derived classes. For example, you need to draw N different shapes by M different algorithms
   applicable to each shape. If you want to utilize polymorphism, you may create a base class `Shape` and derive
   a Cartesian product (MxN) of shape subclasses from it, each drawn by its own algorithm, for example: `Shape1A1`, `Shape1A2`,
-  `Shape2A1`, ... etc. Although, if you utilize GoF [bridge](https://en.wikipedia.org/wiki/Bridge_pattern) pattern, where  
-  algorithms are invoked using composition, you will need only M+N derived classes for your implementation, while still
+  `Shape2A1`, ... etc. Although, if you utilize GoF [bridge](https://en.wikipedia.org/wiki/Bridge_pattern) pattern, where algorithms 
+  are invoked using composition, you will need only M+N derived classes for your implementation, while still
   using polymorphism on the shape classes.
 
 
