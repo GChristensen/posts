@@ -108,7 +108,7 @@ There you may notice the extensive use of the "GO TO" operator without any hesit
 In his book "Structured Computer Organization" Andrew S. Tanenbaum also offers a good description of what
 programming looked like at the dawn of the computer era:
 
-<blockquote>
+<blockquote style="font-size: 90%">
 
 <p>
 In these early years, most computers were "open shop," which meant that the programmer had to operate the machine
@@ -124,24 +124,24 @@ If the programmer wanted to run a FORTRAN program, the following steps were nece
 <ol>
 <li>He went over to the cabinet where the program library was kept,
    took out the big green deck labeled FORTRAN compiler, put it in the card reader, and pushed the START button.</li>
-2. He put his FORTRAN program in the card reader and pushed the CONTINUE button. The program was read in.
-3. When the computer stopped, he read his FORTRAN program in a second time. Although some compilers required only one
-   pass over the input, many required two or more. For each pass, a large card deck had to be read in.
-4. Finally, the translation neared completion. The programmer often became nervous near the end because if the compiler
+<li>He put his FORTRAN program in the card reader and pushed the CONTINUE button. The program was read in.</li> 
+<li>When the computer stopped, he read his FORTRAN program in a second time. Although some compilers required only one
+   pass over the input, many required two or more. For each pass, a large card deck had to be read in.</li>
+<li>Finally, the translation neared completion. The programmer often became nervous near the end because if the compiler
    found an error in the program, he had to correct it and start the entire process all over again. If there were no
-   errors, the compiler punched out the translated machine language program on cards.
-5. The programmer then put the machine language program in the card reader along with the subroutine library deck
-   and read them both in.
-6. The program began executing. More often than not it did not work and unexpectedly stopped in the middle.
+   errors, the compiler punched out the translated machine language program on cards</li>
+<li>The programmer then put the machine language program in the card reader along with the subroutine library deck
+   and read them both in.</li>
+<li>The program began executing. More often than not it did not work and unexpectedly stopped in the middle.
    Generally, the programmer fiddled with the console switches and looked at the console lights for a while.
    If lucky, he figured out the problem, corrected the error, and went back to the cabinet containing the big green
    FORTRAN compiler to start over again. If less fortunate, he made a printout of the contents of memory,
-   called a core dump<sup>†</sup>, and took it home to study.
+   called a core dump<sup>†</sup>, and took it home to study.</li>
 
-This procedure, with minor variations, was normal at many computer centers for years. It forced the programmers to learn
+<p>This procedure, with minor variations, was normal at many computer centers for years. It forced the programmers to learn
 how to operate the machine and to know what to do when it broke down, which was often. The machine was frequently idle
 while people were carrying cards around the room or scratching their heads trying to find out why their programs were
-not working properly.
+not working properly.</p>
 
 </blockquote>
 
