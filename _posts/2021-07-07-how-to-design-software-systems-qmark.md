@@ -108,7 +108,7 @@ There you may notice the extensive use of the "GO TO" operator without any hesit
 In his book "Structured Computer Organization" Andrew S. Tanenbaum also offers a good description of what
 programming looked like at the dawn of the computer era:
 
-<blockquote style="font-size: 90%">
+<blockquote style="font-size: 95%">
 
 <p>
 In these early years, most computers were "open shop," which meant that the programmer had to operate the machine
@@ -137,6 +137,7 @@ If the programmer wanted to run a FORTRAN program, the following steps were nece
    If lucky, he figured out the problem, corrected the error, and went back to the cabinet containing the big green
    FORTRAN compiler to start over again. If less fortunate, he made a printout of the contents of memory,
    called a core dump<sup>†</sup>, and took it home to study.</li>
+</ol>
 
 <p>This procedure, with minor variations, was normal at many computer centers for years. It forced the programmers to learn
 how to operate the machine and to know what to do when it broke down, which was often. The machine was frequently idle
