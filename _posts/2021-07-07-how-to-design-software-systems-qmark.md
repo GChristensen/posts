@@ -110,17 +110,20 @@ programming looked like at the dawn of the computer era:
 
 <blockquote>
 
+<p>
 In these early years, most computers were "open shop," which meant that the programmer had to operate the machine
 personally. Next to each machine was a sign-up sheet. A programmer wanting to run a program signed up for a block of
 time, say Wednesday morning 3 to 5 A.M. (many programmers liked to work when it was quiet in the machine room).
 When the time arrived, the programmer headed for the machine room with a deck of 80-column punched cards
 (an early input medium) in one hand and a sharpened pencil in the other. Upon arriving in the computer room, he or she
 gently nudged the previous programmer toward the door and took over the computer.
-
+</p>
+<p>
 If the programmer wanted to run a FORTRAN program, the following steps were necessary:
-
-1. He went over to the cabinet where the program library was kept,
-   took out the big green deck labeled FORTRAN compiler, put it in the card reader, and pushed the START button.
+</p>
+<ol>
+<li>He went over to the cabinet where the program library was kept,
+   took out the big green deck labeled FORTRAN compiler, put it in the card reader, and pushed the START button.</li>
 2. He put his FORTRAN program in the card reader and pushed the CONTINUE button. The program was read in.
 3. When the computer stopped, he read his FORTRAN program in a second time. Although some compilers required only one
    pass over the input, many required two or more. For each pass, a large card deck had to be read in.
@@ -499,6 +502,7 @@ which should be researched separately.
 * Hassan Gomaa - Software Modeling and Design: Uml, Use Cases, Patterns, and Software Architectures
 * Mark Richards, Neal Ford - Fundamentals of Software Architecture: An Engineering Approach
 * Andrew S. Tanenbaum, Maarten van Steen - Distributed Systems: Principles and Paradigms
+* Martin Fowler - Patterns of Enterprise Application Architecture  
 * Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides - Design Patterns: Elements of Reusable Object-Oriented Software
 * Alan Shalloway - Design Patterns Explained: A New Perspective on Object-Oriented Design
 * Eric Freeman, Kathy Sierra, Bert Bates, Elisabeth Robson - Head First Design Patterns
