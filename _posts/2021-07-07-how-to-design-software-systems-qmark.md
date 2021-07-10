@@ -37,7 +37,7 @@ to read in specialized computer journals.
 [Separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) 
 (modularization) is the cornerstone of quality software. By keeping each part of the
 functionality in a dedicated module, you make the possible changes easier and increase maintainability of the code.
-Well separated concerns are also immune to variation - changes in some parts of the system produce minimal impact on its
+Well-separated concerns are also immune to variation - changes in some parts of the system produce minimal impact on its
 other parts.
 
 Several principles help to write code that is well modularized:
