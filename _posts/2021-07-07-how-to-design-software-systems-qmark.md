@@ -4,7 +4,7 @@ title: How to Design Software Systems?
 categories: [Software, Systems, Design]
 ---
 
-This topic implies many underlying aspects, for example, development of a domain model or 
+This topic implies many underlying aspects, for example, the development of a domain model or 
 intricacies of project management. But if you are asking yourself more mundane questions, such as:
 "How should I partition these classes?" or "How to implement API of the business layer?" this post is for you.
 We begin with well-known basic concepts that you may have encountered elsewhere, but not suspected that they are all
