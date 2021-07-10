@@ -192,7 +192,7 @@ undoubtedly harmful, a new technique that addresses this problem was necessary.
 
 ##### Object-Oriented Programming
 
-Object-oriented programming introduced three new concepts that aid in the minimization of coupling:
+Object-oriented programming introduced three new concepts that greatly aid in the minimization of coupling:
 
 * [Encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) - also known under the more
   general name: [information hiding](https://en.wikipedia.org/wiki/Information_hiding), which allows to hide module
