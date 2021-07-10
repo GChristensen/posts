@@ -223,7 +223,7 @@ its full potential:
 * [SFINAE](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) in C++, which is utilized in the
   [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming).
 
-Because, for example, in C++ extensive use of generic programming may result in uncontrollable binary code bloat, 
+Because extensive use of generic programming may result in uncontrollable binary code bloat, 
 it is often considered harmful by byte-counting programmers.
 
 ##### Aspect-Oriented Programming
