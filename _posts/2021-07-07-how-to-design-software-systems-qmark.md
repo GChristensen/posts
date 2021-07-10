@@ -439,7 +439,8 @@ be viewed from the five different standpoints:
 * Non-functional requirements view - evaluates non-functional architecture properties such as performance or resilience.
 
 Design on this level generally requires a level of knowledge in technology, soft skills, and modeling that differs
-from the skills of a regular software developer.
+from the skills of a regular software developer. Although, there exist [alternative](https://blog.pragmaticengineer.com/software-architecture-is-overrated/)
+points of view.
 
 #### Architecture Styles
 
