@@ -187,7 +187,7 @@ This resulted in barely intelligible code and frequent errors.
 To help this gloomy state of affairs [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra) promoted
 [structured programming](https://en.wikipedia.org/wiki/Structured_programming) as a discipline to adhere only to
 the structured control flow constructs. This was the first major step in the taming of complexity, but it had its own major
-drawback: the global program state was exposed, which does not help to minimize coupling. Because this is also
+drawback: the global program state was exposed, which does not help to minimize coupling. Because this is
 undoubtedly harmful, a new technique that addresses this problem was necessary.
 
 ##### Object-Oriented Programming
