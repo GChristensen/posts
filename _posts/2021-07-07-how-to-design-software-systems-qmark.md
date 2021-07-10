@@ -13,7 +13,7 @@ your own answer to the question - how to design software systems?
 
 Essentially, software engineering is the art of creating abstractions. Quality and elaboration of the used
 abstractions separate failed systems from successfully designed ones, which code is comprehensible, maintainable and has
-a minimum amount of defects. So, how to design quality abstractions, you may ask? We can try to approach this question from 
+a minimum amount of defects. So, how to design quality abstractions, you may ask? We can approach this question from 
 the several following perspectives:
 
 * Separation of concerns.
@@ -112,7 +112,7 @@ the Heart of Software" by Eric Evans. Here it is worth listing several lessons t
 ### Complexity Management
 
 Quality of the used abstractions is very important in managing complexity. In broad sense, complexity is characterized
-by the cognitive effort necessary to understand the program. You can differ a good abstraction from a bad one by its
+by the cognitive effort necessary to understand the program. You can differ a quality abstraction from a bad one by its
 depth (this is a technical term: John Ousterhout, "A Philosophy of Software Design"). The depth is measured by the ratio
 of elaboration of the abstraction interface to its functionality. A good abstraction has a succinct well-defined
 interface with meaningful names and covers wast functionality. The opposite is true for a bad abstraction: it has a wast
