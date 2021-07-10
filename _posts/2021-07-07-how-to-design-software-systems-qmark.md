@@ -507,7 +507,7 @@ The literature listed below offers the real introduction to software engineering
 many books contain references to other literature. Only after reading it all one can approach the beginning of the
 understanding of system design essentials. Some book titles may seem misleading, but every book here (although of
 varying quality) is dedicated, at some degree, to important foundational concepts in software design. The list only
-barely touches more special topics of no less importance such as software development methodologies, unit testing, or
+barely touches more special topics of no less importance, such as software development methodologies, unit testing, or
 algorithm design, which should be researched separately.
 
 * Andrew S. Tanenbaum, Todd Austin - Structured Computer Organization
