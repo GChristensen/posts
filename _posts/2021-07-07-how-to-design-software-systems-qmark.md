@@ -85,7 +85,7 @@ It is recommended to initially select the riskiest aspects of the system for the
 Modeling also should be performed with the vision of the future evolution of the system (this may also help to
 detect possible sources of variation), for which a good domain knowledge may be necessary.
 
-Many excellent books are written on this topic. Please check the recommended literature below.
+Many excellent books are written on this topic. Please, check the recommended literature below.
 
 ### Domain-Driven Design
 
