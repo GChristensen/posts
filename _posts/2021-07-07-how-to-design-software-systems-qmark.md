@@ -200,11 +200,11 @@ Object-oriented programming introduced three new concepts that greatly aid in th
 * [Subclassing](https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)) - class inheritance. Subclassing
   facilitates code reuse while maintaining encapsulation.
 * [Polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) - ability to call methods of a derived
-  class through the reference of a superclass type, which, for example, allows
+  class through a reference of a superclass type, which, for example, allows
   [dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle).
 
-Although OOP had tremendous success and remains a dominant programming paradigm to this day, it is not free of
-its own problems inherited from the procedural style, such as side effects, which, for example, make parallelism
+Although OOP had tremendous success and remains a dominant programming paradigm to this day, it is not free of its own
+problems inherited from the procedural style, such as uncontrollable side effects, which, for example, make parallelism
 a non-trivial task under this approach. Because of that, adepts of functional programming consider object-oriented
 programming harmful, probably, not without a reason. Being a great and simple tool for managing complexity, OOP requires
 equally great experience and discipline for its proper use.
@@ -219,7 +219,7 @@ its full potential:
 * [Covariance and contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))
   in Java-based languages.
 * [Template specialization](https://en.wikipedia.org/wiki/Partial_template_specialization) and template type deduction in
-  C++ (which, for example, includes universal reference-collapsing).
+  C++ (which, for example, includes [universal reference](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers) collapsing).
 * [SFINAE](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) in C++, which is utilized in the
   [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming).
 
