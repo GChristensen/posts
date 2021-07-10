@@ -407,7 +407,7 @@ you may find a good brief description of each pattern, of the problem it solves,
   derive a Cartesian product (MxN) of shape subclasses from it, each drawn by its own algorithm, for example: `Shape1Alg1`,
   `Shape1Alg2`, `Shape2Alg1`, `Shape2Alg2`, ... etc. Although, if you utilize GoF [bridge](https://en.wikipedia.org/wiki/Bridge_pattern)
   pattern, where algorithms are invoked using composition, you will need only M+N derived classes for your
-  implementation, while still using polymorphism on the shape classes.
+  implementation, while still using separation of concerns and polymorphism on the shape classes.
 
 
 ### Software Quality Attributes
