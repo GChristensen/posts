@@ -275,7 +275,7 @@ probably, not without a reason. In moderate amounts, though, it can produce trul
 
 ##### Contract Programming
 
-Design by contract, elements of which could be found, in [Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)),
+Design by contract, elements of which could be found in [Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)),
 [Clojure](https://en.wikipedia.org/wiki/Clojure), and [Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language))
 programming languages, aims to eliminate implicit properties of module interfaces and related obscurity by explicitly defining them in
 interface contracts, for example, in the form of pre- and post-conditions of function calls, that are programmatically verifiable.
@@ -343,7 +343,7 @@ flexible, and maintainable:
 
 * The [Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle) -
   "A client module should not depend on other modules directly, but through abstract interfaces." 
-  The use of term "inversion" in the name of this principle is usually explained by the fact that dependencies
+  The use of the term "inversion" in the name of this principle is usually explained by the fact that dependencies
   between modules are customary made to concretions. The aim of this principle to facilitate dependencies to 
   abstractions. It may make sense in the case of a concretion that is highly volatile
   and may propagate undesired changes. An abstract interface is created, that hides such concretion, which also
