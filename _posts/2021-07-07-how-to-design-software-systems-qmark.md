@@ -24,7 +24,7 @@ the several following perspectives:
 * Software quality attributes.
 * Software architecture.
 
-As the introductory paragraph suggests, there are many more additional facets of the problem. By taking all the
+As the introductory paragraph suggests, there exist many more additional facets of the problem. By taking all the
 discussed principles seriously enough, you will undoubtedly be able to design quality software.
 
 NOTE: some terminology here is borrowed from the recommended literature below. Because authors
