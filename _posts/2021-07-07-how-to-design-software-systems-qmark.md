@@ -67,12 +67,11 @@ Several principles help to write code that is well modularized:
 
 ### Software Modelling
 
-To build quality systems it is customary to model software before its implementation.
-Modeling is usually performed in [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
-by decomposing systems into subsystems, components, or modules and defining detailed component interfaces thoroughly examining
-interactions and dependencies between them, possibly creating a throwaway prototype.
-The developed model becomes a project artifact, changes in which may drive the corresponding changes 
-in the implementation of the system.
+To build quality systems it is customary to model software before its implementation. Modeling is usually performed
+in [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
+by decomposing systems into subsystems, components, or modules and defining detailed component interfaces by thoroughly
+examining interactions and dependencies between them, possibly creating a throwaway prototype. The developed model
+becomes a project artifact, changes in which may drive the corresponding changes in the implementation of the system.
 
 In reality, though, under [agile development methodologies](https://en.wikipedia.org/wiki/Agile_software_development)
 modeling often takes place at the first iterations of the development cycle, in close
