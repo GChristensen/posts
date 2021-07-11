@@ -70,7 +70,8 @@ Several principles help to write code that is well modularized:
 To build quality systems it is customary to model software before its implementation. Modeling is usually performed
 in [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
 by decomposing systems into subsystems, components, or modules and defining detailed component interfaces by thoroughly
-examining interactions and dependencies between them, possibly creating a throwaway prototype. The developed model
+examining interactions and dependencies between them, possibly creating a throwaway prototype. All major interactions, 
+including error handling, are modelled on interaction and/or sequence diagrams. The developed model
 becomes a project artifact, changes in which may drive the corresponding changes in the implementation of the system.
 
 In reality, though, under [agile development methodologies](https://en.wikipedia.org/wiki/Agile_software_development)
@@ -270,7 +271,7 @@ mind-boggling concepts with gut-wrenching names, such as:
 If you already have an extensive OOP experience, the only way to master FP is to use only (and only) languages that
 enforce purity, such as [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language))
 or [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) family of languages. But because the ability of the pure FP to
-reduce cognitive effort is questionable for any real-world applications, OOP programmers often consider it harmful,
+reduce cognitive effort is questionable for any real-world application, OOP programmers often consider it harmful,
 probably, not without a reason. In moderate amounts, though, it can produce truly elegant solutions.
 
 ##### Contract Programming
@@ -439,8 +440,8 @@ be viewed from the five different standpoints:
 * Non-functional requirements view - evaluates non-functional architecture properties such as performance or resilience.
 
 Design on this level generally requires a level of knowledge in technology, soft skills, and modeling that differs
-from the skills of a regular software developer. Although, there exist [alternative](https://blog.pragmaticengineer.com/software-architecture-is-overrated/)
-points of view.
+from the skills of a regular software developer. Although, there is an [alternative](https://blog.pragmaticengineer.com/software-architecture-is-overrated/)
+point of view.
 
 #### Architecture Styles
 
