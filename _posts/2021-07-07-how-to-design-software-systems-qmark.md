@@ -4,7 +4,7 @@ title: How to Design Software Systems?
 categories: [Software, Systems, Design]
 ---
 
-This topic implies many underlying aspects, for example, the development of a domain model or 
+This topic implies many underlying aspects, for example, the proper user experience or 
 subtle intricacies of project management. But if you are asking yourself more mundane questions, such as:
 "How should I partition these classes?" or "How to implement API of the business layer?" this post is for you.
 We begin with well-known basic concepts that you may have encountered elsewhere, but not suspected that they are all
@@ -69,10 +69,11 @@ Several principles help to write code that is well modularized:
 
 To build quality systems it is customary to model software before its implementation. Modeling is usually performed
 in [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
-by decomposing systems into subsystems, components, or modules and defining detailed component interfaces by thoroughly
-examining interactions and dependencies between them, possibly creating a throwaway prototype. All major interactions, 
-including error handling, are modelled on interaction and/or sequence diagrams. The developed model
-becomes a project artifact, changes in which may drive the corresponding changes in the implementation of the system.
+by decomposing systems into subsystems, components, or modules and defining detailed component interfaces. To achieve this,
+all dependencies between system components and their interactions, including possible error handling, are thoroughly examined.
+A throwaway prototype may be created to evaluate the model.
+The developed model becomes a project artifact, changes in which may drive the corresponding changes in the implementation 
+of the system.
 
 In reality, though, under [agile development methodologies](https://en.wikipedia.org/wiki/Agile_software_development)
 modeling often takes place at the first iterations of the development cycle, in close
@@ -84,7 +85,7 @@ to test the validity of the developed model.
 
 It is recommended to initially select the riskiest aspects of the system for the modeling and implementation.
 Modeling also should be performed with the vision of the future evolution of the system (this may also help to
-detect possible sources of variation), for which a good domain knowledge may be necessary.
+detect potential sources of variation), for which a good domain knowledge may be necessary.
 
 Many excellent books are written on this topic. Please, check the recommended literature below.
 
