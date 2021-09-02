@@ -30,7 +30,7 @@ discussed principles seriously enough, you will undoubtedly be able to design qu
 NOTE: some terminology here is borrowed from the recommended literature below. Because authors
 often use [ad hoc](https://en.wikipedia.org/wiki/Ad_hoc) terms in the vein of
 [Martin Heidegger](https://en.wikipedia.org/wiki/Martin_Heidegger), it may differ from what you accustomed
-to read in specialized computer journals.
+to.
 
 ### Separation of Concerns
 
@@ -509,13 +509,12 @@ The domain of software architecture has its own repository of patterns which is 
 The literature listed below offers the real introduction to software engineering. Its choice is somewhat arbitrary, but
 many books contain references to other works. Only after reading it all one can approach the beginning of the
 understanding of system design essentials. Some book titles may seem misleading, but every book here (although of
-varying quality) is dedicated, at some degree, to important foundational concepts in software design. The list only
-barely touches more special topics of no less importance, such as software development methodologies, unit testing, or
-algorithm design, which should be researched separately.
+varying quality) is dedicated, at some degree, to important foundational concepts in software design. 
 
 * Andrew S. Tanenbaum, Todd Austin - Structured Computer Organization
 * Andrew S. Tanenbaum, Bos Herbert - Modern Operating Systems
 * Andrew S. Tanenbaum, Nick Feamster, David J. Wetherall - Computer Networks
+* Steven S. Skiena - The Algorithm Design Manual
 * David Thomas, Andrew Hunt - The Pragmatic Programmer: Your Journey to Mastery
 * John Ousterhout - A Philosophy of Software Design
 * Robert C. Martin - Clean Architecture: A Craftsman's Guide to Software Structure and Design
