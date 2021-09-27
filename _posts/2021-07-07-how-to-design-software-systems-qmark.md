@@ -294,7 +294,7 @@ functional patterns and shows how an ambiguous unintuitive syntax of a hybrid pr
 clear enough concepts.
   
 * Read "Real World Haskell" by Bryan O'Sullivan, Don Stewart, and John Goerzen, which tells how it is painful and futile
-to build something more complex than "Hello World" in a purely functional way without industry-grade tooling and frameworks.
+to build something more complex than "Hello, World" in a purely functional way without industry-grade tooling and frameworks.
 In this sense the book has lost absolutely nothing for almost 15 years of its existence.
   
 * If you are still struggling, read [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://github.com/MostlyAdequate/mostly-adequate-guide)
