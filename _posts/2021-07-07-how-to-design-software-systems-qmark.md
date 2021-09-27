@@ -472,7 +472,7 @@ for example, in the books: "Java Application Architecture" by Kirk Knoernschild,
 "Patterns of Enterprise Application Architecture" by Martin Fowler.
 
 In the broader sense, software architecture is an engineering discipline which is concerned with keeping the system in 
-accordance with various criteria and limits (mostly non-functional). To master it you need to learn a set of *architectural
+accordance with various criteria and requirements (mostly non-functional). To master it you need to learn a set of *architectural
 styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark Richards, Neal Ford, or also in
 [AOSA](https://aosabook.org/en/index.html).
 
