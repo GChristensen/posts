@@ -4,17 +4,17 @@ title: How to Design Software Systems?
 categories: [Software, Systems, Design]
 ---
 
-This topic implies many underlying aspects, for example, the proper user experience or 
-subtle intricacies of project management. But if you are asking yourself more mundane questions, such as:
+This topic implies many underlying aspects. For example, it may be concerned with the quality of user experience or 
+subtle intricacies of project management. If you are asking yourself more mundane questions, such as:
 "How should I partition these classes?" or "How to implement API of the business layer?" this post is for you.
 We begin with well-known basic concepts that you may have encountered elsewhere, but not suspected that they are all
 parts of the larger picture, and finish with rarely-read graduate-level literature. Maybe at the end you will find 
 your own answer to the question - how to design software systems?
 
-Essentially, software engineering is the art of creating abstractions. Quality and elaboration of the used
-abstractions separate failed systems from successfully designed ones, which code is comprehensible, maintainable and has
-a minimum amount of defects. So, how to design quality abstractions, you may ask? We can approach this question from 
-the several following perspectives:
+Software engineering, in its essence, is the art of creating abstractions. Quality and elaboration of the used
+abstractions separate failed software systems from successfully designed ones. They have well comprehensible code, they
+are maintainable, evolvable and have a minimum amount of defects. So, how to design quality abstractions, you may ask?
+We can approach this question from the several following perspectives:
 
 * Separation of concerns.
 * Software modeling.
@@ -30,7 +30,7 @@ discussed principles seriously enough, you will undoubtedly be able to design qu
 NOTE: some terminology here is borrowed from the recommended literature below. Because authors
 often use [ad hoc](https://en.wikipedia.org/wiki/Ad_hoc) terms in the vein of
 [Martin Heidegger](https://en.wikipedia.org/wiki/Martin_Heidegger), it may differ from what you accustomed
-to.
+to read.
 
 ### Separation of Concerns
 
@@ -45,18 +45,24 @@ Several principles help to write code that is well modularized:
 * Do not repeat yourself (also known as [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)). This principle is
   as simple as it is powerful. By not duplicating code you minimize space for potential changes and errors.
 
-* Decoupling - this concept implies minimal dependencies between modules. Two source code metrics often used in
-  this context: [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) - the degree to which the elements
+* Decoupling - this concept implies minimal dependencies between modules, for example, classes in object-oriented
+  languages. Two source code metrics often used in this
+  context: [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) - the degree to which the elements
   inside a module belong together and [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_programming)) - the
-  degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling.
-  There are many approaches that facilitate decoupling, for example, [dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) 
+  degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling. There
+  are many approaches that facilitate decoupling, for
+  example, [dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
   or the GoF [mediator](https://en.wikipedia.org/wiki/Mediator_pattern) pattern.
 
-* [Layers of abstraction](https://en.wikipedia.org/wiki/Abstraction_layer) - by isolating related modules into layers
-  and by using lower-level layers only from the higher-level ones, you minimize the impact of the changes in any given layer
-  on its client layers. Although a good horizontal layered architecture makes it possible to easily swap underlying
-  libraries and even technologies, it is not always optimal, so several layering schemes exist, such
-  as [hexagonal](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) and onion layering.
+* Packaging and maintaining component boundaries. On a more coarse-grained level of packages and components, which may
+  contain multiple classes, [software package metrics](https://en.wikipedia.org/wiki/Software_package_metrics) are used
+  to think about coupling and impact of changes. In short, a lot of dependencies makes a module harder to change.
+
+* [Layers of abstraction](https://en.wikipedia.org/wiki/Abstraction_layer) - by isolating related modules, components or
+  services into layers and by using lower-level layers only from the higher-level ones, you minimize the impact of the
+  changes in any given layer on its client layers. Although a good horizontal layered architecture makes it possible to
+  easily swap underlying libraries and even technologies, it is not always optimal, so several layering schemes exist,
+  such as [hexagonal](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) and onion layering.
 
 #### Anti-patterns
 
@@ -69,13 +75,14 @@ Several principles help to write code that is well modularized:
 
 To build quality systems it is customary to model software before its implementation. Modeling is usually performed
 in [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
-by decomposing systems into subsystems, components, or modules and defining detailed component interfaces. To achieve this,
-all dependencies between system components and their interactions, including possible error handling, are thoroughly examined.
-A throwaway prototype may be created to evaluate the model.
-The developed model becomes a project artifact, changes in which may drive the corresponding changes in the implementation 
-of the system.
+by decomposing systems into subsystems, components, or modules and defining detailed component interfaces. To achieve
+this, all dependencies between system components and their interactions, including possible error handling, are
+thoroughly examined. A throwaway prototype may be created to evaluate the model. In an ideal world the developed model
+would become a project artifact, changes in which may drive the corresponding changes in the implementation of the
+system. But you surely know what happens in these [agile](https://agilemanifesto.org/) projects, where code is valued
+over documentation.
 
-In reality, though, under [agile development methodologies](https://en.wikipedia.org/wiki/Agile_software_development)
+In reality, under [agile development methodologies](https://en.wikipedia.org/wiki/Agile_software_development)
 modeling often takes place at the first iterations of the development cycle, in close
 collaboration with the customer (or without it). This helps to define the requirements more precisely, which may be
 too abstract initially. Also, no code is usually thrown away, confirming the proverb that the best permanent solution
@@ -105,23 +112,22 @@ the Heart of Software" by Eric Evans. Here it is worth listing several lessons t
 1. Good understanding of the problem-area jargon may be really important for the building of a quality domain model.
 2. The domain code (also known as business logic or business rules) should be kept clean from other types of application
    logic to minimize the gap between the domain model and its implementation. It is because of that MVC was invented,
-   and utility logic is usually placed into a separate layer of services.
-3. Sometimes, when domain logic is dense and volatile, it is more convenient to use [rule-engines](https://en.wikipedia.org/wiki/Business_rules_engine)
-   (also known as production systems) than to implement it manually.
-4. To save Houston of problems, different units of measurement and other such value objects should be implemented as separate types
+   and non-domain utility or application logic is usually placed into a separate layer of services.
+3. To save Houston of problems, different units of measurement and other such value objects should be implemented as separate types
    to prevent meaningless arithmetic operations between them.
 
 ### Complexity Management
 
 Quality of the used abstractions is very important in managing complexity. In broad sense, complexity is characterized
-by the cognitive effort necessary to understand the program. You can differ a quality abstraction from a bad one by its
-depth (this is a technical term: John Ousterhout, "A Philosophy of Software Design"). The depth is measured by the ratio
-of elaboration of the abstraction interface to its functionality. A good abstraction has a succinct well-defined
-interface with meaningful names and covers wast functionality. The opposite is true for a bad abstraction: it has a wast
-interface with poorly named members that, possibly, just delegate functionality to an another layer. Although, sometimes
-this may be a necessary evil, such as in the GoF [adapter](https://en.wikipedia.org/wiki/Adapter_pattern) pattern. A
-good abstraction also hides unimportant details and reveals only important ones, minimizing the associated cognitive
-noise, for example, by providing reasonable defaults.
+by the cognitive effort necessary to understand the program. A quality abstraction may be distinguished from a bad one
+by its depth (this is a technical term: John Ousterhout, "A Philosophy of Software Design"). The depth is measured by
+the ratio of elaboration of the abstraction interface to its functionality. A good abstraction has a succinct
+well-defined interface with meaningful names and covers wast functionality. The opposite is true for a bad abstraction:
+it has a wast interface with poorly named members that, possibly, just delegate functionality to an another layer.
+Although, sometimes this may be a necessary evil, such as in the
+GoF [adapter](https://en.wikipedia.org/wiki/Adapter_pattern) pattern. A good abstraction also hides unimportant details
+and reveals only important ones, minimizing the associated cognitive noise, for example, by providing reasonable
+defaults.
 
 A yet another simple and powerful principle also helps to keep complexity at bay: Occam's razor (also known as
 [KISS](https://en.wikipedia.org/wiki/KISS_principle)). By not multiplying entities without necessity, you are not making
@@ -230,13 +236,14 @@ it is often considered harmful by byte-counting programmers.
 
 ##### Aspect-Oriented Programming
 
-Something is still rotten in your kingdom, say proponents of [aspect-oriented programming](https://en.wikipedia.org/wiki/Aspect-oriented_programming).
-You have cross-cutting concerns (this is, obviously, a technical term), such as logging, that dangle from here and there,
-and pollute your code. Let's take them into a single place using [advices](https://en.wikipedia.org/wiki/Advice_(programming))
-(this is a technical term familiar to Lisp programmers), which will result in a better separation
-of concerns. Other programmers are shrugging, and consider this paradigm if not harmful, but of limited use,
-since pointcuts (this is yet another technical term, denoting places where advices are applied) do not provide 
-the same granularity as the direct use of cross-cutting concerns.
+Something is still rotten in your kingdom, say proponents
+of [aspect-oriented programming](https://en.wikipedia.org/wiki/Aspect-oriented_programming). You have cross-cutting
+concerns (this is, obviously, a technical term), such as logging or transaction management, that dangle from here and
+there, and pollute your code. Let's take them into a single place using [advices](https://en.wikipedia.org/wiki/Advice_(programming))
+(this is a technical term familiar to Lisp programmers), which will result in a better separation of concerns. Other
+programmers are shrugging, and consider this paradigm if not harmful, but of limited use, since pointcuts (this is yet
+another technical term, denoting places where advices are applied) do not provide the same granularity as the direct use
+of cross-cutting concerns.
 
 ##### Metaprogramming
 
@@ -250,10 +257,9 @@ that are not accustomed to it.
 ##### Functional Programming
 
 Although functional programming was not developed as a direct response to the problems of OOP and takes its roots in
-[category-theory](https://en.wikipedia.org/wiki/Category_theory)
-and [lambda-calculus](https://en.wikipedia.org/wiki/Lambda_calculus)
-of Alonso Church, it can successfully eliminate some OOP hurdles by severely restricting programmers at the level of
-language. For example, side effects are prohibited in most places, and looping constructs are replaced by recursion,
+[category-theory](https://en.wikipedia.org/wiki/Category_theory) and [lambda-calculus](https://en.wikipedia.org/wiki/Lambda_calculus)
+of Alonso Church, it can successfully eliminate some hurdles of OOP by severely restricting programmers at the level of
+language. For example, side effects are prohibited in the most places, and looping constructs are replaced by recursion,
 which is usually done through folding. Abstractions are built using higher-order functions and functional composition. To
 successfully use the functional approach, a programmer needs to learn how to bypass imposed restrictions (often referenced
 by the technical term "purity") by utilizing
@@ -267,13 +273,32 @@ mind-boggling concepts with gut-wrenching names, such as:
 * [Combinators](https://en.wikipedia.org/wiki/Fixed-point_combinator)
 * [Currying](https://en.wikipedia.org/wiki/Currying)
 * [Folding](https://en.wikipedia.org/wiki/Fold_(higher-order_function))
+* [Monoids](https://en.wikipedia.org/wiki/Monoid_(category_theory))
 * [Monads](https://en.wikipedia.org/wiki/Monad_(functional_programming))
+* [Functors](https://en.wikipedia.org/wiki/Functor_(functional_programming))
+* ...
 
 If you already have an extensive OOP experience, the only way to master FP is to use only (and only) languages that
 enforce purity, such as [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language))
 or [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) family of languages. But because the ability of the pure FP to
 reduce cognitive effort is questionable for any real-world application, OOP programmers often consider it harmful,
 probably, not without a reason. In moderate amounts, though, it can produce truly elegant solutions.
+
+You may try to convince yourself in this by trying the following steps exactly in the order listed (the list may be a little opinionated):
+
+* Read "The Joy of Kotlin" by Pierre-Yves Saumont, which thoroughly describes the basics of functional programming and 
+does a tremendous job to demonstrate how ugly it may look being practiced with an imperative programming language.
+
+* Read "Functional Programming in Scala" by Paul Chiusano and Runar Bjarnason, which tries to teach more advanced 
+functional patterns and shows how an ambiguous unintuitive syntax of a hybrid programming language may obscure
+clear enough concepts.
+  
+* Read "Real World Haskell" by Bryan O'Sullivan, Don Stewart, and John Goerzen, which tells how it is painful and futile
+to build something more complex than "Hello World" in a purely functional way without industry-grade tooling and frameworks.
+In this sense the book lost absolutely nothing for almost 15 years of its existence.
+  
+* If you are still struggling, read [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://github.com/MostlyAdequate/mostly-adequate-guide)
+which demonstrates how to do things in a purely functional way in JavaScript.
 
 ##### Contract Programming
 
@@ -298,7 +323,7 @@ using [futures or promises](https://en.wikipedia.org/wiki/Futures_and_promises)
 (or a subscriber/publisher framework which utilizes a message queue that is called a reactive event stream), while
 showing beautiful ads to the user in full-HD and 60 FPS, until the results are obtained. Unfortunately, if your business
 is ad-based, this approach may harm it, since parallelized set of tasks usually executes faster than the same set of
-sequential ones, so there may be places where it considered harmful.
+sequential ones, so there may be places where it considered harmful (in reality, of course, of unnecessary bloat).
 
 ##### Domain-Specific Languages
 
@@ -353,7 +378,8 @@ flexible, and maintainable:
   Abstract factories are usually used to create instances of such volatile objects.
 
 All these principles are described in more detail in the book
-"Clean Architecture: A Craftsman's Guide to Software Structure and Design" by Robert C. Martin.
+"Clean Architecture: A Craftsman's Guide to Software Structure and Design" by Robert C. Martin. The name may be misleading,
+because this is a book not about architecture, but about tidiness.
 
 #### GRASP Principles
 
@@ -440,6 +466,16 @@ be viewed from the five different standpoints:
   with components assigned to hardware nodes.
 * Non-functional requirements view - evaluates non-functional architecture properties such as performance or resilience.
 
+In narrowest sense, software architecture is the art of maintaining dependencies and boundaries between system components
+to keep system testable, maintainable and evolvable. To do this you need to learn a set of *architectural patterns*, described,
+for example, in the books: "Java Application Architecture" by Kirk Knoernschild, or now mostly obsolete 
+"Patterns of Enterprise Application Architecture" by Martin Fowler.
+
+In the broader sense, software architecture is an engineering discipline which is concerned with keeping the system in 
+accordance with various criteria and limits (mostly non-functional). To master it you need to learn a set of *architectural
+styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark Richards, Neal Ford, or 
+[AOSA](https://aosabook.org/en/index.html).
+
 Design on this level generally requires a level of knowledge in technology, soft skills, and modeling that differs
 from the skills of a regular software developer. Although, there is an [alternative](https://blog.pragmaticengineer.com/software-architecture-is-overrated/)
 point of view.
@@ -496,7 +532,7 @@ by Mark Richards and Neal Ford.
 #### Architectural Patterns
 
 The domain of software architecture has its own repository of patterns which is discussed in the
-"Pattern-Oriented Software Architecture" book series.
+"Pattern-Oriented Software Architecture" book series or "Architectural Patterns" by Pethuru Raj, Anupama Raman, and Harihara Subramanian.
 
 #### Anti-Patterns
 
@@ -530,7 +566,6 @@ varying quality) is dedicated, at some degree, to important foundational concept
 * Harold Abelson, Gerald Jay Sussman, Julie Sussman - Structure and Interpretation of Computer Programs
 * Michael Swaine - Functional Programming: A PragPub Anthology: Exploring Clojure, Elixir, Haskell, Scala, and Swift
 * Michael Fogus, Chris Houser - The Joy of Clojure
-* Pierre-Yves Saumont - The Joy of Kotlin
 * Scott Wlaschin - Domain Modeling Made Functional: Tackle Software Complexity with Domain-Driven Design and F#
 * Martin Fowler - Domain-Specific Languages
 * Ryan D. Kelker - Clojure for Domain-Specific Languages
