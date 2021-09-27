@@ -480,6 +480,11 @@ Design on this level generally requires a level of knowledge in technology, soft
 from the skills of a regular software developer. Although, there is an [alternative](https://blog.pragmaticengineer.com/software-architecture-is-overrated/)
 point of view.
 
+#### Architectural Patterns
+
+The domain of software architecture has its own repository of patterns which is discussed in the
+"Pattern-Oriented Software Architecture" book series or "Architectural Patterns" by Pethuru Raj, Anupama Raman, and Harihara Subramanian.
+
 #### Architecture Styles
 
 Monolithic and distributed architectures represent two opposite approaches, the choice between which is often driven
@@ -528,11 +533,6 @@ used nowadays are listed below.
 
 Software architecture styles are described in more detail in the book "Fundamentals of Software Architecture: An Engineering Approach"
 by Mark Richards and Neal Ford.
-
-#### Architectural Patterns
-
-The domain of software architecture has its own repository of patterns which is discussed in the
-"Pattern-Oriented Software Architecture" book series or "Architectural Patterns" by Pethuru Raj, Anupama Raman, and Harihara Subramanian.
 
 #### Anti-Patterns
 
