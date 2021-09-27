@@ -295,7 +295,7 @@ clear enough concepts.
   
 * Read "Real World Haskell" by Bryan O'Sullivan, Don Stewart, and John Goerzen, which tells how it is painful and futile
 to build something more complex than "Hello World" in a purely functional way without industry-grade tooling and frameworks.
-In this sense the book lost absolutely nothing for almost 15 years of its existence.
+In this sense the book has lost absolutely nothing for almost 15 years of its existence.
   
 * If you are still struggling, read [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://github.com/MostlyAdequate/mostly-adequate-guide)
 which demonstrates how to do things in a purely functional way in JavaScript.
@@ -379,7 +379,7 @@ flexible, and maintainable:
 
 All these principles are described in more detail in the book
 "Clean Architecture: A Craftsman's Guide to Software Structure and Design" by Robert C. Martin. The name may be misleading,
-because this is a book not about architecture, but about tidiness.
+because this is a book not about architecture but about tidiness.
 
 #### GRASP Principles
 
@@ -473,7 +473,7 @@ for example, in the books: "Java Application Architecture" by Kirk Knoernschild,
 
 In the broader sense, software architecture is an engineering discipline which is concerned with keeping the system in 
 accordance with various criteria and limits (mostly non-functional). To master it you need to learn a set of *architectural
-styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark Richards, Neal Ford, or 
+styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark Richards, Neal Ford, or also in
 [AOSA](https://aosabook.org/en/index.html).
 
 Design on this level generally requires a level of knowledge in technology, soft skills, and modeling that differs
@@ -544,7 +544,7 @@ The domain of software architecture has its own repository of patterns which is 
 
 The literature listed below offers the real introduction to software engineering. Its choice is somewhat arbitrary, but
 many books contain references to other works. Only after reading it all one can approach the beginning of the
-understanding of system design essentials. Some book titles may seem misleading, but every book here (although of
+understanding of system design essentials. Some book titles may seem misleading, but every book there (although of
 varying quality) is dedicated, at some degree, to important foundational concepts in software design. 
 
 * Andrew S. Tanenbaum, Todd Austin - Structured Computer Organization
