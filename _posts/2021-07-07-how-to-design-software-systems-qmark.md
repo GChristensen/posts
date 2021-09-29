@@ -4,33 +4,103 @@ title: How to Design Software Systems?
 categories: [Software, Systems, Design]
 ---
 
-This topic implies many underlying aspects. For example, it may be concerned with the quality of user experience or 
-subtle intricacies of project management. If you are asking yourself more mundane questions, such as:
-"How should I partition these classes?" or "How to implement API of the business layer?" this post is for you.
-We begin with well-known basic concepts that you may have encountered elsewhere, but not suspected that they are all
-parts of the larger picture, and finish with rarely-read graduate-level literature. Maybe at the end you will find 
-your own answer to the question - how to design software systems?
+In general, software design implies a multitude of various underlying aspects. For example, it may be concerned with the
+quality of user experience or subtle intricacies of project management. Although if you are asking yourself more mundane
+questions, such as: "How should I partition these classes?" or "How to implement API of the business layer?" this post
+is for you. We begin with well-known basic concepts that you may have encountered elsewhere, but not suspected that they
+are all parts of a larger picture, and finish with rarely-read graduate-level literature. Maybe at the end you will
+find your own answer to the question - how to design software systems?
 
 Software engineering, in its essence, is the art of creating abstractions. Quality and elaboration of the used
-abstractions separate failed software systems from successfully designed ones. They have well comprehensible code, they
-are maintainable, evolvable and have a minimum amount of defects. So, how to design quality abstractions, you may ask?
-We can approach this question from the several following perspectives:
+abstractions separate failed and successfully designed software. The code of a well-designed system is easily
+comprehensible, such systems are easy to develop and maintain, and have a minimum amount of defects. So, how to design
+quality abstractions, you may ask? We can approach this question from the several following perspectives:
 
-* Separation of concerns.
 * Software modeling.
+* Software design.
 * Domain-driven design.
+* Separation of concerns.
 * Complexity management.
 * Structural considerations.
 * Software quality attributes.
 * Software architecture.
 
-As the introductory paragraph suggests, there exist many more additional facets of the problem. By taking all the
+As the introductory paragraph suggests, there are many more additional facets of the trade. By taking all the
 discussed principles seriously enough, you will undoubtedly be able to design quality software.
 
-NOTE: some terminology here is borrowed from the recommended literature below. Because authors
-often use [ad hoc](https://en.wikipedia.org/wiki/Ad_hoc) terms in the vein of
-[Martin Heidegger](https://en.wikipedia.org/wiki/Martin_Heidegger), it may differ from what you accustomed
-to read.
+NOTE: some terminology here is borrowed from the recommended literature below. Because authors often
+use [ad hoc](https://en.wikipedia.org/wiki/Ad_hoc) terms in the vein of
+[Martin Heidegger](https://en.wikipedia.org/wiki/Martin_Heidegger), it may differ from what you accustomed to read in
+revered computer science books. The links are given predominantly to Wikipedia to prevent link rot, but as always, the
+best source of knowledge is in the references.
+
+### Software Modelling
+
+To build quality systems it is customary to model software before its implementation. Modeling begins with the formulation
+of [functional system requirements](https://en.wikipedia.org/wiki/Functional_requirement), which is a 
+[science on its own](https://en.wikipedia.org/wiki/Requirements_engineering). Because we focus on software design,
+we assume that requirements are already subdivided into the relevant verbs and nouns, 
+corresponding to the behavior and data of the system being modelled, so we can start modeling itself.
+
+Modeling is usually performed in [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
+by decomposing the system into subsystems, components, or modules and defining detailed component interfaces. To achieve
+this, all dependencies between system components and their interactions, including possible error handling, are
+thoroughly examined. A throwaway prototype may be created to evaluate the model. In an ideal world, the developed model
+would become a project artifact, changes in which may drive the corresponding changes in the implementation of the
+system. But you surely know what happens in these [agile](https://agilemanifesto.org/) projects, where code is valued
+over documentation.
+
+In reality, under [agile development methodologies](https://en.wikipedia.org/wiki/Agile_software_development)
+modeling often takes place at the first iterations of the development cycle in parallel to writing code. This helps to
+define the requirements more precisely, which may be too abstract initially, in close collaboration with the customer (
+or without it). Also, no code is usually thrown away, confirming the proverb that the best permanent solution is a
+temporary one. Instead of prototyping, some authors (Andy Hunt and Dave Thomas, "The Pragmatic Programmer")
+recommend writing "tracer code", in which the most important aspects of the system are implemented and integrated to
+test the validity of the developed model.
+
+It is recommended to initially select the riskiest aspects of the system for the modeling and implementation. It is also
+often advised that modelling should be performed with the vision of the future evolution of the system, which may 
+help to detect potential sources of variation, for which a good domain knowledge may be necessary.
+
+Many excellent books are written on this topic. Please, check the recommended literature below.
+
+### Software Design
+
+At this point authors usually insert an image of a craftsman with a chisel and explain how it is important to give
+variables consistent and obvious names, write literary-inspired comments, perform regular refactorings and so on. These
+aspects are important, nevertheless, but there is a couple more of them, without which any system will never become
+successful.
+
+At the level of design we have its basic elements at our full disposal: functions, methods, classes, packages, and
+modules. At this particular level the art is to arrange them in such a way, that will prevent the rot of the system
+under the pressure of the omnipresent second law of thermodynamics that strives to turin the system into an intangible
+mess. Because system complexity tends to always increase, we also should tame it by skilfully introducing several levels
+of abstraction in a such way, that the developed system will remain comprehensible at each level. And the most important
+point, abstracting things away should make the possible changes easy. Several design principles discussed below,
+accompanied by a set of well-established design patterns, will help us with this task. The sad truth is that these aspects 
+of design still remain more art than science and require profound knowledge of the practice of pattern application for any 
+success.
+
+### Domain-Driven Design
+
+The approach of [domain driven design](https://en.wikipedia.org/wiki/Domain-driven_design) puts the value of domain
+logic at the first place and has idiosyncratic way of arranging domain objects. Folks in this camp have a whole special
+jargon for what other people call: a jargon, a model, a package, a subsystem, an entity, an object, a persistence
+framework, and so on. In the DDD paradigm, you say that ubiquitous language defines a domain, which is separated into
+bounded contexts that are comprised of aggregates, which consist of entities and value objects stored in repositories,
+and so on. Each term here implies its own profound semantics. Who knows, maybe this helps to think better about domain
+models. The key principle here is that the units of abstraction should closely correspond to the entities of the domain,
+which makes it easier to keep the minimal gap between the domain and implementation.
+
+The domain-driven design methodology is described in the book "Domain-Driven Design: Tackling Complexity in
+the Heart of Software" by Eric Evans. Here it is worth listing several lessons that could be derived from this approach:
+
+1. Good understanding of the problem-area jargon may be important for the creation of an adequate domain model.
+2. The domain code (also known as business logic or business rules) should be kept clean from other types of application
+   logic to minimize the gap between the domain model and its implementation. It is because of that MVC was invented,
+   and non-domain utility or application logic is usually placed into a separate layer of controllers or services.
+3. To save Houston of problems, different units of measurement and other such value objects should be implemented as
+   separate types to prevent meaningless, for example, arithmetic operations between them.
 
 ### Separation of Concerns
 
@@ -43,10 +113,10 @@ other parts.
 Several principles help to write code that is well modularized:
 
 * Do not repeat yourself (also known as [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)). This principle is
-  as simple as it is powerful. By not duplicating code you minimize space for potential changes and errors.
+  as simple as it is powerful. By not duplicating code you minimize the area for potential changes and errors.
 
-* Decoupling - this concept implies minimal dependencies between modules, for example, classes in object-oriented
-  languages. Two source code metrics often used in this
+* Decoupling - this concept implies that modules, for example, classes in object-oriented
+  languages, should only minimally depend on each other. Two source code metrics often used in this
   context: [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) - the degree to which the elements
   inside a module belong together and [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_programming)) - the
   degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling. There
@@ -56,7 +126,9 @@ Several principles help to write code that is well modularized:
 
 * Packaging and maintaining component boundaries. On a more coarse-grained level of packages and components, which may
   contain multiple classes, [software package metrics](https://en.wikipedia.org/wiki/Software_package_metrics) are used
-  to think about coupling and impact of changes. In short, a lot of dependencies makes a module harder to change.
+  to think about coupling and impact of changes. In short, as in the principle above, a lot of dependencies makes a
+  module harder to change, but there are more aspects of this topic which are worth to look in the corresponding
+  literature, for example, in the books by Robert Martin.
 
 * [Layers of abstraction](https://en.wikipedia.org/wiki/Abstraction_layer) - by isolating related modules, components or
   services into layers and by using lower-level layers only from the higher-level ones, you minimize the impact of the
@@ -70,51 +142,6 @@ Several principles help to write code that is well modularized:
   principles listed above. This inevitably results in unmaintainable error-prone code and hiders system evolution.
   [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) design pattern
   or its variations should be used instead.
-
-### Software Modelling
-
-To build quality systems it is customary to model software before its implementation. Modeling is usually performed
-in [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language)
-by decomposing systems into subsystems, components, or modules and defining detailed component interfaces. To achieve
-this, all dependencies between system components and their interactions, including possible error handling, are
-thoroughly examined. A throwaway prototype may be created to evaluate the model. In an ideal world the developed model
-would become a project artifact, changes in which may drive the corresponding changes in the implementation of the
-system. But you surely know what happens in these [agile](https://agilemanifesto.org/) projects, where code is valued
-over documentation.
-
-In reality, under [agile development methodologies](https://en.wikipedia.org/wiki/Agile_software_development)
-modeling often takes place at the first iterations of the development cycle, in close
-collaboration with the customer (or without it). This helps to define the requirements more precisely, which may be
-too abstract initially. Also, no code is usually thrown away, confirming the proverb that the best permanent solution
-is a temporary one. Instead of prototyping, some authors (Andy Hunt and Dave Thomas, "The Pragmatic Programmer")
-recommend writing "tracer code", in which the most important aspects of the system are implemented and integrated
-to test the validity of the developed model.
-
-It is recommended to initially select the riskiest aspects of the system for the modeling and implementation.
-Modeling also should be performed with the vision of the future evolution of the system (this may also help to
-detect potential sources of variation), for which a good domain knowledge may be necessary.
-
-Many excellent books are written on this topic. Please, check the recommended literature below.
-
-### Domain-Driven Design
-
-Folks in the [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) camp have a whole special jargon for what other
-people call: a jargon, a model, a package, a subsystem, an entity, an object, a persistence framework, and so on.
-In the DDD paradigm, you say that ubiquitous language defines a domain, which is separated into bounded contexts that
-are comprised of aggregates, which consist of entities and value objects stored in repositories, and so on.
-Each term here implies its own profound semantics. Who knows, maybe this helps to think better about domain models.
-The key principle here is that units of abstraction should closely correspond to the entities of the domain, which makes
-it easier to keep the minimal gap between the domain and implementation.
-
-The domain-driven design methodology is described in the book "Domain-Driven Design: Tackling Complexity in
-the Heart of Software" by Eric Evans. Here it is worth listing several lessons that could be derived from this approach:
-
-1. Good understanding of the problem-area jargon may be really important for the building of a quality domain model.
-2. The domain code (also known as business logic or business rules) should be kept clean from other types of application
-   logic to minimize the gap between the domain model and its implementation. It is because of that MVC was invented,
-   and non-domain utility or application logic is usually placed into a separate layer of services.
-3. To save Houston of problems, different units of measurement and other such value objects should be implemented as separate types
-   to prevent meaningless arithmetic operations between them.
 
 ### Complexity Management
 
@@ -213,7 +240,7 @@ Object-oriented programming introduced three new concepts that greatly aid in th
 
 Although OOP had tremendous success and remains a dominant programming paradigm to this day, it is not free of its own
 problems inherited from the procedural style, such as uncontrollable side effects, which, for example, make parallelism
-a non-trivial task under this approach. Because of that, adepts of functional programming consider object-oriented
+a non-trivial task. Because of that, adepts of functional programming consider object-oriented
 programming harmful, probably, not without a reason. Being a great and simple tool for managing complexity, OOP requires
 equally great experience and discipline for its proper use.
 
@@ -240,7 +267,7 @@ Something is still rotten in your kingdom, say proponents
 of [aspect-oriented programming](https://en.wikipedia.org/wiki/Aspect-oriented_programming). You have cross-cutting
 concerns (this is, obviously, a technical term), such as logging or transaction management, that dangle from here and
 there, and pollute your code. Let's take them into a single place using [advices](https://en.wikipedia.org/wiki/Advice_(programming))
-(this is a technical term familiar to Lisp programmers), which will result in a better separation of concerns. Other
+(this is a technical term that may be familiar to Lispers), which will result in a better separation of concerns. Other
 programmers are shrugging, and consider this paradigm if not harmful, but of limited use, since pointcuts (this is yet
 another technical term, denoting places where advices are applied) do not provide the same granularity as the direct use
 of cross-cutting concerns.
@@ -257,7 +284,7 @@ that are not accustomed to it.
 ##### Functional Programming
 
 Although functional programming was not developed as a direct response to the problems of OOP and takes its roots in
-[category-theory](https://en.wikipedia.org/wiki/Category_theory) and [lambda-calculus](https://en.wikipedia.org/wiki/Lambda_calculus)
+[category theory](https://en.wikipedia.org/wiki/Category_theory) and [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus)
 of Alonso Church, it can successfully eliminate some hurdles of OOP by severely restricting programmers at the level of
 language. For example, side effects are prohibited in the most places, and looping constructs are replaced by recursion,
 which is usually done through folding. Abstractions are built using higher-order functions and functional composition. To
@@ -276,7 +303,7 @@ mind-boggling concepts with gut-wrenching names, such as:
 * [Monoids](https://en.wikipedia.org/wiki/Monoid_(category_theory))
 * [Monads](https://en.wikipedia.org/wiki/Monad_(functional_programming))
 * [Functors](https://en.wikipedia.org/wiki/Functor_(functional_programming))
-* ...
+* etc.
 
 If you already have an extensive OOP experience, the only way to master FP is to use only (and only) languages that
 enforce purity, such as [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language))
@@ -284,7 +311,8 @@ or [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) family of langu
 reduce cognitive effort is questionable for any real-world application, OOP programmers often consider it harmful,
 probably, not without a reason. In moderate amounts, though, it can produce truly elegant solutions.
 
-You may try to convince yourself in this by trying the following steps exactly in the order listed (the list may be a little opinionated):
+You may try to convince yourself in this by trying the following steps exactly in the order listed (the list may be a
+little opinionated):
 
 * Read "The Joy of Kotlin" by Pierre-Yves Saumont, which thoroughly describes the basics of functional programming and 
 does a tremendous job to demonstrate how ugly it may look being practiced with an imperative programming language.
@@ -294,8 +322,12 @@ functional patterns and shows how an ambiguous unintuitive syntax of a hybrid pr
 clear enough concepts.
   
 * Read "Real World Haskell" by Bryan O'Sullivan, Don Stewart, and John Goerzen, which tells how it is painful and futile
-to build something more complex than "Hello, World" in a purely functional way without industry-grade tooling and frameworks.
-In this sense the book has lost absolutely nothing for almost 15 years of its existence.
+to build something more complex than "Hello, World!" in a purely functional way without industry-grade tooling and frameworks.
+In this sense, the book has lost absolutely nothing for almost 15 years of its existence.
+  
+* "Functional Programming Made Easier" by Charles Scalfani adds a yet another dimension of despair. In two thousand
+  pages of fine print it explains that you can not skillfully build functional abstractions without the knowledge
+  of category theory and attempts to teach you some of it along the way.
   
 * If you are still struggling, read [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://github.com/MostlyAdequate/mostly-adequate-guide)
 which demonstrates how to do things in a purely functional way in JavaScript.
@@ -311,11 +343,11 @@ requirements and also have unit tests to maintain.
 
 ##### Reactive Programming
 
-Originally, this approach was focused on the application responsivity and easing the creation of UIs by eliminating the
+Originally, this approach was focused on the easing the creation of UIs by eliminating the
 mess of wiring between application event handlers. But because it often employs parallelism, and the lion share of
 parallelism-related complexity is hidden beneath the libraries or language
 constructs, [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming) is often sold as a separate
-paradigm on the complexity-management and related markets.
+paradigm on the complexity-management and related markets, which allows to improve application responsivity.
 
 Parallelized reactive programming it is where you offload multiple complex tasks from the main thread of execution to a thread pool
 (or a [multiprocessing](https://en.wikipedia.org/wiki/Multiprocessing) environment) and wait for their completion by
@@ -323,7 +355,8 @@ using [futures or promises](https://en.wikipedia.org/wiki/Futures_and_promises)
 (or a subscriber/publisher framework which utilizes a message queue that is called a reactive event stream), while
 showing beautiful ads to the user in full-HD and 60 FPS, until the results are obtained. Unfortunately, if your business
 is ad-based, this approach may harm it, since parallelized set of tasks usually executes faster than the same set of
-sequential ones, so there may be places where it considered harmful (in reality, of course, of unnecessary bloat).
+sequential ones, so there may be places where it considered harmful. In reality, of course, it may be harmful because 
+of an unnecessary bloat.
 
 ##### Domain-Specific Languages
 
@@ -357,7 +390,7 @@ flexible, and maintainable:
 * The [Open–closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) -
   "A module should be open for extension, but closed for modification." This principle facilitates stability of the
   module interface to minimize the impact of changes. It is not surprising, that stable interfaces are usually
-  well thought out.
+  well-thought-out.
 
 * The [Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle) -
   "A module of a given type should be interchangeable with a module of its subtype without any unexpected side effects."
@@ -374,11 +407,11 @@ flexible, and maintainable:
   between modules are customary made to concretions. The aim of this principle to facilitate dependencies to 
   abstractions. It may make sense in the case of a concretion that is highly volatile
   and may propagate undesired changes. An abstract interface is created, that hides such concretion, which also
-  eliminates the direct dependency on the referred module, increasing decoupling. 
+  eliminates the direct dependency on the referred module source code, increasing decoupling. 
   Abstract factories are usually used to create instances of such volatile objects.
 
-All these principles are described in more detail in the book
-"Clean Architecture: A Craftsman's Guide to Software Structure and Design" by Robert C. Martin. The name may be misleading,
+All these principles are described in more detail in the books by Robert C. Martin, for example, in
+"Clean Architecture: A Craftsman's Guide to Software Structure and Design". The name of this book may be misleading,
 because this is a book not about architecture but about tidiness.
 
 #### GRASP Principles
@@ -435,14 +468,14 @@ you may find a good brief description of each pattern, of the problem it solves,
   derive a Cartesian product (MxN) of shape subclasses from it, each drawn by its own algorithm, for example: `Shape1Alg1`,
   `Shape1Alg2`, `Shape2Alg1`, `Shape2Alg2`, ... etc. Although, if you utilize GoF [bridge](https://en.wikipedia.org/wiki/Bridge_pattern)
   pattern, where algorithms are invoked using composition, you will need only M+N derived classes for your
-  implementation, while still using separation of concerns and polymorphism on the shape classes.
+  implementation, while still using separation of concerns and polymorphism on the Shape subclasses.
 
 
 ### Software Quality Attributes
 
-Earlier we encountered some [software quality](https://en.wikipedia.org/wiki/Software_quality) attributes, such as
-simplicity, reusability, testability, maintainability, clarity, flexibility, correctness and evolvability. 
-To understand what may act as major considerations in the choice of a software architecture, and also in which aspects 
+Earlier we implicitly invoked some [software quality](https://en.wikipedia.org/wiki/Software_quality) attributes, such as
+simplicity, reusability, maintainability, clarity, flexibility, correctness and evolvability. 
+To understand what may act as major considerations in the choice of a software architecture, and also by which aspects 
 it may be constrained or evaluated, we need more examples:
 
 * Granularity - the number of physical nodes needed to deploy an architectural solutions.
@@ -455,8 +488,19 @@ it may be constrained or evaluated, we need more examples:
 ### Software Architecture
 
 Software architecture is often described as a high-level system design, which operates on the level of system layers and
-subsystems, rather than on the level of separate modules. Although many divisions are possible, system architecture may
-be viewed from the five different standpoints:
+subsystems, rather than on the level of separate modules or classes. 
+
+In narrowest sense, software architecture is the art of maintaining dependencies and boundaries between coarse-grained
+system components to keep system testable, maintainable and evolvable. To do this you need to learn a set of 
+*architectural patterns*, described, for example, in the books: "Java Application Architecture" by Kirk Knoernschild, or
+now mostly obsolete "Patterns of Enterprise Application Architecture" by Martin Fowler.
+
+In the broader sense, software architecture is an engineering discipline which is concerned with keeping the system in 
+accordance with various criteria and requirements (mostly non-functional). To master it you need to learn a set of *architectural
+styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark Richards, Neal Ford, or also in
+[AOSA](https://aosabook.org/en/index.html).
+
+Although many divisions are possible, system architecture may be viewed from the five different standpoints:
 
 * View of use-cases - this is a functional requirements view, which is an input to develop the software architecture.
   Each use case describes the sequence of interactions between one or more actors (external users) and the system.
@@ -465,16 +509,6 @@ be viewed from the five different standpoints:
 * Deployment view - this view depicts a specific configuration of the distributed architecture
   with components assigned to hardware nodes.
 * Non-functional requirements view - evaluates non-functional architecture properties such as performance or resilience.
-
-In narrowest sense, software architecture is the art of maintaining dependencies and boundaries between system components
-to keep system testable, maintainable and evolvable. To do this you need to learn a set of *architectural patterns*, described,
-for example, in the books: "Java Application Architecture" by Kirk Knoernschild, or now mostly obsolete 
-"Patterns of Enterprise Application Architecture" by Martin Fowler.
-
-In the broader sense, software architecture is an engineering discipline which is concerned with keeping the system in 
-accordance with various criteria and requirements (mostly non-functional). To master it you need to learn a set of *architectural
-styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark Richards, Neal Ford, or also in
-[AOSA](https://aosabook.org/en/index.html).
 
 Design on this level generally requires a level of knowledge in technology, soft skills, and modeling that differs
 from the skills of a regular software developer. Although, there is an [alternative](https://blog.pragmaticengineer.com/software-architecture-is-overrated/)
@@ -544,21 +578,22 @@ by Mark Richards and Neal Ford.
 
 The literature listed below offers the real introduction to software engineering. Its choice is somewhat arbitrary, but
 many books contain references to other works. Only after reading it all one can approach the beginning of the
-understanding of system design essentials. Some book titles may seem misleading, but every book there (although of
-varying quality) is dedicated, at some degree, to important foundational concepts in software design. 
+understanding of system design essentials. Some book titles may seem misleading, but every book there is dedicated, 
+at some degree, to important foundational concepts in software design. 
 
 * Andrew S. Tanenbaum, Todd Austin - Structured Computer Organization
 * Andrew S. Tanenbaum, Bos Herbert - Modern Operating Systems
 * Andrew S. Tanenbaum, Nick Feamster, David J. Wetherall - Computer Networks
 * Steven S. Skiena - The Algorithm Design Manual
+* Aditya Bhargava - Grokking Algorithms
 * David Thomas, Andrew Hunt - The Pragmatic Programmer: Your Journey to Mastery
 * John Ousterhout - A Philosophy of Software Design
 * Robert C. Martin - Clean Architecture: A Craftsman's Guide to Software Structure and Design
 * Craig Larman - Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development
 * Hassan Gomaa - Software Modeling and Design: Uml, Use Cases, Patterns, and Software Architectures
 * Mark Richards, Neal Ford - Fundamentals of Software Architecture: An Engineering Approach
+* Pethuru Raj, Anupama Raman, and Harihara Subramanian - Architectural Patterns   
 * Andrew S. Tanenbaum, Maarten van Steen - Distributed Systems: Principles and Paradigms
-* Martin Fowler - Patterns of Enterprise Application Architecture  
 * Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides - Design Patterns: Elements of Reusable Object-Oriented Software
 * Eric Freeman, Kathy Sierra, Bert Bates, Elisabeth Robson - Head First Design Patterns
 * Andrei Alexandrescu - Modern C++ Design: Generic Programming and Design Patterns Applied
@@ -570,4 +605,6 @@ varying quality) is dedicated, at some degree, to important foundational concept
 * Martin Fowler - Domain-Specific Languages
 * Ryan D. Kelker - Clojure for Domain-Specific Languages
 * Markus Voelter - DSL Engineering: Designing, Implementing and Using Domain-Specific Languages
- 
+* Tomasz Nurkiewicz, Ben Christensen - Reactive Programming with RxJava
+
+Happy studying!
