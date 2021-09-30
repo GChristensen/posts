@@ -73,7 +73,7 @@ successful.
 
 At the level of design, we have its basic elements at our full disposal: functions, methods, classes, packages, and
 modules. At this particular level, the art is to arrange them in such a way, that will prevent the rot of the system
-under the pressure of the omnipresent second law of thermodynamics that strives to turn the system into an intangible
+under the pressure of the omnipresent second law of thermodynamics that strives to turn the system into an incorrigible
 mess. Because system complexity tends to always increase, we also should tame it by skilfully introducing several levels
 of abstraction in a such way, that the developed system will remain comprehensible at each level. And the most important
 point, abstracting things away should make the possible changes easy. Several design principles discussed below,
