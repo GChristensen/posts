@@ -81,6 +81,10 @@ accompanied by a set of well-established design patterns, will help us with this
 of design still remain more art than science and require a profound knowledge of the practice of pattern application for any 
 success.
 
+For example, it is a great skill to discern when you need to abstract some logic by factoring it into the base class and use
+the template method pattern for its customization, or when to assemble it into a dynamic pipeline of the chain of 
+responsibility pattern. Knowledge of the design patterns structure greatly helps to apply propper design to your concrete situation.
+
 ### Domain-Driven Design
 
 The approach of [domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design) puts the value of domain
@@ -331,6 +335,10 @@ In this sense, the book has lost absolutely nothing for almost 15 years of its e
   
 * If you are still struggling, read [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://github.com/MostlyAdequate/mostly-adequate-guide)
 which demonstrates how to do things in a purely functional way in JavaScript.
+
+* Now, after you have learned how to compose comonads and write interpreters for domain-specific languages based on algebraic types,
+you are ready to obtain the black belt of functional programming. But if there are tools that allow to achieve the same with much less
+headache and with much more fun, as, for example, [Clojure](https://clojure.org), why bother?
 
 ##### Contract Programming
 
