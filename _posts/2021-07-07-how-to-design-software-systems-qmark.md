@@ -84,6 +84,7 @@ success.
 For example, it is a great skill to discern when you need to abstract some logic by factoring it into the base class and use
 the template method pattern for its customization, or when to assemble it into a dynamic pipeline of the chain of 
 responsibility pattern. Knowledge of the design patterns structure greatly helps to apply propper design to your concrete situation.
+The book "Refactoring to Patterns" by Joshua Kerievsky also helps to understand the cases when patterns should be avoided.
 
 ### Domain-Driven Design
 
@@ -125,8 +126,8 @@ Several principles help to write well modularized code:
   inside a module belong together and [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_programming)) - the
   degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling. There
   are many approaches that facilitate decoupling, for
-  example, [dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
-  or the GoF [mediator](https://en.wikipedia.org/wiki/Mediator_pattern) pattern.
+  example, [dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) which is in essence 
+  is the programming to abstractions, or the GoF [mediator](https://en.wikipedia.org/wiki/Mediator_pattern) pattern.
 
 * Packaging and maintaining component boundaries. On a more coarse-grained level of packages and components, which may
   contain multiple classes, [software package metrics](https://en.wikipedia.org/wiki/Software_package_metrics) are used
@@ -338,8 +339,8 @@ which demonstrates how to do things in a purely functional way in JavaScript.
 
 * Now, after you have learned how to compose comonads and write interpreters for domain-specific languages based on algebraic types,
 you are ready to obtain the black belt of functional programming. But if there are tools that allow to achieve the same with much less
-headache and with much more fun, as, for example, [Clojure](https://clojure.org), why bother?
-
+headache and with much more fun, such as [Clojure](https://clojure.org)...
+                                 
 ##### Contract Programming
 
 Design by contract, elements of which could be found in [Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)),
@@ -596,14 +597,15 @@ at some degree, to important foundational concepts in software design.
 * Aditya Bhargava - Grokking Algorithms
 * David Thomas, Andrew Hunt - The Pragmatic Programmer: Your Journey to Mastery
 * John Ousterhout - A Philosophy of Software Design
+* Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides - Design Patterns
+* Eric Freeman, Kathy Sierra, Bert Bates, Elisabeth Robson - Head First Design Patterns
+* Joshua Kerievsky - Refactoring to Patterns
 * Robert C. Martin - Clean Architecture: A Craftsman's Guide to Software Structure and Design
 * Craig Larman - Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development
 * Hassan Gomaa - Software Modeling and Design: Uml, Use Cases, Patterns, and Software Architectures
 * Mark Richards, Neal Ford - Fundamentals of Software Architecture: An Engineering Approach
 * Pethuru Raj, Anupama Raman, and Harihara Subramanian - Architectural Patterns   
 * Andrew S. Tanenbaum, Maarten van Steen - Distributed Systems: Principles and Paradigms
-* Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides - Design Patterns: Elements of Reusable Object-Oriented Software
-* Eric Freeman, Kathy Sierra, Bert Bates, Elisabeth Robson - Head First Design Patterns
 * Andrei Alexandrescu - Modern C++ Design: Generic Programming and Design Patterns Applied
 * Eric Evans - Domain-Driven Design: Tackling Complexity in the Heart of Software
 * Harold Abelson, Gerald Jay Sussman, Julie Sussman - Structure and Interpretation of Computer Programs
