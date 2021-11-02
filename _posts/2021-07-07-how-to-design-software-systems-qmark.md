@@ -120,20 +120,23 @@ Several principles help to write well modularized code:
 * Do not repeat yourself (also known as [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)). This principle is
   as simple as it is powerful. By not duplicating code you minimize the area for potential changes and errors.
 
+* [Single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle) - a component
+  should have only one reason to change.
+
 * Decoupling - this concept implies that modules, for example, classes in object-oriented
   languages, should only minimally depend on each other. Two source code metrics are often used in this
   context: [cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) - the degree to which the elements
   inside a module belong together and [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_programming)) - the
-  degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling. There
-  are many approaches that facilitate decoupling, for
+  degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling. 
+  There are several approaches that facilitate decoupling, for
   example, [dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) which is in essence 
   is the programming to abstractions, or the GoF [mediator](https://en.wikipedia.org/wiki/Mediator_pattern) pattern.
 
 * Packaging and maintaining component boundaries. On a more coarse-grained level of packages and components, which may
   contain multiple classes, [software package metrics](https://en.wikipedia.org/wiki/Software_package_metrics) are used
-  to think about coupling and the impact of changes. In short, as in the principle above, a lot of dependencies make a
-  module harder to change, but there are more aspects of this topic that are worth to look in the corresponding
-  literature, for example, in the books by Robert Martin.
+  to think about coupling and the impact of changes. In short, system components are divided on instable (nothing depends on them),
+  flexible (little depends on them), and stable (many other components depend on them). Stable abstraction principle 
+  states that a stable component should also be abstract to make system extension easy.
 
 * [Layers of abstraction](https://en.wikipedia.org/wiki/Abstraction_layer) - by isolating related modules, components or
   services into layers and by using lower-level layers only from the higher-level ones, you minimize the impact of the
@@ -163,7 +166,9 @@ defaults.
 
 A yet another simple and powerful principle also helps to keep complexity at bay: Occam's razor (also known as
 [KISS](https://en.wikipedia.org/wiki/KISS_principle)). By not multiplying entities without necessity, you are not making
-the system less comprehensible. We survey other related principles in the "Structural Considerations" section. Below we
+the system less comprehensible. 
+
+We survey other related principles in the "Structural Considerations" section. Below we
 examine what the existing programming tools and approaches offer in this field. Generally, they allow managing
 complexity to the extent of what you can and can not do with them. Practice suggests that too much or too little 
 freedom results in lamentable consequences.
@@ -274,8 +279,9 @@ concerns (this is, obviously, a technical term), such as logging or transaction 
 there, and pollute your code. Let's take them into a single place using [advices](https://en.wikipedia.org/wiki/Advice_(programming))
 (this is a technical term that may be familiar to Lispers), which will result in a better separation of concerns. Other
 programmers are shrugging, and consider this paradigm if not harmful, but of limited use, since pointcuts (this is yet
-another technical term, denoting places where advices are applied) do not provide the same granularity as the direct use
-of cross-cutting concerns.
+another technical term, denoting places where advices are applied) often do not provide the same granularity as the direct use
+of the concerns being abstracted away. So, it may be appropriate only in monstruous systems with large number of coarse-grained 
+concerns.
 
 ##### Metaprogramming
 
@@ -361,11 +367,13 @@ paradigm on the complexity-management and related markets, which allows improvin
 Parallelized reactive programming is where you offload multiple complex tasks from the main thread of execution to a thread pool
 (or a [multiprocessing](https://en.wikipedia.org/wiki/Multiprocessing) environment) and wait for their completion by
 using [futures or promises](https://en.wikipedia.org/wiki/Futures_and_promises)
-(or a subscriber/publisher framework which utilizes a message queue that is called a reactive event stream) while
-showing beautiful ads to the user in full-HD and 60 FPS, until the results are obtained. Unfortunately, if your business
-is ad-based, this approach may harm it, since a parallelized set of tasks usually executes faster than the same set of
-sequential ones, so there may be places where it is considered harmful. In reality, of course, it may be harmful because 
-of unnecessary bloat.
+or a subscriber/publisher framework which utilizes a message queue that is called a reactive event stream. You can
+filter, modify or combine event streams together. 
+
+While events are processed it is possible to display beautiful ads to the user in full-HD and 60 FPS, until the results are ready. 
+Unfortunately, if your business is ad-based, this approach may harm it, since a parallelized set of tasks usually executes faster 
+than the same set of sequential ones, so there may be places where it is considered harmful. In other areas it is considered
+harmful because of unnecessary bloat.
 
 ##### Domain-Specific Languages
 
@@ -422,6 +430,12 @@ flexible, and maintainable:
 All these principles are described in more detail in the books by Robert C. Martin, for example, in
 "Clean Architecture: A Craftsman's Guide to Software Structure and Design". The name of this book may be misleading
 because this is a book not about architecture but about tidiness.
+
+#### The Law of Demeter
+
+[The Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter) facilitates the abstinence of the dependence on
+inner structure of the used classes and components. If there is such a dependence, it is better to be reimplemented
+as an incapsulated method of the dependent class that utilizes this functionality.
 
 #### GRASP Principles
 
@@ -595,12 +609,13 @@ at some degree, to important foundational concepts in software design.
 * Andrew S. Tanenbaum, Nick Feamster, David J. Wetherall - Computer Networks
 * Steven S. Skiena - The Algorithm Design Manual
 * Aditya Bhargava - Grokking Algorithms
+* Robert C. Martin - Clean Code: A Handbook of Agile Software Craftsmanship
 * David Thomas, Andrew Hunt - The Pragmatic Programmer: Your Journey to Mastery
 * John Ousterhout - A Philosophy of Software Design
 * Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides - Design Patterns
 * Eric Freeman, Kathy Sierra, Bert Bates, Elisabeth Robson - Head First Design Patterns
 * Joshua Kerievsky - Refactoring to Patterns
-* Robert C. Martin - Clean Architecture: A Craftsman's Guide to Software Structure and Design
+* Clean Architecture: A Craftsman's Guide to Software Structure and Design
 * Craig Larman - Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development
 * Hassan Gomaa - Software Modeling and Design: Uml, Use Cases, Patterns, and Software Architectures
 * Mark Richards, Neal Ford - Fundamentals of Software Architecture: An Engineering Approach
