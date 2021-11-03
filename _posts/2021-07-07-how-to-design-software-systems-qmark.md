@@ -73,15 +73,15 @@ omnipresent second law of thermodynamics that strives to turn everything into an
 impact of possible changes? How to make the system easily extensible and comprehensible at the same time?
 
 At the level of design, we have all its basic elements at our full disposal: functions, methods, classes, packages, and
-modules. At this particular level, the trick is to arrange them just in a right way under a set of mutually-decoupled
+modules. At this particular level, the trick is to arrange them just in the right way under a set of mutually-decoupled
 layers of abstractions. Several design principles discussed below, accompanied by a range of well-established design 
 patterns, may greatly help with this task. The sad truth is that these aspects of design still remain more art than 
 science and require a profound knowledge of the practice of pattern application for any success.
 
-It is a sign of skill, if after a look at the model you say: "To properly separate concerns I should implement this core
+It is a sign of skill if after a look at the model you say: "To properly separate concerns I should implement this core
 functionality as a set of fine-grained classes and use decorators for optional features". But the task of design is so
-cognitively daunting, that it is rarely done in a right way from the start. Usually, design is gradually improved over
-the course of the development, so image of a craftsman working with clay is more appropriate. 
+cognitively daunting, that it is rarely done in the right way from the start. Usually, design is gradually improved over
+the course of the development, so an image of a craftsman working with clay is more appropriate. 
 
 Successful designers are guided by the most salient features in the context of the system evolution, and some good books
 on thinking may help to discover them, such as "Blink: The Power of Thinking Without Thinking" by Malcolm Gladwell, or
@@ -119,7 +119,7 @@ functionality in a dedicated module, you make the possible changes easier and in
 Well-separated concerns are also immune to variation - changes in some parts of the system produce a minimal impact on its
 other parts.
 
-Several principles help to write well modularized code:
+Several principles help to write well-modularized code:
 
 * Do not repeat yourself (also known as [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)). This principle is
   as simple as it is powerful. By not duplicating code you minimize the area for potential changes and errors.
@@ -133,13 +133,13 @@ Several principles help to write well modularized code:
   inside a module belong together and [coupling](https://en.wikipedia.org/wiki/Coupling_(computer_programming)) - the
   degree of interdependence between modules. A designer should strive to maximize cohesion and minimize coupling. 
   There are several approaches that facilitate decoupling, for
-  example, [dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) which is in essence 
+  example, [dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) which is, in essence, 
   is the programming to abstractions, or the GoF [mediator](https://en.wikipedia.org/wiki/Mediator_pattern) pattern.
 
 * Packaging and maintaining component boundaries. On a more coarse-grained level of packages and components, which may
   contain multiple classes, [software package metrics](https://en.wikipedia.org/wiki/Software_package_metrics) are used
-  to think about coupling and the impact of changes. In short, system components are divided on instable (nothing depends on them),
-  flexible (little depends on them), and stable (many other components depend on them). Stable abstraction principle 
+  to think about coupling and the impact of changes. In short, system components are divided on unstable (nothing depends on them),
+  flexible (little depends on them), and stable (many other components depend on them). The stable abstraction principle 
   states that a stable component should also be abstract to make system extension easy.
 
 * [Layers of abstraction](https://en.wikipedia.org/wiki/Abstraction_layer) - by isolating related modules, components or
@@ -284,7 +284,7 @@ there, and pollute your code. Let's take them into a single place using [advices
 (this is a technical term that may be familiar to Lispers), which will result in a better separation of concerns. Other
 programmers are shrugging, and consider this paradigm if not harmful, but of limited use, since pointcuts (this is yet
 another technical term, denoting places where advices are applied) often do not provide the same granularity as the direct use
-of the functionality being abstracted away. So, it may be appropriate primarily in monstrous enterprise systems with large number 
+of the functionality being abstracted away. So, it may be appropriate primarily in monstrous enterprise systems with a large number 
 of coarse-grained concerns.
 
 ##### Metaprogramming
@@ -320,7 +320,7 @@ mind-boggling concepts with gut-wrenching names, such as:
 * [Functors](https://en.wikipedia.org/wiki/Functor_(functional_programming))
 * etc.
 
-If you already have an extensive OOP experience, the only way to master FP is to use only (and only) languages that
+If you already have extensive OOP experience, the only way to master FP is to use only (and only) languages that
 enforce purity, such as [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language))
 or [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) family of languages. But because the ability of the pure FP to
 reduce cognitive effort is questionable for any real-world application, OOP programmers often consider it harmful,
@@ -348,7 +348,7 @@ In this sense, the book has lost absolutely nothing for almost 15 years of its e
 which demonstrates how to do things in a purely functional way in JavaScript.
 
 * Now, after you have learned how to compose comonads and write interpreters for domain-specific languages based on algebraic types,
-you are ready to obtain the black belt of functional programming. But if there are tools that allow to achieve the same with much less
+you are ready to obtain the black belt of functional programming. But if there are tools that allow achieving the same with much less
 headache and with much more fun, such as [Clojure](https://clojure.org)...
                                  
 ##### Contract Programming
@@ -376,15 +376,15 @@ filter, modify or combine event streams together.
 
 While events are processed, it is possible to display beautiful ads to the user in full-HD and 60 FPS, until the results are ready. 
 Unfortunately, if your business is ad-based, this approach may harm it, since a parallelized set of tasks usually executes faster 
-than the same set of sequential ones, so there may be places where it is considered harmful. In other areas it is considered
-harmful because of unnecessary bloat.
+than the same set of sequential ones, so there may be places where it is considered harmful. In other areas, it is considered
+harmful because it may introduce an unnecessary bloat.
 
 ##### Domain-Specific Languages
 
 [Domain-specific languages](https://en.wikipedia.org/wiki/Domain-specific_language) allow creating reasonably deep
 and clear abstractions of such quality, that sometimes they could be used even by non-specialists in computer science.
 Although, the development of a good DSL, based on metaprogramming or special tools, such as [Xtext](https://en.wikipedia.org/wiki/Xtext)
-or Spoofax, usually requires the amount of efforts that is an order of magnitude (or two) higher than that for a regular OOP solution.
+or Spoofax, usually requires the amount of effort that is an order of magnitude (or two) higher than that for a regular OOP solution.
 So, more than often a DSL results in semantics, that only its authors can understand. Thus, more than often DSLs are
 considered harmful.
 
@@ -438,14 +438,14 @@ because this is a book not about architecture but about tidiness.
 #### The Law of Demeter
 
 [The Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter) facilitates the abstinence of the dependence on
-inner structure of the used classes and components. If there is such a dependence, it is better to be reimplemented
+the inner structure of the used classes and components. If there is such a dependence, it is better to be reimplemented
 as an incapsulated method of the dependent class that utilizes this functionality.
 
 #### GRASP Principles
 
 These are nine less-known principles, that are focused on assigning responsibilities to objects
 ([General Responsibility Assignment Software Patterns](https://en.wikipedia.org/wiki/GRASP_(object-oriented_design))).
-They are also worth to consider, since responsibilities is a common currency in the object-oriented world.
+They are also worth to consider since responsibilities are a common currency in the object-oriented world.
 
 * Information expert - a responsibility is preferably assigned to the class that has all necessary information to fulfill it.
 
@@ -503,7 +503,7 @@ you may find a good brief description of each pattern, of the problem it solves,
 
 Earlier we implicitly invoked some [software quality](https://en.wikipedia.org/wiki/Software_quality) attributes, such as
 simplicity, reusability, maintainability, clarity, flexibility, correctness, and evolvability. 
-To understand what may act as major considerations in the choice of a software architecture, and also by which aspects 
+To understand what may act as major considerations in the choice of software architecture, and also by which aspects 
 it may be constrained or evaluated, we need more examples:
 
 * Granularity - the number of physical nodes needed to deploy an architectural solution.
@@ -524,8 +524,8 @@ system components to keep the system testable, maintainable, and evolvable. To d
 now mostly obsolete "Patterns of Enterprise Application Architecture" by Martin Fowler.
 
 In the broader sense, software architecture is an engineering discipline that is concerned with keeping the system in
-accordance with various criteria and requirements (mostly non-functional). At this particular level the trick is to
-choose a right method or tool, that is the most appropriate to the problem at hand. To master this you need to learn a
+accordance with various criteria and requirements (mostly non-functional). At this particular level, the trick is to
+choose the right method or tool, that is the most appropriate to the problem at hand. To master this you need to learn a
 set of *architectural styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark
 Richards, Neal Ford, or also in [AOSA](https://aosabook.org/en/index.html).
 
