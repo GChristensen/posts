@@ -83,8 +83,10 @@ functionality as a set of fine-grained classes and use decorators for optional f
 cognitively daunting, that it is rarely done in the right way from the start. Usually, design is gradually improved over
 the course of the development, so an image of a craftsman working with clay is more appropriate. 
 
-Successful designers are guided by the most salient features in the context of the system evolution, and some good books
-on thinking may help to discover them, such as "Blink: The Power of Thinking Without Thinking" by Malcolm Gladwell, or
+On the one hand, they say that [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it). On the other, you need
+to account for the system extensibility, which marks an explicit tradeoff. Successful designers are guided by the most 
+salient features in the context of the system evolution, and some good books on thinking may help to discover them, 
+such as "Blink: The Power of Thinking Without Thinking" by Malcolm Gladwell, or
 "Think Again: The Power of Knowing What You Don't Know" by Adam Grant. More advanced cognitive techniques, such
 as [sleep on it](https://link.springer.com/article/10.3758/s13421-012-0256-7)
 or [insight meditation](https://www.sciencedirect.com/science/article/abs/pii/S1053810012000578) may significantly
