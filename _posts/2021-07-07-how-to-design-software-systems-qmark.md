@@ -66,25 +66,29 @@ Many excellent books are written on this topic. Please, check the recommended li
 
 ### Software Design
 
-At this point authors usually insert an image of a craftsman with a chisel and explain how it is important to give
-variables consistent and obvious names, write literary-inspired comments, perform regular refactorings, and so on. These
-aspects are important, nevertheless, but there are a couple more of them, without which any system will never become
-successful.
+At this point authors usually insert an image of a craftsman with a chisel and explain how it is important to name
+variables in a consistent and obvious way, write literary-inspired comments, create small functions, and so on. But we
+are interested in more grandeur aspects of the trade. Namely, how to prevent system rot under the pressure of the 
+omnipresent second law of thermodynamics that strives to turn everything into an incorrigible mess? How to minimize the
+impact of possible changes? How to make the system easily extensible and comprehensible at the same time?
 
-At the level of design, we have its basic elements at our full disposal: functions, methods, classes, packages, and
-modules. At this particular level, the art is to arrange them in such a way, that will prevent the rot of the system
-under the pressure of the omnipresent second law of thermodynamics that strives to turn the system into an incorrigible
-mess. Because system complexity tends to always increase, we also should tame it by skilfully introducing several levels
-of abstraction in a such way, that the developed system will remain comprehensible at each level. And the most important
-point, abstracting things away should make the possible changes easy. Several design principles discussed below,
-accompanied by a set of well-established design patterns, will help us with this task. The sad truth is that these aspects 
-of design still remain more art than science and require a profound knowledge of the practice of pattern application for any 
-success.
+At the level of design, we have all its basic elements at our full disposal: functions, methods, classes, packages, and
+modules. At this particular level, the trick is to arrange them just in a right way under a set of mutually-decoupled
+layers of abstractions. Several design principles discussed below, accompanied by a range of well-established design 
+patterns, may greatly help with this task. The sad truth is that these aspects of design still remain more art than 
+science and require a profound knowledge of the practice of pattern application for any success.
 
-For example, it is a great skill to discern when you need to abstract some logic by factoring it into the base class and use
-the template method pattern for its customization, or when to assemble it into a dynamic pipeline of the chain of 
-responsibility pattern. Knowledge of the design patterns structure greatly helps to apply propper design to your concrete situation.
-The book "Refactoring to Patterns" by Joshua Kerievsky also helps to understand the cases when patterns should be avoided.
+It is a sign of skill, if after a look at the model you say: "To properly separate concerns I should implement this core
+functionality as a set of fine-grained classes and use decorators for optional features". But the task of design is so
+cognitively daunting, that it is rarely done in a right way from the start. Usually, design is gradually improved over
+the course of the development, so image of a craftsman working with clay is more appropriate. 
+
+Successful designers are guided by the most salient features in the context of the system evolution, and some good books
+on thinking may help to discover them, such as "Blink: The Power of Thinking Without Thinking" by Malcolm Gladwell, or
+"Think Again: The Power of Knowing What You Don't Know" by Adam Grant. More advanced cognitive techniques, such
+as [sleep on it](https://link.springer.com/article/10.3758/s13421-012-0256-7)
+or [insight meditation](https://www.sciencedirect.com/science/article/abs/pii/S1053810012000578) may significantly
+boost success rate if used properly (at this point many authors insert an image of a psychic with a crystal ball).
 
 ### Domain-Driven Design
 
@@ -280,8 +284,8 @@ there, and pollute your code. Let's take them into a single place using [advices
 (this is a technical term that may be familiar to Lispers), which will result in a better separation of concerns. Other
 programmers are shrugging, and consider this paradigm if not harmful, but of limited use, since pointcuts (this is yet
 another technical term, denoting places where advices are applied) often do not provide the same granularity as the direct use
-of the concerns being abstracted away. So, it may be appropriate only in monstruous systems with large number of coarse-grained 
-concerns.
+of the functionality being abstracted away. So, it may be appropriate primarily in monstrous enterprise systems with large number 
+of coarse-grained concerns.
 
 ##### Metaprogramming
 
@@ -322,7 +326,7 @@ or [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) family of langu
 reduce cognitive effort is questionable for any real-world application, OOP programmers often consider it harmful,
 probably, not without a reason. In moderate amounts, though, it can produce truly elegant solutions.
 
-You may try to convince yourself in this by trying the following steps exactly in the order listed (the list may be a
+You may try to convince yourself in this by performing the following steps exactly in the order listed (the list may be a
 little opinionated):
 
 * Read "The Joy of Kotlin" by Pierre-Yves Saumont, which thoroughly describes the basics of functional programming and 
@@ -370,7 +374,7 @@ using [futures or promises](https://en.wikipedia.org/wiki/Futures_and_promises)
 or a subscriber/publisher framework which utilizes a message queue that is called a reactive event stream. You can
 filter, modify or combine event streams together. 
 
-While events are processed it is possible to display beautiful ads to the user in full-HD and 60 FPS, until the results are ready. 
+While events are processed, it is possible to display beautiful ads to the user in full-HD and 60 FPS, until the results are ready. 
 Unfortunately, if your business is ad-based, this approach may harm it, since a parallelized set of tasks usually executes faster 
 than the same set of sequential ones, so there may be places where it is considered harmful. In other areas it is considered
 harmful because of unnecessary bloat.
@@ -441,6 +445,7 @@ as an incapsulated method of the dependent class that utilizes this functionalit
 
 These are nine less-known principles, that are focused on assigning responsibilities to objects
 ([General Responsibility Assignment Software Patterns](https://en.wikipedia.org/wiki/GRASP_(object-oriented_design))).
+They are also worth to consider, since responsibilities is a common currency in the object-oriented world.
 
 * Information expert - a responsibility is preferably assigned to the class that has all necessary information to fulfill it.
 
@@ -518,10 +523,11 @@ system components to keep the system testable, maintainable, and evolvable. To d
 *architectural patterns*, described, for example, in the books: "Java Application Architecture" by Kirk Knoernschild, or
 now mostly obsolete "Patterns of Enterprise Application Architecture" by Martin Fowler.
 
-In the broader sense, software architecture is an engineering discipline that is concerned with keeping the system in 
-accordance with various criteria and requirements (mostly non-functional). To master it you need to learn a set of *architectural
-styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark Richards, Neal Ford, or also in
-[AOSA](https://aosabook.org/en/index.html).
+In the broader sense, software architecture is an engineering discipline that is concerned with keeping the system in
+accordance with various criteria and requirements (mostly non-functional). At this particular level the trick is to
+choose a right method or tool, that is the most appropriate to the problem at hand. To master this you need to learn a
+set of *architectural styles*, which are described in the books: "Fundamentals of Software Architecture" by Mark
+Richards, Neal Ford, or also in [AOSA](https://aosabook.org/en/index.html).
 
 Although many divisions are possible, system architecture may be viewed from the five different standpoints:
 
