@@ -522,7 +522,7 @@ to maintain.
 #### Reactive Programming
 
 Originally, this approach was a sprinkle of programming language magic, 
-where change-observation event handlers of some variables were created and
+where change-observation event handlers of selected variables were created and
 maintained automatically by the programming environment. 
 In the modern days, reactive programming is essentially a message-passing 
 architecture maintained by a framework, where whole event streams could be 
