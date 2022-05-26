@@ -96,7 +96,7 @@ Many excellent books are written on this topic. Please, check the recommended li
 To explain the essence of a good design authors usually insert an image of a
 craftsman with a chisel and tell how it is important to name variables in a
 consistent and obvious way, write literary-inspired comments, create small
-functions, and so on. But we are interested in more grandeur aspects of the
+functions, and so on. But there are more grandeur aspects of the
 trade. Namely, how to prevent system rot under the pressure of the omnipresent
 second law of thermodynamics that strives to turn everything into an
 incorrigible mess? How to minimize the impact of possible changes? How to make
@@ -132,6 +132,11 @@ it](https://link.springer.com/article/10.3758/s13421-012-0256-7) or [insight
 meditation](https://www.sciencedirect.com/science/article/abs/pii/S1053810012000578)
 may significantly boost the success rate if used properly. At this point, many
 authors insert an image of a psychic with a crystal ball.
+
+A straightforward ad-hoc design without any foresight is what brings the most
+suffering along with the loads of unneeded work. Use-case-based modeling allows
+to estimate what subsystems and layers of functionality your software may have,
+and what internal APIs, facades, and adapters you need to think about carefully.
 
 ### Domain-Driven Design
 
