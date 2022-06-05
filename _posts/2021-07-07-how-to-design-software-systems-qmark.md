@@ -133,10 +133,10 @@ meditation](https://www.sciencedirect.com/science/article/abs/pii/S1053810012000
 may significantly boost the success rate if used properly. At this point, many
 authors insert an image of a psychic with a crystal ball.
 
-A straightforward ad-hoc design without any foresight is what brings the most
+Needless to say, that a straightforward ad-hoc design without any foresight brings the most
 suffering along with the loads of unneeded work. Use-case-based modeling allows
 to estimate what subsystems and layers of functionality your software may have,
-and what internal APIs, facades, and adapters you need to think about carefully.
+and what internal APIs, facades, and adapters you may need to think about carefully.
 
 ### Domain-Driven Design
 
