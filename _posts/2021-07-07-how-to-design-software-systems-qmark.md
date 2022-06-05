@@ -275,9 +275,14 @@ Several principles help to write well-modularized code:
 
 ### Software Complexity
 
-The quality of the used abstractions is very important in managing software
-complexity. In a broad sense, complexity is characterized by the cognitive
-effort necessary to understand the program. Carefully designed and layered
+The quality of the used abstractions is important in the management of [software
+complexity](https://en.wikipedia.org/wiki/Programming_complexity). 
+In a broad sense, complexity is characterized by the cognitive
+effort necessary to understand the program. The more formal notion of 
+[cyclomatic complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
+has a number of practical applications, such as computing test coverage.
+
+Carefully designed, modularized, and layered
 abstractions help to prevent the system from becoming an incomprehensible mess.
 A quality abstraction may be distinguished from a bad one by its depth (this is
 a technical term: John Ousterhout, "A Philosophy of Software Design"). The depth
@@ -296,6 +301,18 @@ A yet another simple and powerful principle also helps to keep complexity at
 bay: Occam's razor (also known as
 [KISS](https://en.wikipedia.org/wiki/KISS_principle)). By not multiplying
 entities without necessity, you are not making the system less comprehensible.
+
+#### Anti-patterns
+
+* Abstraction leak - it happens when some aspects of the system that should be 
+encapsulated are propagated through the unrelated modules and components. 
+Abstraction leak may happen in more subtle ways, for example, throuhg 
+[implicit dependencies](https://en.wikipedia.org/wiki/API#Libraries_and_frameworks:~:text=Hyrum%27s%20law%20%5B18%5D%20states%20that%20%22With%20a%20sufficient%20number%20of%20users%20of%20an%20API%2C%20it%20does%20not%20matter%20what%20you%20promise%20in%20the%20contract%3A%20all%20observable%20behaviors%20of%20your%20system%20will%20be%20depended%20on%20by%20somebody.%22). 
+If a user of a dictionary library depends on the order of items stored in a
+dictionary, the code may regress if the container hashing algorithm changes
+in the next version of the library. It is recommended to put unit tests on
+such dependencies.
+
 
 ### Design Imposed by Programming Paradigms
 
