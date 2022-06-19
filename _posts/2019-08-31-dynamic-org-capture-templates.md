@@ -186,8 +186,8 @@ class OrgCapture {
 ```
 
 Because we have several arbitrary-text arguments, we also need `getArgumentText` helper function to go around two iShell parser quirks:
-- It passes the current selection, if it presents, as an argument value to the custom [noun-types](https://gchristensen.github.io/ishell/res/tutorial.html#Introduction_to_Noun_Types).
-- It requires special `this` [anaphoric pronoun](https://gchristensen.github.io/ishell/res/tutorial.html#Anaphora)
+- It passes the current selection, if it presents, as an argument value to the custom [noun-types](https://gchristensen.github.io/ishell/addon/ui/options/tutorial.html#Introduction_to_Noun_Types).
+- It requires special `this` [anaphoric pronoun](https://gchristensen.github.io/ishell/addon/ui/options/tutorial.html#Anaphora)
   in place of the first arbitrary-text argument value
   if there is an active selection and values of other arbitrary-text arguments contain spaces. 
   If there is no selection, `this` is considered as the literal value of an argument.
