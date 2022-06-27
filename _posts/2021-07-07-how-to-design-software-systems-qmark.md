@@ -4,11 +4,11 @@ title: How to Design Software Systems?
 categories: [Software, Systems, Design]
 ---
 
-The notion of software design may imply a multitude of various underlying
-aspects. For example, it may be concerned with the quality of user experience or
-subtle intricacies of project management. If you are asking yourself more
-mundane questions, such as: "How should I partition these classes?" or "How to
-implement API of the service layer?" this post is for you. We begin with
+The notion of software design may imply a multitude of various aspects. For
+example, it may be concerned with the quality of user experience or subtle
+intricacies of project management. If you are asking yourself more mundane
+questions, such as: "How should I assign responsibilities to these classes?" or
+"How to implement API of the service layer?" this post is for you. We begin with
 well-known basic concepts that you may have encountered elsewhere, but not
 suspected that they are all parts of a larger picture, and finish with
 rarely-read graduate-level literature. Maybe in the end, you will find your own
