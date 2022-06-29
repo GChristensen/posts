@@ -11,8 +11,9 @@ yourself whether you really want to embark on a trip into this wonderland.
 
 # Down the Rabbit Hole: Foundational Principles
 
-Let us overview some basic principles employed in functional programming. 
-They have a profound impact on how the functional programs are designed.
+The foundational principles of the functional approach discussed below
+have a profound impact on how the functional programs are designed.
+Functional composition is probably the most important of them.
 
 ## Immutability and Referential Transparency
 
