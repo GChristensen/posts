@@ -11,6 +11,9 @@ yourself whether you really want to embark on a trip into this wonderland.
 
 # Down the Rabbit Hole: Foundational Principles
 
+Let's overview some basic principles employed in functional programming. 
+They have a profound impact on how the functional programs are designed.
+
 ## Immutability and Referential Transparency
 
 Despite a widespread belief, it is not the presence of
@@ -24,7 +27,7 @@ transparent](https://en.wikipedia.org/wiki/Referential_transparency) (free of
 side effects). Referential transparency implies that without changing the result
 of the program, a function invocation could always be replaced with its value
 and vice versa. This means that, like mathematical functions, our functions
-should always return the same value being called with the corresponding set of
+should always return the same value when called with the same set of
 arguments. But there is a little quirk. In a truly functional program,
 all functions should have only one argument to be able to participate in
 functional composition. We will see how to
@@ -53,8 +56,9 @@ self-referencing function calls or through [mutual
 recursion](https://en.wikipedia.org/wiki/Mutual_recursion). While recursion
 starts with the last step and continues until the base case is achieved,
 corecursion starts with the base case and continues until the first step.
-Depth-first and breadth-first tree traversal algorithms are examples of
-recursion and corecursion respectively.
+Depth-first and breadth-first [tree
+traversal](https://en.wikipedia.org/wiki/Tree_traversal) algorithms are examples
+of recursion and corecursion respectively.
 
 ## Higher-order functions
 
@@ -74,21 +78,20 @@ not support referring to a function by its name from its code. In general,
 combinators are used to hierarchically organize abstractions, reducing code
 complexity.
 
-
 ## Folding
 
 In purely functional languages, the mutation is prohibited, and we can not
-create a loop that modifies a variable along with its iterations. To iterate we
+create a loop that modifies a variable through its iterations. To iterate we
 can only rely on recursion. A higher-order function called
 [fold](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (also known
 as reduce) is the generalization of this recursive approach to iteration. It
 takes a recursive data structure, such as a list, along with a combining
 function, and returns a value that combines all the elements of the given data
-structure. Because recursion may be implemented in two different ways, by
+structure. Recursion may be implemented in two different ways, by
 combining the first or the last element of the data structure with the recursive
-result of the combination of the rest, there are two corresponding kinds of the
-fold: the right (foldr, for example `1 + [2 + [3 + [4 + 5]]]`) and the left
-(foldl, for example `[[[1 + 2] + 3] + 4] + 5`). The Direction of folding may be
+result of the combination of the rest. There are two corresponding kinds of the
+fold: the right (`foldr`, for example `1 + [2 + [3 + [4 + 5]]]`) and the left
+(`foldl`, for example `[[[1 + 2] + 3] + 4] + 5`). The Direction of folding may be
 important if the supplied combining function is not commutative. [Tail-call
 optimization](https://en.wikipedia.org/wiki/Tail_call) is required to circumvent
 the issue of stack overflow on large inputs.
@@ -108,7 +111,8 @@ becomes the key primitive used to make abstractions in the functional world.
 Functional programmers invented many ways to compose various 
 things with each other. For example, Haskell has
 the following compositional operators: `. $ <$ <$> $> <> <* <*> *> >> >>= =<< >=> <=< <|>`.
-So you can conveniently make an abstraction by saying`f3 = f2 . f1` which is equivalent to 
+So you can conveniently make an abstraction by saying `f3 = f2 . f1`
+which is equivalent to 
 `f3 = f2(f1())` in the [point free](https://en.wikipedia.org/wiki/Tacit_programming) notation. 
 And if this is not enough, you can always create your own operators. 
 What a splendid language!
@@ -136,6 +140,11 @@ just after they are encountered.
 
 # Through the Looking-Glass: Where We Meet Category Theory 
 
+Design of purely functional programs heavily relies on category theory 
+and the underlying algebraical laws of the used functional primitives.
+We will only scratch a surface here, to give a glimpse of what pure functional
+design looks like.
+
 ## Algebraic Data Types
 
 Although functional languages may be dynamically typed, there are plenty of
@@ -147,7 +156,7 @@ and unwieldy. It is because they may really be complex and unwieldy.
 There are two kinds of [algebraic data
 types](https://en.wikipedia.org/wiki/Algebraic_data_type) (ADTs): sum types and
 product types. They vary in the way by which their number of inhabiting values
-is calculated. For example, the number possible of inhabiting values of
+is calculated. For example, the number of possible inhabiting values of
 2-[tuple](https://en.wikipedia.org/wiki/Tuple) of bytes, which is a product
 type, is 256x256 = 65536 - all possible combinations from `[0, 0]` to `[255, 255]`. On the other hand, the number of inhabitants of the
 Boolean, a sum type, is 2: `true` and `false`. Product types and sum types are
@@ -157,7 +166,7 @@ similar to normal integers.
 
 In practice, the sum types are often employed as containers that wrap some
 tagged values which could be processed with pattern matching, spawning their
-own path of execution. Such wrappers often called "contexts". For example, the
+own paths of execution. Such wrappers are called "contexts". For example, the
 following listing defines the `Maybe` sum type with two value constructors used
 as tags: `Just` that takes a parameter and parameterless `Nothing`.
 
@@ -190,7 +199,7 @@ add2 x =                       -- and also returns an Int packed into a Maybe
 Because exceptions disrupt the control flow of a program, functional languages
 use various tagged values to indicate errors in computations. Being returned
 somewhere in the middle of the chain of composed functions, `Nothing` will
-short-circuit the computation. Such change of the computation path or wrapper is
+short-circuit the computation. Such change of a computation path or a wrapper is
 called an "effect" (not to be confused with side-effects).
 
 The two following sections contain some highly abstract stuff, but it is important.
@@ -208,7 +217,7 @@ categories, for example:
 
 ```haskell
 -- a function that takes type a and returns type b is mapped to a function
--- that takes and returns these types wraped into Maybe
+-- that takes and returns these types wraped into the Maybe container
 F :: (a -> b) -> (Maybe a -> Maybe b)
 ```
 
@@ -216,8 +225,10 @@ Such higher-order morphisms are called
 [functors](https://en.wikipedia.org/wiki/Lift_(mathematics)), and mapping into
 some other category (context) is called
 [lifting](https://en.wikipedia.org/wiki/Lift_(mathematics)). Morphisms that
-preserve the algebraic structure of the objects, as in the definition above,
-are called homomorphisms.
+preserve the algebraic structure of the objects, as in the definition above, are
+called homomorphisms. There are also [morphisms of
+functors](https://en.wikipedia.org/wiki/Natural_transformation). Nothing complex,
+just arrows everywhere.
 
 ## Algebras
 
@@ -228,7 +239,7 @@ as a set that is [closed](https://en.wikipedia.org/wiki/Closure_(mathematics))
 under a binary operator. Functional programmers create
 algebras to formalize and verify the design of their programs.
 
-Some well-known algebras include:
+All this "complex" algebraic stuff is actually what you learned in elementary school:
 
 * A [semigroup](https://en.wikipedia.org/wiki/Semigroup) is a magma where the binary operator is [associative](https://en.wikipedia.org/wiki/Associative_property).
 * A [monoid](https://en.wikipedia.org/wiki/Monoid) is a semigroup where the set has a [identity element](https://en.wikipedia.org/wiki/Identity_element).
@@ -246,14 +257,13 @@ Some well-known algebras include:
 
 So, you decided to create some abstractions by composing some functions that
 accept and return some ADTs possibly creating some effects. Here you are
-entering the territory of the functional plumbing using morphisms because the
+entering the territory of the functional plumbing using morphisms. The
 constraints imposed by the static type checking could not be satisfied automatically.
 Let's assume that `mayb` returns an integer result of some
 computation wrapped in `Maybe`.
 
 ```haskell
-mayb :: Int -> Maybe Int
-mayb x = Just x -- here we just wrap x in Maybe
+mayb x = Just x -- here we just wrap x of any type into Maybe
 ```
 
 Let's create an abstraction `addcomp`, that adds an Int to the result of `mayb`.
@@ -263,7 +273,7 @@ addcomp :: Int -> Maybe Int
 addcomp y = y + mayb 1 -- this does not work
 ```
 
-You can not just say `y + mayb 1` because there is no `+` operator that sums
+You can not say that `y + mayb 1` because there is no `+` operator that sums
 integers and `Maybe`. In OOP you probably would implement such an operator or a
 visitor. In FP you need to use a functor (<$>) to perform addition inside the
 context of `Maybe`.
@@ -280,28 +290,33 @@ how `fmap` of the functor typeclass instance for `Maybe` is implemented:
 ```haskell
 instance Functor Maybe where    -- <$> seen above is the infix synonym for fmap
   fmap f Nothing = Nothing      -- nothing is done with Nothing
-  fmap f (Just x) = Just (f x)  -- x is destructured from Maybe, applied to f, and placed back
+  fmap f (Just x) = Just (f x)  -- x is destructured from Maybe, applied to f,
+                                -- and placed back
 ```
 
-In the example above we took the bare + operator and applied it inside the
-context. But sometimes computations end with functions packed inside a context.
-In this case, we use [applicative
-functor](https://en.wikipedia.org/wiki/Applicative_functor) (<*>) for plumbing.
-This beast takes the function out of context to apply it. Watch the hands:
+`fmap` takes a bare function, `+` in our case, along with a value wrapped into a
+context, and applies the function inside the same context. 
+
+Sometimes computations end with functions packed inside a context. In this case,
+we use [applicative functor](https://en.wikipedia.org/wiki/Applicative_functor)
+(<*>) for plumbing. This appliance accepts the function inside a context, a
+value inside a context, takes them out, applies them, and puts the result back.
+For the `Maybe` container `pure 1` returns `Just 1`. Watch the hands:
 
 ```haskell 
-addcomp y = mayb (+ y) <*> Just 1 -- this implementation of addcomp produces the same result as above 
+addcomp y = mayb (+ y) <*> pure 1 -- this implementation of addcomp produces 
+                                  -- the same result as above 
 ```
 
-All compositional operators in Haskell are intended for such functional
-plumbing, where you try to match the input types of the composed functions with
-their output types. To become a skilled functional plumber, it is necessary to
-understand the meaning of the bottomless crevasse of such magical words as
-functor, bifunctor, profunctor, applicative functor, invariant, contravariant,
-lens, Kleisli arrow, monad, and, save the Lord, comonad. All plumbing should
-then be checked for consistency with the corresponding category-theoretical laws
-of the entities mentioned above. Are the used functions commute? Is identity
-transformation abstracted enough? There is even some [advanced
+All compositional operators in Haskell are intended for such plumbing. Your
+task is to match the input types of the composed functions with their output types.
+To become a skilled functional plumber, it is necessary to understand the
+meaning of the bottomless crevasse of such magical words as functor, bifunctor,
+profunctor, applicative functor, invariant, contravariant, lens, Kleisli arrow,
+monad, and, save the Lord, comonad. All plumbing should then be checked for
+consistency with the corresponding category-theoretical laws of the entities
+mentioned above. Do the used functions commute? Does the identity law hold?
+There is even some [advanced
 literature](https://github.com/BartoszMilewski/Publications/blob/master/TheDaoOfFP/DaoFP.pdf)
 on this topic that promises a path to the functional nirvana.
 
@@ -332,26 +347,29 @@ Because the `addcomp` function from the example above is also monadic, we
 can compose them using the monadic bind (>>=): 
 
 ```haskell
-moncomp = addcomp 1 >>= reciprocal -- in the point-free notation the argument is assumed
+moncomp = addcomp 1 >>= reciprocal -- in the point-free notation 
+                                   -- the argument is assumed
 ```
 
 The call `moncomp 1` will result in `Just 0.5`.
 
-All the magic comes from the context implementations of bind. 
+All the magic happens in the context's implementation of bind. 
 This is how bind for `Maybe` is implemented:
 
 ```haskell
 instance Monad Maybe where  
 ...
+(>>=) :: m a -> (a -> m b) -> m b  
 Just x >>= f = f x  
 ```
 
-The use of monads brings its own problems. The contexts may stack like onion petals, and
-additional plumbing may be required to peel them off.
+It takes a value in a context and a monadic function, so the result remains in
+the context. The use of monads may bring its own problems. The contexts may stack
+like onion petals, and additional plumbing may be required to peel them off.
 
 # Conclusion
 
-While OOP programmers just declare a state at their classes, to maintain a state,
+While OOP programmers just declare a state in their classes, to maintain a state,
 FP purists are bound to pass monads in and out. They usually stash state somewhere
 in tuples along with the results of their computations. Does this help to create
 clear, comprehensible, and maintainable designs? It is for you to decide. Also, note
