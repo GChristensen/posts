@@ -11,7 +11,7 @@ yourself whether you really want to embark on a trip into this wonderland.
 
 # Down the Rabbit Hole: Foundational Principles
 
-Let's overview some basic principles employed in functional programming. 
+Let us overview some basic principles employed in functional programming. 
 They have a profound impact on how the functional programs are designed.
 
 ## Immutability and Referential Transparency
@@ -24,13 +24,12 @@ all data structures should be
 [immutable](https://en.wikipedia.org/wiki/Persistent_data_structure), and
 functions must be [referentially
 transparent](https://en.wikipedia.org/wiki/Referential_transparency) (free of
-side effects). Referential transparency implies that without changing the result
-of the program, a function invocation could always be replaced with its value
-and vice versa. This means that, like mathematical functions, our functions
-should always return the same value when called with the same set of
-arguments. But there is a little quirk. In a truly functional program,
-all functions should have only one argument to be able to participate in
-functional composition. We will see how to
+side effects). A referentially transparent expression could always be replaced
+with its value without changing the result of the program. This means that, like
+mathematical functions, our functions should always return the same value when
+called with the same set of arguments. But there is a little quirk. In a truly
+functional program, all functions should have only one argument to be able to
+participate in functional composition. We will see how to
 [deal](https://en.wikipedia.org/wiki/Currying) with this below.
 
 ## First-class functions
@@ -142,7 +141,7 @@ just after they are encountered.
 
 Design of purely functional programs heavily relies on category theory 
 and the underlying algebraical laws of the used functional primitives.
-We will only scratch a surface here, to give a glimpse of what pure functional
+We will only scratch the surface here to give a glimpse of what purely functional
 design looks like.
 
 ## Algebraic Data Types
@@ -158,11 +157,12 @@ types](https://en.wikipedia.org/wiki/Algebraic_data_type) (ADTs): sum types and
 product types. They vary in the way by which their number of inhabiting values
 is calculated. For example, the number of possible inhabiting values of
 2-[tuple](https://en.wikipedia.org/wiki/Tuple) of bytes, which is a product
-type, is 256x256 = 65536 - all possible combinations from `[0, 0]` to `[255, 255]`. On the other hand, the number of inhabitants of the
-Boolean, a sum type, is 2: `true` and `false`. Product types and sum types are
-collectively called "algebraic" because they have algebraic
+type, is 256x256 = 65536. It includes possible combinations from `[0, 0]` to
+`[255, 255]`. On the other hand, the number of inhabitants of the Boolean, a sum
+type, is 2: `true` and `false`. Product types and sum types are collectively
+called "algebraic" because they have algebraic
 [properties](https://stanford-cs242.github.io/f19/lectures/03-2-algebraic-data-types.html)
-similar to normal integers. 
+similar to normal integers.
 
 In practice, the sum types are often employed as containers that wrap some
 tagged values which could be processed with pattern matching, spawning their
@@ -314,7 +314,7 @@ To become a skilled functional plumber, it is necessary to understand the
 meaning of the bottomless crevasse of such magical words as functor, bifunctor,
 profunctor, applicative functor, invariant, contravariant, lens, Kleisli arrow,
 monad, and, save the Lord, comonad. All plumbing should then be checked for
-consistency with the corresponding category-theoretical laws of the entities
+consistency with the corresponding algebraical laws of the entities
 mentioned above. Do the used functions commute? Does the identity law hold?
 There is even some [advanced
 literature](https://github.com/BartoszMilewski/Publications/blob/master/TheDaoOfFP/DaoFP.pdf)
@@ -369,8 +369,8 @@ like onion petals, and additional plumbing may be required to peel them off.
 
 # Conclusion
 
-While OOP programmers just declare a state in their classes, to maintain a state,
-FP purists are bound to pass monads in and out. They usually stash state somewhere
+While OOP programmers just declare properties in their classes, to maintain a state,
+FP purists are bound to pass monads in and out. They usually stash the state somewhere
 in tuples along with the results of their computations. Does this help to create
 clear, comprehensible, and maintainable designs? It is for you to decide. Also, note
 that users of the dynamically-typed functional languages do not learn category
