@@ -137,6 +137,8 @@ example, the creation of potentially infinite sequences. Such tricks are
 impossible in strict languages, where all expressions are evaluated completely
 just after they are encountered.
 
+![Hookah](/posts/images/understand-fp-1.png)
+
 # Through the Looking-Glass: Where We Meet Category Theory 
 
 Design of purely functional programs heavily relies on category theory 
@@ -377,3 +379,4 @@ that users of the dynamically-typed functional languages do not learn category
 theory and just use the `comp` function to compose. It is barely imaginable, 
 how they are able to write working programs with this.
 
+![Party](/posts/images/understand-fp-2.png)
