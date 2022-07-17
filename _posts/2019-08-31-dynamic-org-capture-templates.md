@@ -65,13 +65,11 @@ function noun_org_headline(text, html, callback, selectionIndices) {
 
     let matcher = new RegExp(text, "i");
     // generate predefined suggestions (from ORG_HEADLINES)
-    let suggs = ORG_HEADLINES.map(h => ({name: h}))
-        .filter(i => (i.match = matcher.exec(i.name), !!i.match))
-        .map(i => cmdAPI.makeSugg(i.name, i.name, null,
-            cmdAPI.matchScore(i.match), selectionIndices));
-    // add a suggestion as it was entered by the user (from the text argument)
-    suggs.push(cmdAPI.makeSugg(text, html, null,
-        suggs.length? .1: 1, selectionIndices));
+    suggs = ORG_HEADLINES.map(name => cmdAPI.makeSugg(name, name, null, 1, selectionIndices));
+    suggs = cmdAPI.grepSuggs(text, suggs);
+    
+    // add a suggestion as it was entered by the user
+    cmdAPI.addSugg(suggs, text, html, null, suggs.length? .1 : 1, selectionIndices);
 
     return suggs;
 }
