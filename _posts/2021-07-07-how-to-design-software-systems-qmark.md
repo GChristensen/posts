@@ -204,7 +204,7 @@ algorithm to their needs. Although, they may thoroughly examine if they could el
 existing bottlenecks with some advanced data structures, such as [Fibonacci heaps](https://en.wikipedia.org/wiki/Fibonacci_heap)
 or [tries](https://en.wikipedia.org/wiki/Trie), which has lower computational complexity
 on some operations, if they are unlucky, they may face the issue of computational [tractability](https://en.wikipedia.org/wiki/Computational_complexity_theory#Intractability).
-Developers that [know]((https://en.wikipedia.org/wiki/Algorithmic_paradigm)) 
+Developers who [know](https://en.wikipedia.org/wiki/Algorithmic_paradigm) 
 their heuristics (methods that allow obtaining a faster or approximate solution),
 such as [greedy algorithms](https://en.wikipedia.org/wiki/Greedy_algorithm), 
 [divide and conquer](https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm), 
