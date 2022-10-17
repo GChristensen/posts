@@ -10,22 +10,22 @@ the manuals for setting up a local MediaWiki server, I will describe
 the solution that works for me.
 
 Any note-taking tool with the following four features is suitable 
-for a usable knowledge base:
+for establishing a pretty usable knowledge base:
 
 * Hierarchical data organization
 * Hyperlinking and cross-referencing
 * Tagging
 * Search
 
-Occasionally you may also need a [concept mapping](https://en.wikipedia.org/wiki/Concept_map) tool, and utilize an
-advanced note-taking system, such as the one used by [Niklas Luhmann](https://en.wikipedia.org/wiki/Niklas_Luhmann),
-which is described in the book [How to Take Smart Notes](https://www.goodreads.com/en/book/show/34507927). Luhmann did his
-main work by elaborately wringing notes on the reading material and implemented
-a sophisticated system of links and indexes to keep the notes together. 
+It also may be vital to employ a [concept- or mind-mapping](https://en.wikipedia.org/wiki/Concept_map) tool and utilize a
+note-taking system, such as the one used by [Niklas Luhmann](https://en.wikipedia.org/wiki/Niklas_Luhmann).
+As described in the book [How to Take Smart Notes](https://www.goodreads.com/en/book/show/34507927), Luhmann did his
+primary work by elaborately wringing notes on the reading material implementing
+a sophisticated system of links and indexes to keep the notes together. Through links, his indexes branched into
+multiple contexts. This helped to understand the researched topic in many ways.  
 
-Additionally, I have one more requirement: there should be an ability to
-easily attach and open large quantities of arbitrary documents, 
-such as PDF files or files produced by concept mapping software.
+In spite of the above, the software used to establish a knowledge base should have an ability to
+easily attach and open large quantities of documents, such as PDF files or files produced by concept mapping tools.
 
 All my demands are fulfilled by the two following sets of tools:
 
@@ -38,31 +38,27 @@ and [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
 for wiki-related manipulations, for example, the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) to download and insert attachment files.
 In Windows, an instance of org-wiki may be automatically 
 installed and configured as a part of [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution.
-I use it to keep any long-term files and notes that I need less often than, 
-for example, any web-resources available online.
+I use it to keep any long-term files and notes that I need less often.
 
-[Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), that
-currently works only in [Firefox](http://firefox.com), is an advanced bookmark manager with 
+[Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), is an advanced bookmark manager with 
 the abilities of web-clipping, cloud-bookmarking, and note-taking which 
 resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
-I use it to store and organize bookmarks to online resources and save
-local archives of web-pages and PDF documents.
+I use it to store and organize bookmarks to online resources and keep a
+local archive of web-pages and PDF documents.
 
-Let's consider the knowledge-keeping features of this software in more
-detail.
-
+Let's consider the organizational features of this software in more detail.
 
 **1. Hierarchical grouping**
 
-org-wiki uses files at the top level of its organizational structure. 
-Links to the topic files are placed in a wiki index file. The topic files
+org-wiki utilizes files at the top level of its organizational structure. 
+There are topic files and index files, that contain links to the former. The topic files
 are divided into headings and subheadings of various levels. If necessary, any
-file could be quickly accessed through the Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar) module.
+file could be quickly accessed through the Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar).
 
 ![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
 
-Scrapyard uses shelves at its top level. Bookmarks and page archives could
-be grouped in a hierarchical tree of folders.
+Scrapyard utilizes shelves at its top level. Bookmarks and page archives could
+be grouped into hierarchical trees of folders.
 
 ![Scrapyard hierarchy](/posts/images/scrapyard-hierarchy.png)
 
@@ -94,12 +90,11 @@ case and, for example, through the `lgrep` command in the recent.
 ### Hyperlinking from org-wiki to Scrapyard and vice versa
 
 If necessary, it is possible to create links from org-wiki to archives and
-documents in Scrapyard and vice versa. I assume that you are using [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution in Windows with the preinstalled org-protocol (you need to configure org-protocol manually
-otherwise).
+documents in Scrapyard and vice versa.
 
 #### Referencing from org-wiki to Scrapyard
 
-At first you need to register `ext+scrapyard` protocol in Windows registry
+At first, it is necessary to register `ext+scrapyard` protocol in Windows registry
 using a .reg file with the following content: 
 
 ```
@@ -141,7 +136,7 @@ The link includes a Scrapyard UUID of the referred item which is available from 
 
 #### Referencing from Scrapyard to org-wiki
 
-Since we assume that org-protocol is already configured in your system, 
+Since we assume that org-protocol is already configured in your system by RHO emacs, 
 just add the following code to your `.emacs` configuration file:
 
 ```clojure
