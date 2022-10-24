@@ -367,17 +367,18 @@ Just x >>= f = f x
 ```
 
 It takes a value in a context and a monadic function, so the result remains in
-the context. The use of monads may bring its own problems. The contexts may stack
+the context. Monads may bring their own problems. The contexts may stack
 like onion petals, and additional plumbing may be required to peel them off.
 
-# Conclusion
+# Footnotes
 
-While OOP programmers just declare properties in their classes, to maintain a state,
-FP purists are bound to pass monads in and out. They usually stash the state somewhere
+OOP programmers just declare properties in their classes to maintain state.
+In functional programming, state is avoided whenever possible. But when it is impossible,
+functional programmers are bound to pass monads in and out. They usually stash state somewhere
 in tuples along with the results of their computations. Does this help to create
-clear, comprehensible, and maintainable designs? It is for you to decide. Also, note
-that users of the dynamically-typed functional languages do not learn category
-theory and just use the `comp` function to compose. It is barely imaginable, 
+clear, comprehensible, and maintainable designs? It is for you to decide. And
+users of the dynamically-typed functional languages do not learn category
+theory. They just use the `comp` function to compose. It is barely imaginable, 
 how they are able to write working programs with this.
 
 ![Party](/posts/images/understand-fp-2.png)
