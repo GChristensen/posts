@@ -43,8 +43,8 @@ installed and configured as a part of [RHO Emacs](https://gchristensen.github.io
 I use it to store any files that I need less often and to keep free-form notes, for which Emacs is indispensable.
 
 [Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), is an advanced bookmark manager that 
-is able to clip fragments of pages, has cloud bookmarking, and also could be used for note-taking. It 
-resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
+is able to clip fragments of pages, it has cloud bookmarking, and also could be used for note-taking. Much like
+the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
 I use Scrapyard to store and organize bookmarks to online resources and keep a
 local archive of web pages and PDF documents.
 
