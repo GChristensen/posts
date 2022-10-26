@@ -59,10 +59,10 @@ There are topic files and index files. Index files contain links to the topic fi
 are divided into headings and subheadings of various levels. Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar)
 allows to quickly access any file, if necessary.
 
+![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
+
 There are also non-hierarchical approaches to note-taking. The [org-roam](https://orgroam.com) Emacs package, which is 
 also available in [RHO Emacs](https://gchristensen.github.io/rho-emacs/), is a popular example.
-
-![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
 
 Scrapyard utilizes shelves at its top level. Bookmarks and page fragments could
 be grouped into hierarchical trees of folders.
@@ -76,8 +76,8 @@ of hyperlinking possibilities to files and headings in them.
 Usually, you need a unique ID in the property drawer of a heading 
 to be able to refer to it from a link.
 
-Scrapyard allows referring any bookmark or page archive from notes through
-a link with `ext+scrapyard://` protocol which requires a UUID of a 
+Scrapyard allows referring any bookmark or page archive from the text of notes through
+a link with `ext+scrapyard://` protocol. Such links require an UUID of the
 referred item (the addon help provides more details on linking).
 
 **3. Tagging**
@@ -88,15 +88,14 @@ of a headline, separated by colons, and [searching](https://orgmode.org/manual/T
 Scrapyard also allows to specify tags inside bookmark properties and 
 provides a special tag search mode.
 
-**4. Search** 
+**4. Text Search** 
 
-Both Scrapyard and Emacs provide search. It is a built-in feature in Scrapyard. In the org-mode it is necessary 
+Both Scrapyard and Emacs provide text search. It is a built-in feature in Scrapyard. In the org-mode it may be necessary 
 to use grep in all its possible Emacs flavors.
 
 ### Hyperlinking from org-wiki to Scrapyard and vice versa
 
-If necessary, it is possible to create links from org-wiki to archives and
-documents in Scrapyard and vice versa.
+It is possible to create links from org-wiki to archives and documents in Scrapyard and vice versa.
 
 #### Referencing from org-wiki to Scrapyard
 
