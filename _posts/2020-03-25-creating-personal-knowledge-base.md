@@ -5,7 +5,7 @@ categories: [Emacs, Firefox, org-mode, org-wiki, Scrapyard, elisp]
 ---
 
 Despite that there are gigabytes of writings on this topic, ranging
-from the recipes of managing a bunch of markdown files on GitHub to
+from the recipes for managing a bunch of markdown files on GitHub to
 the manuals for setting up a local MediaWiki server, I will describe 
 the solution that works for me.
 
@@ -17,51 +17,56 @@ for establishing a pretty usable knowledge base:
 * Tagging
 * Search
 
-It also may be vital to employ a [concept- or mind-mapping](https://en.wikipedia.org/wiki/Concept_map) tool and utilize a
-note-taking system, such as the one used by [Niklas Luhmann](https://en.wikipedia.org/wiki/Niklas_Luhmann).
+For a worthy knowledge base, it may also be vital to employ a [concept- or mind-mapping](https://en.wikipedia.org/wiki/Concept_map) tool and utilize a
+note-taking system, such as Zettelkasten invented by [Niklas Luhmann](https://en.wikipedia.org/wiki/Niklas_Luhmann).
 As described in the book [How to Take Smart Notes](https://www.goodreads.com/en/book/show/34507927), Luhmann did his
-primary work by elaborately wringing notes on the reading material implementing
+primary work by elaborately wringing notes on the reading material. He implemented
 a sophisticated system of links and indexes to keep the notes together. Through links, his indexes branched into
-multiple contexts. This helped to understand the researched topic in many ways.  
+multiple contexts. This helped him to understand the researched topic in many ways.
 
-In spite of the above, the software used to establish a knowledge base should have an ability to
-easily attach and open large quantities of documents, such as PDF files or files produced by concept mapping tools.
+Obviously, our software should also have the ability to easily attach and open large quantities of documents, 
+such as PDF files or files produced by concept mapping tools.
 
-All my demands are fulfilled by the two following sets of tools:
+Most of my demands are fulfilled by the two following software packages:
 
 * [Emacs org-mode](https://orgmode.org/) + [org-wiki](https://github.com/caiorss/org-wiki)
 * [Firefox](http://firefox.com) + [Scrapyard bookmark manager](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/)
 
-[org-wiki](https://github.com/caiorss/org-wiki) is an [Emacs](http://emacs.org) module that utilizes
+[org-wiki](https://github.com/caiorss/org-wiki) is an [Emacs](http://emacs.org) module based on
 [org-mode markup](http://ergoemacs.org/emacs/emacs_org_markup.html)
-and [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
-for wiki-related manipulations, for example, the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) to download and insert attachment files.
+that [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
+for wiki-related manipulations, for example, the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) to download and insert attachment files,
+or commands to quickly insert links.
 In Windows, an instance of org-wiki may be automatically 
 installed and configured as a part of [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution.
-I use it to keep any long-term files and notes that I need less often.
+I use it to store any files that I need less often and to keep free-form notes, for which Emacs is indispensable.
 
-[Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), is an advanced bookmark manager with 
-the abilities of web-clipping, cloud-bookmarking, and note-taking which 
+[Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), is an advanced bookmark manager that 
+is able to clip fragments of pages, has cloud bookmarking, and also could be used for note-taking. It 
 resembles the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
-I use it to store and organize bookmarks to online resources and keep a
-local archive of web-pages and PDF documents.
+I use Scrapyard to store and organize bookmarks to online resources and keep a
+local archive of web pages and PDF documents.
 
-Let's consider the organizational features of this software in more detail.
+Let's consider the features of this software in more detail.
 
 **1. Hierarchical grouping**
 
+Carefully maintained hierarchical organization allows to effortlessly find any necessary content.
+
 org-wiki utilizes files at the top level of its organizational structure. 
-There are topic files and index files, that contain links to the former. The topic files
-are divided into headings and subheadings of various levels. If necessary, any
-file could be quickly accessed through the Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar).
+There are topic files and index files. Index files contain links to the topic files. The topic files
+are divided into headings and subheadings of various levels. Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar)
+allows to quickly access any file, if necessary.
+
+There are also non-hierarchical approaches to note-taking. The [org-roam](https://orgroam.com) Emacs package, which is 
+also available in [RHO Emacs](https://gchristensen.github.io/rho-emacs/), is a popular example.
 
 ![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
 
-Scrapyard utilizes shelves at its top level. Bookmarks and page archives could
+Scrapyard utilizes shelves at its top level. Bookmarks and page fragments could
 be grouped into hierarchical trees of folders.
 
 ![Scrapyard hierarchy](/posts/images/scrapyard-hierarchy.png)
-
 
 **2. Hyperlinking and cross-referencing**
 
@@ -72,20 +77,20 @@ to be able to refer to it from a link.
 
 Scrapyard allows referring any bookmark or page archive from notes through
 a link with `ext+scrapyard://` protocol which requires a UUID of a 
-referred item (see the addon help for more details).
+referred item (the addon help provides more details on linking).
 
 **3. Tagging**
 
 org-mode allows adding [tags](https://orgmode.org/manual/Tags.html) at the end 
-of a headline, separated by colons and [search](https://orgmode.org/manual/Tag-Searches.html#Tag-Searches) by them.
+of a headline, separated by colons, and [searching](https://orgmode.org/manual/Tag-Searches.html#Tag-Searches) by them.
 
 Scrapyard also allows to specify tags inside bookmark properties and 
 provides a special tag search mode.
 
 **4. Search** 
 
-Both Scrapyard and Emacs provide search as a built-in feature in the former
-case and, for example, through the `lgrep` command in the recent.
+Both Scrapyard and Emacs provide search. It is a built-in feature in Scrapyard. In the org-mode it is necessary 
+to use grep in all its possible Emacs flavors.
 
 ### Hyperlinking from org-wiki to Scrapyard and vice versa
 
@@ -132,11 +137,11 @@ Now you may use the following links in your org markup:
 [[scrapyard:B79C8A274D0B4378835976C2B2554ACD][link text]]
 ```
 
-The link includes a Scrapyard UUID of the referred item which is available from the extended item properties.
+The link includes a Scrapyard UUID of the referred item, which is available from the extended item properties.
 
 #### Referencing from Scrapyard to org-wiki
 
-Since we assume that org-protocol is already configured in your system by RHO emacs, 
+Since we assume that org-protocol is already configured in your system by RHO Emacs, 
 just add the following code to your `.emacs` configuration file:
 
 ```clojure
@@ -153,7 +158,7 @@ just add the following code to your `.emacs` configuration file:
 Add a unique `CUSTOM_ID` property to the headline being referred, for example, 
 with the value `my_headline`.
 
-Now you can use the following links from Scrapyard notes in the Org format:
+Now you can use the following links from Scrapyard notes:
 
 ```
 [[org-protocol://open-reference?link=file:path/to/file.org::#my_headline][link text]]
