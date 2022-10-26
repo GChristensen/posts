@@ -17,14 +17,15 @@ for establishing a pretty usable knowledge base:
 * Tagging
 * Search
 
-For a worthy knowledge base, it may also be vital to employ a [concept- or mind-mapping](https://en.wikipedia.org/wiki/Concept_map) tool and utilize a
+For a worthy knowledge base, it may be vital to implement a
 note-taking system, such as Zettelkasten invented by [Niklas Luhmann](https://en.wikipedia.org/wiki/Niklas_Luhmann).
 As described in the book [How to Take Smart Notes](https://www.goodreads.com/en/book/show/34507927), Luhmann did his
-primary work by elaborately wringing notes on the reading material. He implemented
+primary work by elaborately wringing notes on the reading material. He created
 a sophisticated system of links and indexes to keep the notes together. Through links, his indexes branched into
 multiple contexts. This helped him to understand the researched topic in many ways.
 
-Obviously, our software should also have the ability to easily attach and open large quantities of documents, 
+[concept- or mind-mapping](https://en.wikipedia.org/wiki/Concept_map) tool would also be a good addition.
+This means that our software should have the ability to easily attach and open large quantities of documents, 
 such as PDF files or files produced by concept mapping tools.
 
 Most of my demands are fulfilled by the two following software packages:
