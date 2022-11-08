@@ -19,7 +19,9 @@ Quality and elaboration of the used abstractions separate failed and
 successfully designed software. The code of a well-designed system is easily
 comprehensible, such systems are easy to extend and maintain, and have a
 minimum amount of defects. So, how should we design quality systems?
-We can approach this question from the several following perspectives:
+As in other engineering disciplines, modeling, prototyping, measurement and iteration
+are important elements of the development cycle.
+We can approach the question of design from the several following perspectives:
 
 * Software modeling
 * Software design in General
@@ -28,7 +30,7 @@ We can approach this question from the several following perspectives:
 * Design for resilience
 * Algorithm design
 * Modularity and separation of concerns
-* Software complexity
+* Managing complexity
 * Design imposed by programming paradigms
 * Design imposed by the principles of discipline
 * Design Patterns
@@ -39,13 +41,6 @@ As the introductory paragraph suggests, there are many more additional facets of
 the trade. By taking all the discussed principles seriously enough, you will
 undoubtedly be able to design quality software.
 
-NOTE: some terminology here is borrowed from the recommended literature below.
-Because authors often use [ad hoc](https://en.wikipedia.org/wiki/Ad_hoc) terms
-in the vein of [Martin Heidegger](https://en.wikipedia.org/wiki/Martin_Heidegger), 
-it may differ from what you are accustomed to read in revered computer science books. 
-The links are given predominantly to Wikipedia to prevent link rot, but as always,
-the best source of knowledge is in the references.
-
 ### Software Modelling
 
 To build quality systems it is customary to model software before its
@@ -53,26 +48,28 @@ implementation. Modeling begins with the formulation of [functional system
 requirements](https://en.wikipedia.org/wiki/Functional_requirement), which is a
 [science on its own](https://en.wikipedia.org/wiki/Requirements_engineering).
 Because we focus on software design, we assume that requirements are already
-subdivided into the relevant verbs and nouns, corresponding to the behavior and
-data of the system being modeled, so we can start modeling itself.
+subdivided into the relevant verbs and nouns. Such division corresponds to 
+the behavior and data of the system being modeled.
 
 Modeling is usually performed in
 [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language) by decomposing
-the system into subsystems, components, or modules and defining detailed
+the system into subsystems, components, or modules and by defining detailed
 component interfaces. To achieve this, all dependencies between system
 components and their interactions, including possible error handling, are
 thoroughly examined. A throwaway prototype may be created to evaluate the model.
-In an ideal world, where software is being coded on punchcards,
+
+
+In an ideal world, where software is coded on punchcards,
 the developed model would become a project artifact, changes
-in which may drive the corresponding changes in the implementation of the
+in which drive the corresponding changes in the implementation of the
 system. But you surely know what happens in these
 [agile](https://agilemanifesto.org/) projects, where code is valued over
 documentation.
 
 In reality, under now widespread [agile development
-methodologies](https://en.wikipedia.org/wiki/Agile_software_development) the discipline
+methodologies](https://en.wikipedia.org/wiki/Agile_software_development), the whole discipline
 of [agile modeling](http://www.agilemodeling.com/) has emerged.
-The modeling often takes place at the first iterations of the development cycle in
+Modeling often takes place at the first iterations of the development cycle in
 parallel to writing code. This helps to define the requirements more precisely,
 which may be too abstract initially, in close collaboration with the customer (
 or without it). Also, no code is usually thrown away, confirming the proverb
@@ -85,7 +82,7 @@ knowledge of which may be sparse.
 
 It is recommended to select the riskiest aspects of the system for the initial
 modeling and implementation. It is also often advised that modeling should be
-performed with the vision of the future evolution of the system, which may help
+performed with the vision of the future evolution of the system. This may help
 to detect potential sources of variation, for which good domain knowledge may be
 necessary.
 
@@ -93,25 +90,26 @@ Many excellent books are written on this topic. Please, check the recommended li
 
 ### Software Design in General
 
-To explain the essence of a good design authors usually insert an image of a
+To explain the essence of a good design, authors usually insert an image of a
 craftsman with a chisel and tell how it is important to name variables in a
 consistent and obvious way, write literary-inspired comments, create small
-functions, and so on. But there are more grandeur aspects of the
-trade. Namely, how to prevent system rot under the pressure of the omnipresent
-second law of thermodynamics that strives to turn everything into an
-incorrigible mess? How to minimize the impact of possible changes? How to make
-the system easily extensible and comprehensible at the same time?
+functions, and so on. Although code quality is a significant matter,
+design is concerned with more grandeur goals. Namely, how to prevent system 
+rot under the pressure of the omnipresent second law of thermodynamics that 
+strives to turn everything into an incorrigible mess? How to minimize the impact 
+of possible changes? How to make the system easily extensible and comprehensible at 
+the same time?
 
 At the level of design, we have all its basic elements at our full disposal:
-functions, methods, classes, packages, and modules. At this particular level,
-the trick is to arrange them just in the right way under a set of
-maximally-decoupled layers of abstractions. Several design principles discussed
-below (read on), accompanied by a range of well-established design patterns, will
-greatly help with this task. The sad truth is that these aspects of design still
-remain more art than science and require a profound knowledge of the practice of
-pattern application for any success.
+functions, methods, classes, packages, and modules. The trick is to arrange them
+just in the right way under a hierarchy of maximally-decoupled layers of
+abstractions. Several design principles discussed below, accompanied by a range
+of well-established design patterns, will greatly help with this task. The sad
+truth is that these aspects of design still remain more art than science and
+require a profound knowledge of the practice of pattern application for any
+success.
 
-It is a sign of skill if after a look at the model you say: "To properly
+It is a sign of skill, if after a look at the model you say: "To properly
 separate concerns I should implement the core functionality as a set of
 fine-grained classes and use decorators for optional features". But the task of
 design is so cognitively daunting, that it is rarely done in the right way from
@@ -136,7 +134,7 @@ authors insert an image of a psychic with a crystal ball.
 Needless to say, that a straightforward ad-hoc design without any foresight brings the most
 suffering along with the loads of unneeded work. Use-case-based modeling allows
 to estimate what subsystems and layers of functionality your software may have,
-and what internal APIs, facades, and adapters you may need to think about carefully.
+and what internal APIs, facades, and adapters you may need to think about.
 
 ### Domain-Driven Design
 
@@ -159,12 +157,12 @@ The domain-driven design methodology is described in the book "Domain-Driven Des
 the Heart of Software" by Eric Evans. 
 Here it is worth listing several lessons that could be derived from this approach:
 
-1. A good understanding of the problem-area jargon and its proliferation to the system implementation 
+1. A good understanding of the problem-area jargon and its utilization in the system 
    may be important for the creation and maintenance of an adequate domain model.
 2. The domain code (also known as business logic or business rules elsewhere) should be
    kept clean from other types of application logic to minimize the gap between
    the domain model and its implementation. It is because of that MVC was
-   invented, and non-domain application logic is usually placed into
+   invented. Non-domain application logic is usually placed into
    a separate layer of controllers or services.
 3. To save Houston of problems, different units of measurement and other such value objects
    should be implemented as separate types to prevent meaningless operations between them.
@@ -273,7 +271,7 @@ Several principles help to write well-modularized code:
   [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) design pattern
   or its variations should be used instead.
 
-### Software Complexity
+### Managing Complexity
 
 The quality of the used abstractions is important in the management of [software
 complexity](https://en.wikipedia.org/wiki/Programming_complexity). 
@@ -369,19 +367,19 @@ not working properly.</p>
 
 † Reference to [magnetic-core memory](https://en.wikipedia.org/wiki/Magnetic-core_memory).
 
-At least in the early versions of FORTRAN, you were not too restricted and could do anything in 
-an arbitrary way by any existing means. There also were not so many of them.
+At least in the early versions of FORTRAN, you were not too restricted and could do anything 
+by any existing means. There also were not so many of them.
 This resulted in barely intelligible code and frequent errors.
 
 #### Structured Programming: GOTO Considered Harmful
 
-To help this gloomy state of affairs [Edsger
+To help this gloomy state of affairs, [Edsger
 Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra) wholeheartedly promoted [structured
 programming](https://en.wikipedia.org/wiki/Structured_programming) as a
 discipline to adhere only to the structured control flow constructs. This was
 the first major step in the taming of complexity, but it had its own major
-drawback: the global program state was exposed, which does not help to minimize
-coupling. Because this is also undoubtedly harmful, a new technique that addresses
+drawback: the global program state still was exposed, which does not help to minimize
+coupling. Because this is also undoubtedly harmful, a technique that addresses
 this problem was necessary.
 
 #### Object-Oriented Programming
@@ -425,8 +423,8 @@ mastering of several related concepts to unleash its full potential:
 * [SFINAE](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) in C++, which is utilized in the
   [template metaprogramming](https://en.wikipedia.org/wiki/Template_metaprogramming).
 
-Because extensive use of generic programming may result in uncontrollable binary code bloat, 
-it is often considered harmful by byte-counting programmers.
+Because extensive use of generics may result in uncontrollable binary code bloat, 
+this approach is often considered harmful by byte-counting programmers.
 
 #### Aspect-Oriented Programming
 
@@ -439,20 +437,20 @@ your code. Let's take them into a single place using
 technical term that may be familiar to Lisp programmers), which will result in a
 better separation of concerns. Other programmers are shrugging, and consider
 this paradigm if not harmful, but of limited use, since pointcuts (this is yet
-another technical term, denoting places where advices are applied) often do not
+another technical term, denoting the places where advices are applied) often do not
 provide the same granularity as the direct use of the functionality being
 abstracted away. So, it may be appropriate primarily in monstrous enterprise
 systems with a large number of coarse-grained cross-cutting concerns.
 
 #### Metaprogramming
 
-Metaprogramming, which allows to programmatically generate any code, may be
+Metaprogramming allows to generate code programmatically. Such code may be
 template-based, dynamically evaluated, or implemented through [syntactic
 macros](https://en.wikipedia.org/wiki/Macro_(computer_science)#Syntactic_macros).
 It tends to produce abstractions of such depth and eloquence, that it often
 results in the apparent elimination of complexity through the introduction of
-obscurity (opacity of which is limited only by the creativity of the author),
-both in the places of abstraction use and implementation. Because of this,
+obscurity, opacity of which is limited only by the creativity of the author.
+This happens both in the places of abstraction use and implementation. Because of this,
 metaprogramming is usually considered harmful by the programmers that are not
 accustomed to it.
 
@@ -521,7 +519,7 @@ exactly in the order listed (the list may be a little opinionated):
   Programming](https://github.com/MostlyAdequate/mostly-adequate-guide) which
   demonstrates how to do things in a purely functional way in JavaScript.
 
-* If all this does not help, try to read [this](https://gchristensen.github.io/posts/understand-functional-programming-in-20-minutes/), 
+* If all this does not help, try reading [this](https://gchristensen.github.io/posts/understand-functional-programming-in-20-minutes/), 
   and start over again, if necessary. 
 
 Now, after you have learned how to compose comonads and write interpreters for
@@ -535,8 +533,8 @@ achieving the same with much less headache and with much more fun, such as
 Design by contract, elements of which could be found in
 [Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)),
 [Clojure](https://en.wikipedia.org/wiki/Clojure), and
-[Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language))
-programming languages, aims to eliminate implicit properties of module
+[Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language)),
+aims to eliminate implicit properties of module
 interfaces and related obscurity by explicitly defining them in interface
 contracts. This may be achieved, for example, in the form of pre- and
 post-conditions of function calls, that are programmatically verifiable. Being
@@ -570,7 +568,7 @@ reactive event stream. You can filter, modify or combine event streams together.
 While events are processed, it is possible to display beautiful ads to the user
 in full-HD and 60 FPS, until the results are ready. Unfortunately, if your
 business is ad-based, this approach may harm it, since a parallelized set of
-tasks usually executes faster than the same set of sequential ones, so there are
+tasks usually executes faster than the same set of sequential ones. So, there are
 places where reactive programming may be considered harmful. In other areas, it
 may be considered harmful because of unnecessary bloat.
 
@@ -762,7 +760,8 @@ point of view.
 #### Architectural Patterns
 
 The domain of software architecture has its own repository of patterns which is discussed in the
-"Pattern-Oriented Software Architecture" book series or "Architectural Patterns" by Pethuru Raj, Anupama Raman, and Harihara Subramanian.
+"Pattern-Oriented Software Architecture" book series, and also in
+"Architectural Patterns" by Pethuru Raj, Anupama Raman, and Harihara Subramanian.
 
 #### Architecture Styles
 
@@ -822,7 +821,7 @@ by Mark Richards and Neal Ford.
 ### Recommended Literature
 
 The literature listed below offers a real introduction to software engineering. Its choice is somewhat arbitrary, but
-many books contain references to other works. Only after reading it all, one can approach the beginning of the
+many books contain references to other works. Only after reading it all, one can approach the beginnings of the
 understanding of system design essentials. Some book titles may seem misleading, but every book there is dedicated, 
 at some degree, to important foundational concepts in software design. 
 

@@ -374,7 +374,8 @@ like onion petals, and additional plumbing may be required to peel them off.
 
 OOP programmers just declare properties in their classes to maintain state.
 In functional programming, state is avoided whenever possible. But when it is impossible,
-functional programmers are bound to pass monads in and out. They usually stash state somewhere
+functional programmers are bound to [pass monads](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/State)
+in and out. They usually stash state somewhere
 in tuples along with the results of their computations. Does this help to create
 clear, comprehensible, and maintainable designs? It is for you to decide. And
 users of the dynamically-typed functional languages do not learn category

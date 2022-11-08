@@ -30,17 +30,8 @@ such as PDF files or files produced by concept mapping tools.
 
 Most of my demands are fulfilled by the two following software packages:
 
-* [Emacs org-mode](https://orgmode.org/) + [org-wiki](https://github.com/caiorss/org-wiki)
 * [Firefox](http://firefox.com) + [Scrapyard bookmark manager](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/)
-
-[org-wiki](https://github.com/caiorss/org-wiki) is an [Emacs](http://emacs.org) module based on
-[org-mode markup](http://ergoemacs.org/emacs/emacs_org_markup.html)
-that [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
-for wiki-related manipulations, for example, the [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) to download and insert attachment files,
-or commands to quickly insert links.
-In Windows, an instance of org-wiki may be automatically 
-installed and configured as a part of [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution.
-I use it to store any files that I need less often and to keep free-form notes, for which Emacs is indispensable.
+* [Emacs org-mode](https://orgmode.org/) + [org-wiki](https://github.com/caiorss/org-wiki)
 
 [Scrapyard](https://addons.mozilla.org/en-US/firefox/addon/scrapyard/), is an advanced bookmark manager that 
 is able to clip fragments of pages, it has cloud bookmarking, and also could be used for note-taking. Much like
@@ -48,50 +39,65 @@ the good old [ScrapBook](https://en.wikipedia.org/wiki/ScrapBook).
 I use Scrapyard to store and organize bookmarks to online resources and keep a
 local archive of web pages and PDF documents.
 
+[org-wiki](https://github.com/caiorss/org-wiki) is an [Emacs](http://emacs.org) module based on
+[org-mode markup](http://ergoemacs.org/emacs/emacs_org_markup.html)
+that [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
+for wiki-related manipulations. For example, there are
+[commands](https://github.com/caiorss/org-wiki#commands-to-download-files) to download and insert attachment files,
+or commands to quickly insert links.
+In Windows, an instance of org-wiki may be automatically
+installed and configured as a part of [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution.
+I use it to store any files that I need less often and to keep free-form notes, for which Emacs is indispensable.
+
+Although Emacs requires some technical background, the huge benefit is that everything costs exactly zero shekels per month, 
+and you own all your data. The authors of this software will undoubtedly be happy if you support their hard work with a small donation.
+
 Let's consider the features of this software in more detail.
 
 **1. Hierarchical grouping**
 
-Carefully maintained hierarchical organization allows to effortlessly find any necessary content.
-
-org-wiki utilizes files at the top level of its organizational structure. 
-There are topic files and index files. Index files contain links to the topic files. The topic files
-are divided into headings and subheadings of various levels. Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar)
-allows to quickly access any file, if necessary.
-
-![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
-
-There are also non-hierarchical approaches to note-taking. The [org-roam](https://orgroam.com) Emacs package, which is 
-also available in [RHO Emacs](https://gchristensen.github.io/rho-emacs/), is a popular example.
+Elaborate and carefully maintained hierarchical organization allows to effortlessly find any necessary content.
+It is not easy to keep a good taxonomy on your area of interest, but this provides an immense advantage.
 
 Scrapyard utilizes shelves at its top level. Bookmarks and page fragments could
 be grouped into hierarchical trees of folders.
 
 ![Scrapyard hierarchy](/posts/images/scrapyard-hierarchy.png)
 
+org-wiki uses files at the top level of its organizational structure. 
+There are topic files and index files. Index files contain links to the topic files. The topic files
+are divided into headings and subheadings of various levels. Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar)
+allows to quickly access any file, if necessary. A bunch of org-wiki files could be added to the Scrapyard **files** shelf,
+where they are rendered into HTML and are available as editable notes.
+
+![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
+
+There are also non-hierarchical approaches to note-taking. The [org-roam](https://orgroam.com) Emacs package, which is 
+also available in [RHO Emacs](https://gchristensen.github.io/rho-emacs/), is a popular example.
+
 **2. Hyperlinking and cross-referencing**
+
+Scrapyard allows referring any bookmark or page archive from the text of notes through
+a link with `ext+scrapyard://` protocol. Such links require a UUID of the
+referred item (the addon help provides more details on linking).
 
 org-mode provides a wide [variety](https://orgmode.org/guide/Hyperlinks.html)
 of hyperlinking possibilities to files and headings in them.
 Usually, you need a unique ID in the property drawer of a heading 
 to be able to refer to it from a link.
 
-Scrapyard allows referring any bookmark or page archive from the text of notes through
-a link with `ext+scrapyard://` protocol. Such links require an UUID of the
-referred item (the addon help provides more details on linking).
-
 **3. Tagging**
 
-org-mode allows adding [tags](https://orgmode.org/manual/Tags.html) at the end 
-of a headline, separated by colons, and [searching](https://orgmode.org/manual/Tag-Searches.html#Tag-Searches) by them.
-
-Scrapyard also allows to specify tags inside bookmark properties and 
+Scrapyard allows to specify tags inside bookmark properties and 
 provides a special tag search mode.
+
+org-mode allows adding [tags](https://orgmode.org/manual/Tags.html) at the end
+of a headline, separated by colons, and [searching](https://orgmode.org/manual/Tag-Searches.html#Tag-Searches) by them.
 
 **4. Text Search** 
 
-Both Scrapyard and Emacs provide text search. It is a built-in feature in Scrapyard. In the org-mode it may be necessary 
-to use grep in all its possible Emacs flavors.
+Both Scrapyard and Emacs provide text search. It is a built-in feature in Scrapyard. In Emacs it may be necessary 
+to use grep in all its possible [flavors](https://www.gnu.org/software/emacs/manual/html_node/emacs/Grep-Searching.html).
 
 ### Hyperlinking from org-wiki to Scrapyard and vice versa
 
