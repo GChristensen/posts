@@ -24,7 +24,7 @@ primary work by elaborately wringing notes on the reading material. He created
 a sophisticated system of links and indexes to keep the notes together. Through links, his indexes branched into
 multiple contexts. This helped him to understand the researched topic in many ways.
 
-[concept- or mind-mapping](https://en.wikipedia.org/wiki/Concept_map) tool would also be a good addition.
+A [concept- or mind-mapping](https://en.wikipedia.org/wiki/Concept_map) application would also be a good addition.
 This means that our software should have the ability to easily attach and open large quantities of documents, 
 such as PDF files or files produced by concept mapping tools.
 
@@ -40,35 +40,35 @@ I use Scrapyard to store and organize bookmarks to online resources and keep a
 local archive of web pages and PDF documents.
 
 [org-wiki](https://github.com/caiorss/org-wiki) is an [Emacs](http://emacs.org) module based on
-[org-mode markup](http://ergoemacs.org/emacs/emacs_org_markup.html)
-that [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
+[org-mode markup](http://ergoemacs.org/emacs/emacs_org_markup.html).
+It [provides](https://caiorss.github.io/org-wiki/) a bunch of commands
 for wiki-related manipulations. For example, there are
 [commands](https://github.com/caiorss/org-wiki#commands-to-download-files) to download and insert attachment files,
 or commands to quickly insert links.
 In Windows, an instance of org-wiki may be automatically
 installed and configured as a part of [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution.
-I use it to store any files that I need less often and to keep free-form notes, for which Emacs is indispensable.
+I use org-wiki to store any files that I need less often and to keep free-form notes, for which Emacs is indispensable.
 
 Although Emacs requires some technical background, the huge benefit is that everything costs 
 exactly zero shekels per month, and you own all your data. 
-If you enjoy the software, the authors will undoubtedly be happy to receive a small donation.
+If you enjoy the software, though, the authors will undoubtedly be happy to receive a small donation.
 
-Let's consider the features of these tools in more detail.
+Let's consider the features of the applications above in more detail.
 
-**1. Hierarchical grouping**
+**1. Hierarchical organization**
 
 Elaborate and carefully maintained hierarchical organization allows to effortlessly find any necessary content.
-It is not easy to keep a good taxonomy on your area of interest, but this provides an immense advantage.
+It takes some effort to keep a good taxonomy on your area of interest, but this provides an immense advantage.
 
-Scrapyard utilizes shelves at its top level. Bookmarks and page fragments could
-be grouped into hierarchical trees of folders.
+Scrapyard utilizes shelves at its top level of the hierarchy. Bookmarks and page fragments could
+be grouped into trees of folders.
 
 ![Scrapyard hierarchy](/posts/images/scrapyard-hierarchy.png)
 
 org-wiki uses files at the top level of its organizational structure. 
 There are topic files and index files. Index files contain links to the topic files. The topic files
-are divided into headings and subheadings of various levels. Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar)
-allows to quickly access any file, if necessary. A bunch of org-wiki files could be added to the Scrapyard **files** shelf,
+are divided into collapsible headings and subheadings of various levels. Emacs [SpeedBar](https://www.emacswiki.org/emacs/SpeedBar)
+allows to quickly access any file, if necessary. A bunch of org-wiki files could also be added to the Scrapyard **files** shelf,
 where they are rendered into HTML and are available as editable notes.
 
 ![org-wiki hierarchy](/posts/images/org-wiki-hierarchy.png)
@@ -78,7 +78,7 @@ also available in [RHO Emacs](https://gchristensen.github.io/rho-emacs/), is a p
 
 **2. Hyperlinking and cross-referencing**
 
-Scrapyard allows referring any bookmark or page archive from the text of notes through
+Scrapyard allows referring any bookmark or page archive from the text of its notes through
 a link with `ext+scrapyard://` protocol. Such links require a UUID of the
 referred item (the addon help provides more details on linking).
 
@@ -90,14 +90,14 @@ to be able to refer to it from a link.
 **3. Tagging**
 
 Scrapyard allows to specify tags inside bookmark properties and 
-provides a special tag search mode.
+provides a tag filtering mode in the sidebar.
 
 org-mode allows adding [tags](https://orgmode.org/manual/Tags.html) at the end
 of a headline, separated by colons, and [searching](https://orgmode.org/manual/Tag-Searches.html#Tag-Searches) by them.
 
 **4. Text Search** 
 
-Both Scrapyard and Emacs provide text search. It is a built-in feature in Scrapyard. In Emacs it may be necessary 
+Both Scrapyard and Emacs provide text search. It is a built-in feature in Scrapyard. In Emacs, it may be necessary 
 to use grep in all its possible [flavors](https://www.gnu.org/software/emacs/manual/html_node/emacs/Grep-Searching.html).
 
 ### Hyperlinking from org-wiki to Scrapyard and vice versa
@@ -121,7 +121,7 @@ REGEDIT4
 @="\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\" \"%1\""
 ```
 
-RHO Emacs adds this registry entry automatically.
+RHO Emacs adds this registry entry on installation.
 
 Then add the following code to your `.emacs` configuration file:
 
@@ -144,7 +144,7 @@ Now you may use the following links in your org markup:
 [[scrapyard:B79C8A274D0B4378835976C2B2554ACD][link text]]
 ```
 
-The link includes a Scrapyard UUID of the referred item, which is available from the extended item properties.
+The link includes a Scrapyard UUID of the referred item, which is available from the item properties.
 
 #### Referencing from Scrapyard to org-wiki
 

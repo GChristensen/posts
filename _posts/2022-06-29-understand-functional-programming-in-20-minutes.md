@@ -5,76 +5,77 @@ categories: [Software, Design, Functional programming]
 ---
 
 Functional programming has a reputation for being notoriously hard to understand.
-In this post, we consistently examine its basic principles, abstractions,
+In this post, we examine its basic principles, abstractions,
 and building blocks. Hopefully, after reading this, you will be able to decide for
 yourself whether you really want to embark on a trip into this wonderland.
 
 # Down the Rabbit Hole: Foundational Principles
 
-The foundational principles of the functional approach discussed below
-have a profound impact on how the functional programs are designed.
-Functional composition is probably the most important of them.
+The principles discussed below have a profound impact on how the functional 
+programs are designed. While traditional object-oriented design is focused on 
+entities and relations between them, functional programs are designed as 
+workflow-pipelines of data transformations. The functional composition is 
+probably the most important principle here.
 
 ## Immutability and Referential Transparency
 
 Despite a widespread belief, it is not the presence of
-[lambdas](https://en.wikipedia.org/wiki/Anonymous_function), and even [lambda
-calculus](https://en.wikipedia.org/wiki/Lambda_calculus) makes programming
-functional. On the surface, everything is much simpler. In a functional program,
+*[lambdas](https://en.wikipedia.org/wiki/Anonymous_function)*, and even *[lambda
+calculus](https://en.wikipedia.org/wiki/Lambda_calculus)*, that makes programming
+functional. The truth is embarrassingly simple. In a purely functional program,
 all data structures should be
-[immutable](https://en.wikipedia.org/wiki/Persistent_data_structure), and
-functions must be [referentially
-transparent](https://en.wikipedia.org/wiki/Referential_transparency) (free of
+*[immutable](https://en.wikipedia.org/wiki/Persistent_data_structure)*, and
+functions must be *[referentially
+transparent](https://en.wikipedia.org/wiki/Referential_transparency)* (free of
 side effects). A referentially transparent expression could always be replaced
 with its value without changing the result of the program. This means that, like
-mathematical functions, our functions should always return the same value when
-called with the same set of arguments. But there is a little quirk. In a truly
-functional program, all functions should have only one argument to be able to
-participate in functional composition. We will see how to
-[deal](https://en.wikipedia.org/wiki/Currying) with this below.
+mathematical functions, such functions should always return the same value when
+called with the same set of arguments. But there is a little quirk.
+To be able to participate in functional composition, all functions should have only one argument. 
+We will see how to [deal](https://en.wikipedia.org/wiki/Currying) with this below.
 
 ## First-class functions
 
-Having [first-class
-functions](https://en.wikipedia.org/wiki/First-class_function) means that 
-functions could be returned as a value or passed as arguments. In such a
-context, [anonymous functions](https://en.wikipedia.org/wiki/Anonymous_function)
-make sense. In turn, the existence of functions that could be defined elsewhere
-implies the existence of [lexical
-closures](https://en.wikipedia.org/wiki/Closure_(computer_programming)). In the
+Having *[first-class
+functions](https://en.wikipedia.org/wiki/First-class_function)* means that 
+functions could be returned as a value or passed as arguments. In this case, lambdas or 
+*[anonymous functions](https://en.wikipedia.org/wiki/Anonymous_function)*
+make sense. And the existence of lambda-functions that could be defined elsewhere
+implies the existence of *[lexical
+closures](https://en.wikipedia.org/wiki/Closure_(computer_programming))*. In the
 functional languages that allow side effects, lexical closures may become a
-basis of poor man's encapsulation. But more often, first-class functions are
-employed as the mechanism for another type of abstraction: higher-order
-functions.
+basis of [poor man's encapsulation](https://www.cs.utexas.edu/ftp/garbage/cs345/schintro-v14/schintro_122.html).
+But more often, first-class functions are employed as the mechanism for another type of abstraction:
+*higher-order functions*.
 
 ## Recursion and Corecursion
 
-[Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)) is a way
+*[Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))* is a way
 of solving problems by representing it as a combination of some base case and a
 smaller version of the same problem. Usually, recursion is implemented through
-self-referencing function calls or through [mutual
-recursion](https://en.wikipedia.org/wiki/Mutual_recursion). While recursion
+self-referencing function calls or through *[mutual
+recursion](https://en.wikipedia.org/wiki/Mutual_recursion)*. While recursion
 starts with the last step and continues until the base case is achieved,
-corecursion starts with the base case and continues until the first step.
+*corecursion* starts with the base case and continues until the first step.
 Depth-first and breadth-first [tree
 traversal](https://en.wikipedia.org/wiki/Tree_traversal) algorithms are examples
 of recursion and corecursion respectively.
 
 ## Higher-order functions
 
-[Higher-order functions](https://en.wikipedia.org/wiki/Higher-order_function)
+*[Higher-order functions](https://en.wikipedia.org/wiki/Higher-order_function)*
 are functions that accept other functions to use them as a part of the
 algorithm. They may be considered as an abstraction device similar to the 
 [template method](https://en.wikipedia.org/wiki/Template_method_pattern) in OOP. The
-[map](https://en.wikipedia.org/wiki/Map_(higher-order_function)) is a simple
+*[map](https://en.wikipedia.org/wiki/Map_(higher-order_function))* is a simple
 example. 
 
-In the context of functional programming, combinators are the
+In the context of functional programming, *combinators* are the
 higher-order functions that do not have dependencies on the outer context (do
-not have free variables) and use only function applications to produce results.
+not have *free variables*) and use only function applications to produce results.
 [Y-combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed-point_combinators_in_lambda_calculus)
-is a curious example, which allows achieving self-recursion in languages that do
-not support referring to a function by its name from its code. In general, 
+is a curious instance, which allows achieving self-recursion in languages that do
+not support referring to a function by its name from its own code. In general, 
 combinators are used to hierarchically organize abstractions, reducing code
 complexity.
 
@@ -83,48 +84,48 @@ complexity.
 In purely functional languages, the mutation is prohibited, and we can not
 create a loop that modifies a variable through its iterations. To iterate we
 can only rely on recursion. A higher-order function called
-[fold](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (also known
+*[fold](https://en.wikipedia.org/wiki/Fold_(higher-order_function))* (also known
 as reduce) is the generalization of this recursive approach to iteration. It
 takes a recursive data structure, such as a list, along with a combining
 function, and returns a value that combines all the elements of the given data
 structure. Recursion may be implemented in two different ways, by
-combining the first or the last element of the data structure with the recursive
+combining the first or the last element of the data structure with the 
 result of the combination of the rest. There are two corresponding kinds of the
 fold: the right (`foldr`, for example `1 + [2 + [3 + [4 + 5]]]`) and the left
-(`foldl`, for example `[[[1 + 2] + 3] + 4] + 5`). The Direction of folding may be
-important if the supplied combining function is not commutative. [Tail-call
-optimization](https://en.wikipedia.org/wiki/Tail_call) is required to circumvent
+(`foldl`, for example `[[[1 + 2] + 3] + 4] + 5`). The *direction of folding* may be
+important if the supplied combining function is not *commutative*. *[Tail-call
+optimization](https://en.wikipedia.org/wiki/Tail_call)* is required to circumvent
 the issue of stack overflow on large inputs.
 
 ## Functional composition
 
-Because functions should not produce side effects, there is little sense in
+Because functions should not produce *side effects*, there is little sense in
 sequential function evaluation. And indeed, functional languages generally
-support only one statement per function. Although, if pattern matching is
+allow only one statement per function. Although, if pattern matching is
 involved, this statement may contain more than one path of execution. One of the
 ways to achieve sequential evaluation in a single statement is to compose
 functions. For instance, while imperative programmers say `f1(); f2();`,
-functional programmers say `f2(f1());`. Thus, the [function
-composition](https://en.wikipedia.org/wiki/Function_composition_(computer_science))
-becomes the key primitive used to make abstractions in the functional world.
+functional programmers say `f2(f1());`. Thus, the *[function
+composition](https://en.wikipedia.org/wiki/Function_composition_(computer_science))*
+becomes the crucial primitive used to make abstractions in the functional world.
 
 Functional programmers invented many ways to compose various 
 things with each other. For example, Haskell has
 the following compositional operators: `. $ <$ <$> $> <> <* <*> *> >> >>= =<< >=> <=< <|>`.
-So you can conveniently make an abstraction by saying `f3 = f2 . f1`
+You can conveniently make an abstraction by saying `f3 = f2 . f1`
 which is equivalent to 
-`f3 = f2(f1())` in the [point free](https://en.wikipedia.org/wiki/Tacit_programming) notation. 
+`f3 = f2(f1())` in the *[point free](https://en.wikipedia.org/wiki/Tacit_programming) notation*. 
 And if this is not enough, you can always create your own operators. 
 What a splendid language!
 
 ## Currying and Partial Application
 
-To be a subject for the composition, functions should accept only one argument.
-[Currying](https://en.wikipedia.org/wiki/Currying) is the operation that 
+To become a subject for the composition, functions should accept only one argument.
+*[Currying](https://en.wikipedia.org/wiki/Currying)* is the operation that 
 creates a single-parameter function from a multi-parameter one. A curried
 function is a single-argument function that simply returns another function
-with the number of arguments decreased by one. On the other hand, [partial application](https://en.wikipedia.org/wiki/Partial_application)
-(not to be confused with [partial functions](https://en.wikipedia.org/wiki/Partial_function))
+with the number of arguments decreased by one. On the other hand, *[partial application](https://en.wikipedia.org/wiki/Partial_application)*
+(not to be confused with *[partial functions](https://en.wikipedia.org/wiki/Partial_function)*)
 allows binding of predefined values to some function parameters, 
 which also results in a function with a lesser number of arguments.
 
@@ -132,8 +133,8 @@ which also results in a function with a lesser number of arguments.
 
 When working with recursive algorithms and data structures, it makes sense to
 defer the evaluation of the recursive part until it is actually needed. Such
-deferring based on syntactic constructs is called [lazy
-evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation) and allows, for
+deferring based on syntactic constructs is called *[lazy
+evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation)* and allows, for
 example, the creation of potentially infinite sequences. Such tricks are
 impossible in strict languages, where all expressions are evaluated completely
 just after they are encountered.
@@ -143,79 +144,81 @@ just after they are encountered.
 # Through the Looking-Glass: Where We Meet Category Theory 
 
 Design of purely functional programs heavily relies on category theory 
-and the underlying algebraical laws of the used functional primitives.
+and the underlying algebraical laws of the utilized functional primitives.
 We will only scratch the surface here to give a glimpse of what purely functional
-design looks like.
+design may look like.
 
 ## Algebraic Data Types
 
-Although functional languages may be dynamically typed, there are plenty of
-statically-typed ones. At first glance, [functional type
-systems](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) with
-their [typeclasses](https://en.wikipedia.org/wiki/Type_class) may seem complex
+Although functional languages may be *dynamically typed*, there are plenty of
+*statically-typed* ones. At first glance, *[functional type
+systems](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)* with
+their *[typeclasses](https://en.wikipedia.org/wiki/Type_class)* may seem complex
 and unwieldy. It is because they may really be complex and unwieldy.
 
-There are two kinds of [algebraic data
-types](https://en.wikipedia.org/wiki/Algebraic_data_type) (ADTs): sum types and
-product types. They vary in the way by which their number of inhabiting values
+There are two kinds of *[algebraic data
+types](https://en.wikipedia.org/wiki/Algebraic_data_type)* (ADTs): *sum types* and
+*product types*. They vary in the way by which their number of inhabiting values
 is calculated. For example, the number of possible inhabiting values of
 2-[tuple](https://en.wikipedia.org/wiki/Tuple) of bytes, which is a product
-type, is 256x256 = 65536. It includes possible combinations from `[0, 0]` to
+type, is 256x256 = 65536. It includes all possible combinations from `[0, 0]` to
 `[255, 255]`. On the other hand, the number of inhabitants of the Boolean, a sum
 type, is 2: `true` and `false`. Product types and sum types are collectively
 called "algebraic" because they have algebraic
 [properties](https://stanford-cs242.github.io/f19/lectures/03-2-algebraic-data-types.html)
 similar to normal integers.
 
-In practice, the sum types are often employed as containers that wrap some
-tagged values which could be processed with pattern matching, spawning their
-own paths of execution. Such wrappers are called "contexts". For example, the
-following listing defines the `Maybe` sum type with two value constructors used
-as tags: `Just` that takes a parameter and parameterless `Nothing`.
+In practice, the sum types are often employed as containers or tags that wrap some
+values which then are processed with pattern matching. Such wrappers are called "*contexts*". 
+For example, the following listing defines the `Maybe` sum type with two value constructors used
+as tags. `Just` takes a parameter and `Nothing` appears as is.
 
 ```haskell
 data Maybe a = Just a | Nothing
 x = Just 10 -- wrap an Int into the Maybe container 
 ```
 
-Similar to a null-reference, the `Maybe` type is used to distinguish between the
-absent and fulfilled results of a computation. It is more safe than `null`,
-dubbed as the billion dollar mistake, because in pattern matching compiler will
-enforce the use of the `Nothing` branch.
+Similar to a null-reference, the `Maybe` type may be used to distinguish between the
+absent and fulfilled results of a computation. Because in pattern matching compiler will
+enforce the implementation of the `Nothing` branch, it is generally more safe than the use of `null`,
+dubbed as the billion-dollar mistake.
 
 ## Pattern matching
 
-Pattern matching offers syntactic constructs needed to destructure and recombine
+*Pattern matching* offers syntactic constructs needed to destructure and recombine
 values stored in ADTs. 
 
 ```haskell
-add :: Int -> Int -> Int       -- Hindley-Milner signatrue declaration
-add x y = x + y                -- add takes two Ints and returns an Int 
+add :: Int -> Int -> Int        -- Hindley-Milner signatrue declaration
+add x y = x + y                 -- add takes two Ints and returns an Int 
 
-add2 :: Maybe Int -> Maybe Int -- add2 takes an Int packed into a Maybe 
-add2 x =                       -- and also returns an Int packed into a Maybe
-  case x of                    -- the pattern matching takes place here
-    Just x' -> Just (add x' 2) -- x' is the Int destructured from the Maybe wrapper
-    Nothing -> Nothing         -- Nothing is left as it is
+addmb :: Maybe Int -> Maybe Int -- addmb takes an Int packed into a Maybe 
+addmb x =                       -- and also returns an Int packed into a Maybe
+  case x of                     -- the pattern matching takes place here
+    Just x' -> Just (add x' 2)  -- x' is the Int destructured from the Maybe wrapper
+    Nothing -> Nothing          -- Nothing is left as it is
 ```
 
-Because exceptions disrupt the control flow of a program, functional languages
-use various tagged values to indicate errors in computations. Being returned
-somewhere in the middle of the chain of composed functions, `Nothing` will
-short-circuit the computation. Such change of a computation path or a wrapper is
-called an "effect" (not to be confused with side-effects).
+It is important to note, that each branch of a pattern-matching expression
+spawns its own *path of execution*. Because exceptions disrupt the control flow
+of a program, functional languages use pattern matching based on contexts to
+process errors. Being returned somewhere in the middle of the chain of composed
+functions that use pattern matching, `Nothing` will short-circuit the
+computation - only the branch with `Nothing` will be chosen. Such change of a
+computational path or of a context is called an "*effect*" (not to be confused
+with side effects).
 
-The two following sections contain some highly abstract stuff, but it is important.
+The two following sections contain some highly condensed abstract stuff, but it is important.
 Please, do not switch the channel.
 
 ## Some Category Theory 
 
-A category consists of a set of objects and a set of
-[morphisms](https://en.wikipedia.org/wiki/Morphism) between the objects.
+A *category* consists of a set of objects and a set of
+*[morphisms](https://en.wikipedia.org/wiki/Morphism)* between the objects.
 Morphism `f` between objects `a` and `b` is written as `f: a -> b`. Morphisms
 compose. In the context of functional programming, objects are types and
 morphisms are functions. Morphisms that map to the same type (`f: a -> a`) are
-called endomorphisms. Morphisms may map not only between types, but also between
+called *endomorphisms*. Morphisms may map not only between types, but also between
 categories, for example:
 
 ```haskell
@@ -225,17 +228,17 @@ F :: (a -> b) -> (Maybe a -> Maybe b)
 ```
 
 Such higher-order morphisms are called
-[functors](https://en.wikipedia.org/wiki/Lift_(mathematics)), and mapping into
+*[functors](https://en.wikipedia.org/wiki/Lift_(mathematics))*, and mapping into
 some other category (context) is called
-[lifting](https://en.wikipedia.org/wiki/Lift_(mathematics)). Morphisms that
+*[lifting](https://en.wikipedia.org/wiki/Lift_(mathematics))*. Morphisms that
 preserve the algebraic structure of the objects, as in the definition above, are
-called homomorphisms. There are also [morphisms of
-functors](https://en.wikipedia.org/wiki/Natural_transformation). Nothing complex,
+called *homomorphisms*. There are also *[morphisms of
+functors](https://en.wikipedia.org/wiki/Natural_transformation)*. Nothing complex,
 just arrows everywhere.
 
 ## Algebras
 
-Algebras are a collection of functions operating over some ADTs, along with a
+*Algebras* are a collection of functions operating over some ADTs, along with a
 set of laws or constraints specifying relationships between these functions. For
 example, the [magma](https://en.wikipedia.org/wiki/Magma_(algebra)) is defined
 as a set that is [closed](https://en.wikipedia.org/wiki/Closure_(mathematics))
@@ -259,9 +262,13 @@ All this "complex" algebraic stuff is actually what you learned in elementary sc
 ## Abstractions Based on ADTs
 
 So, you decided to create some abstractions by composing some functions that
-accept and return some ADTs possibly creating some effects. Here you are
-entering the territory of the functional plumbing using morphisms. The
-constraints imposed by the static type checking could not be satisfied automatically.
+accept and return some ADTs. During the course they may create some effects. Here you are
+entering the territory of the functional plumbing with morphisms. 
+In the case of static type checking, its constraints could not be satisfied automatically,
+and you need to choose right morphisms to make your composed chain of functions to work 
+as intended. The morphisms are usually implemented as methods of the typeclass implementation
+for the particular context.
+
 Let's assume that `mayb` returns an integer result of some
 computation wrapped in `Maybe`.
 
@@ -316,7 +323,7 @@ task is to match the input types of the composed functions with their output typ
 To become a skilled functional plumber, it is necessary to understand the
 meaning of the bottomless crevasse of such magical words as functor, bifunctor,
 profunctor, applicative functor, invariant, contravariant, lens, Kleisli arrow,
-monad, and, save the Lord, comonad. All plumbing should then be checked for
+monad, and, save the Lord, comonad. All plumbing is usually checked for
 consistency with the corresponding algebraical laws of the entities
 mentioned above. Do the used functions commute? Does the identity law hold?
 There is even some [advanced
@@ -367,7 +374,7 @@ Just x >>= f = f x
 ```
 
 It takes a value in a context and a monadic function, so the result remains in
-the context. Monads may bring their own problems. The contexts may stack
+the context. Monads may bring their own problems: the contexts may stack
 like onion petals, and additional plumbing may be required to peel them off.
 
 # Footnotes
