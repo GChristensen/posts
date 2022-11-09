@@ -324,7 +324,7 @@ To become a skilled functional plumber, it is necessary to understand the
 meaning of the bottomless crevasse of such magical words as functor, bifunctor,
 profunctor, applicative functor, invariant, contravariant, lens, Kleisli arrow,
 monad, and, save the Lord, comonad. All plumbing is usually checked for
-consistency with the corresponding algebraical laws of the entities
+consistency with the corresponding algebraical laws 
 mentioned above. Do the used functions commute? Does the identity law hold?
 There is even some [advanced
 literature](https://github.com/BartoszMilewski/Publications/blob/master/TheDaoOfFP/DaoFP.pdf)
