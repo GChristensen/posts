@@ -49,10 +49,11 @@ In Windows, an instance of org-wiki may be automatically
 installed and configured as a part of [RHO Emacs](https://gchristensen.github.io/rho-emacs/) distribution.
 I use it to store any files that I need less often and to keep free-form notes, for which Emacs is indispensable.
 
-Although Emacs requires some technical background, the huge benefit is that everything costs exactly zero shekels per month, 
-and you own all your data. The authors of this software will undoubtedly be happy if you support their hard work with a small donation.
+Although Emacs requires some technical background, the huge benefit is that everything costs 
+exactly zero shekels per month, and you own all your data. 
+If you enjoy the software, the authors will undoubtedly be happy to receive a small donation.
 
-Let's consider the features of this software in more detail.
+Let's consider the features of these tools in more detail.
 
 **1. Hierarchical grouping**
 
