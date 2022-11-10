@@ -377,7 +377,7 @@ It takes a value in a context and a monadic function, so the result remains in
 the context. Monads may bring their own problems: the contexts may stack
 like onion petals, and additional plumbing may be required to peel them off.
 
-# Footnotes
+# Afterword
 
 OOP programmers just declare properties in their classes to maintain state.
 In functional programming, state is avoided whenever possible. But when it is impossible,

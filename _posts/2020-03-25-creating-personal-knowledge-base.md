@@ -89,6 +89,7 @@ to be able to refer to it from a link.
 
 **3. Tagging**
 
+Tags allow to put documents into a context thad does not explicitly present in its content.
 Scrapyard allows to specify tags inside bookmark properties and 
 provides a tag filtering mode in the sidebar.
 
