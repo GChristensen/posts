@@ -323,9 +323,9 @@ task is to match the input types of the composed functions with their output typ
 To become a skilled functional plumber, it is necessary to understand the
 meaning of the bottomless crevasse of such magical words as functor, bifunctor,
 profunctor, applicative functor, invariant, contravariant, lens, Kleisli arrow,
-monad, and, save the Lord, comonad. All plumbing is usually checked for
+monad, and, save the Lord, comonad. In theory, all plumbing should be checked for
 consistency with the corresponding algebraical laws 
-mentioned above. Do the used functions commute? Does the identity law hold?
+mentioned above. Do the composed functions commute? Does the identity law hold?
 There is even some [advanced
 literature](https://github.com/BartoszMilewski/Publications/blob/master/TheDaoOfFP/DaoFP.pdf)
 on this topic that promises a path to the functional nirvana.
