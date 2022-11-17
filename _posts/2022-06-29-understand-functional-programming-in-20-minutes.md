@@ -153,8 +153,9 @@ design may look like.
 Although functional languages may be *dynamically typed*, there are plenty of
 *statically-typed* ones. At first glance, *[functional type
 systems](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)* with
-their *[typeclasses](https://en.wikipedia.org/wiki/Type_class)* may seem complex
-and unwieldy. It is because they may really be complex and unwieldy.
+their *[typeclasses](https://en.wikipedia.org/wiki/Type_class)* (templates that define
+possible operations on types) may seem complex and unwieldy. It is because they may 
+really be complex and unwieldy.
 
 There are two kinds of *[algebraic data
 types](https://en.wikipedia.org/wiki/Algebraic_data_type)* (ADTs): *sum types* and
@@ -262,12 +263,12 @@ All this "complex" algebraic stuff is actually what you learned in elementary sc
 ## Abstractions Based on ADTs
 
 So, you decided to create some abstractions by composing some functions that
-accept and return some ADTs. During the course they may create some effects. Here you are
-entering the territory of the functional plumbing with morphisms. 
-In the case of static type checking, its constraints could not be satisfied automatically,
-and you need to choose right morphisms to make your composed chain of functions to work 
+accept and return some ADTs. During the course of execution, they may produce some effects.
+Here you are entering the territory of the functional plumbing with morphisms. 
+Unfortunately, the constraints imposed by static types could not be satisfied automatically.
+You need to choose the right morphisms to make your chain of composed functions to work 
 as intended. The morphisms are usually implemented as methods of the typeclass implementation
-for the particular context.
+for the particular context type.
 
 Let's assume that `mayb` returns an integer result of some
 computation wrapped in `Maybe`.
@@ -376,6 +377,25 @@ Just x >>= f = f x
 It takes a value in a context and a monadic function, so the result remains in
 the context. Monads may bring their own problems: the contexts may stack
 like onion petals, and additional plumbing may be required to peel them off.
+
+# What is so fancy about all this?
+
+When looking at combinators modelled as a workflows which represents some business rules,
+some people compare them whit prose, poetry, or haiku even:
+
+```haskell
+prepareForm templateURL = do
+  reportErrors
+  downloadTemplate
+  insertCurrentDate
+  trimFields
+```
+
+When composition is used along with pattern matching, we also get error processing almost
+for free without these ugly try/catch blocks around every function call. An error will
+short-circuit the happy path. Tiny functions with focused responsibilities facilitate
+code malleability. Although, since functions should be curried, and the plumbing logic may
+be scattered across typeclasses, there are some limits.
 
 # Afterword
 
