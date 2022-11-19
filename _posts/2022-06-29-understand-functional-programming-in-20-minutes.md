@@ -9,7 +9,7 @@ In this post, we examine its basic principles, abstractions,
 and building blocks. Hopefully, after reading this, you will be able to decide for
 yourself whether you really want to embark on a trip into this wonderland.
 
-# Down the Rabbit Hole: Foundational Principles
+# Down the Rabbit Hole: The Foundational Principles
 
 The principles discussed below have a profound impact on how the functional 
 programs are designed. While traditional object-oriented design is focused on 
@@ -40,10 +40,10 @@ Having *[first-class
 functions](https://en.wikipedia.org/wiki/First-class_function)* means that 
 functions could be returned as a value or passed as arguments. In this case, lambdas or 
 *[anonymous functions](https://en.wikipedia.org/wiki/Anonymous_function)*
-make sense. And the existence of lambda-functions that could be defined elsewhere
+make sense. The existence of lambda-functions that could be defined elsewhere
 implies the existence of *[lexical
 closures](https://en.wikipedia.org/wiki/Closure_(computer_programming))*. In the
-functional languages that allow side effects, lexical closures may become a
+functional languages with side effects, lexical closures may become a
 basis of [poor man's encapsulation](https://www.cs.utexas.edu/ftp/garbage/cs345/schintro-v14/schintro_122.html).
 But more often, first-class functions are employed as the mechanism for another type of abstraction:
 *higher-order functions*.
@@ -67,14 +67,14 @@ of recursion and corecursion respectively.
 are functions that accept other functions to use them as a part of the
 algorithm. They may be considered as an abstraction device similar to the 
 [template method](https://en.wikipedia.org/wiki/Template_method_pattern) in OOP. The
-*[map](https://en.wikipedia.org/wiki/Map_(higher-order_function))* is a simple
+*[map](https://en.wikipedia.org/wiki/Map_(higher-order_function))* is a usual
 example. 
 
 In the context of functional programming, *combinators* are the
 higher-order functions that do not have dependencies on the outer context (do
 not have *free variables*) and use only function applications to produce results.
-[Y-combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed-point_combinators_in_lambda_calculus)
-is a curious instance, which allows achieving self-recursion in languages that do
+[Y](https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed-point_combinators_in_lambda_calculus)
+is a curious combinator which allows achieving self-recursion in languages that do
 not support referring to a function by its name from its own code. In general, 
 combinators are used to hierarchically organize abstractions, reducing code
 complexity.
@@ -82,10 +82,10 @@ complexity.
 ## Folding
 
 In purely functional languages, the mutation is prohibited, and we can not
-create a loop that modifies a variable through its iterations. To iterate we
+create a loop that modifies a variable through its iterations. To iterate, we
 can only rely on recursion. A higher-order function called
 *[fold](https://en.wikipedia.org/wiki/Fold_(higher-order_function))* (also known
-as reduce) is the generalization of this recursive approach to iteration. It
+as reduce) serves as the generalization of this recursive approach to iteration. It
 takes a recursive data structure, such as a list, along with a combining
 function, and returns a value that combines all the elements of the given data
 structure. Recursion may be implemented in two different ways, by
@@ -104,8 +104,8 @@ sequential function evaluation. And indeed, functional languages generally
 allow only one statement per function. Although, if pattern matching is
 involved, this statement may contain more than one path of execution. One of the
 ways to achieve sequential evaluation in a single statement is to compose
-functions. For instance, while imperative programmers say `f1(); f2();`,
-functional programmers say `f2(f1());`. Thus, the *[function
+functions. For instance, while imperative programmers write `f1(); f2();`,
+functional programmers write `f2(f1());`. Thus, the *[function
 composition](https://en.wikipedia.org/wiki/Function_composition_(computer_science))*
 becomes the crucial primitive used to make abstractions in the functional world.
 
@@ -333,7 +333,7 @@ on this topic that promises a path to the functional nirvana.
 
 ## Monads
 
-No text on functional programming could avoid the topic of monads. Monads
+No text on functional programming could avoid the topic of *monads* . Monads
 are truly magical. They allow chaining sequential computations that produce effects.
 They even allow performing side effects or input/output, which are considered
 impure operations.
@@ -343,7 +343,7 @@ Monads are monoids in the category of endofunctors, which, as you remember, are
 semigroups with identity. This means that they are also functors. Particularly,
 applicative ones. If this does not make things clear, monads just allow to
 compose functions of the form `f: a -> m b`, which are called monadic or
-effectful functions. Here `m` is a context for which you need to implement a
+*effectful functions*. Here `m` is a context for which you need to implement a
 monad typeclass instance, and, as the signature suggests, the type `b` may be
 completely different from the type `a`. For an example, let's create a monadic
 function that returns the reciprocal of the given number:
@@ -392,8 +392,8 @@ prepareForm templateURL = do
 ```
 
 When composition is used along with pattern matching, we also get error processing almost
-for free without these ugly try/catch blocks around every function call. An error will
-short-circuit the happy path. Tiny functions with focused responsibilities facilitate
+for free without these ugly try/catch blocks around every function call. An error simply
+short-circuits the happy path. Tiny functions with focused responsibilities facilitate
 code malleability. Although, since functions should be curried, and the plumbing logic may
 be scattered across typeclasses, there are some limits.
 
