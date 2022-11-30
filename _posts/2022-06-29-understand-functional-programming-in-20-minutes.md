@@ -267,7 +267,7 @@ All this "complex" algebraic stuff is actually what you learned in elementary sc
 The successful functional design relies on the proper understanding of the algebraic properties of the corresponding
 constructs, such as monoid, modad or functor. For instance, a monoid has the following algebraic properties:
 
-1. Closure: &lt;category element&gt; + &lt;category element&gt; = &ltelement in the same category&gt;
+1. Closure: &lt;category element&gt; + &lt;category element&gt; = &lt;element in the same category&gt;
 2. Associativity: (1 + 2) + 3 = 1 + (2 + 3)
 3. Identity: 0 + &lt;a number&gt; = &lt;the number&gt; + 0 = &lt;the number&gt;
 
