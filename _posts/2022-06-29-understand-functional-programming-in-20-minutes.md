@@ -264,14 +264,14 @@ All this "complex" algebraic stuff is actually what you learned in elementary sc
     * Multiplication with 0 annihilates R.
 * In a [ring](https://en.wikipedia.org/wiki/Ring_(algebra)), the set has an [additive inverse](https://en.wikipedia.org/wiki/Additive_inverse).
 
-The successful use of functional design relies on the proper understanding of the algebraic properties of the corresponding
-constructs, for example, folding. This is where functional programming gets really complex. For example, a Monoid has the following algebraic properties:
+The successful functional design relies on the proper understanding of the algebraic properties of the corresponding
+constructs, such as monoid, modad or functor. For instance, a monoid has the following algebraic properties:
 
-1. Closure: <category element> + <category element> = <element in the same category>
+1. Closure: &lt;category element&gt; + &lt;category element&gt; = &ltelement in the same category&gt;
 2. Associativity: (1 + 2) + 3 = 1 + (2 + 3)
-3. Identity: 0 + <a number> = <the number> + 0 = <the number>
+3. Identity: 0 + &lt;a number&gt; = &lt;the number&gt; + 0 = &lt;the number&gt;
 
-Addition of integers is a monoid, so it could be used in folding without fear of an incorrect result. 
+Addition of integers is a monoid, so it could be used, for example, in folding without the fear of an incorrect result. 
 
 ## Abstractions Based on ADTs
 
