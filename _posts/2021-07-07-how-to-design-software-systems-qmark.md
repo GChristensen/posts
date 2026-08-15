@@ -7,6 +7,7 @@ categories: [Software, Systems, Design]
 "Software design" can mean a lot of different things. It might be about the quality of the user experience, or the finer
 points of managing a project. But if you are facing more concrete questions, for example, "How should I divide responsibilities among
 these classes?" or "How do I design the API for my service layer?" - this post is for you.
+<!--more-->
 
 We'll start with basic ideas you've probably encountered before, without realizing they're all pieces of one larger
 picture, and work our way up to material that's usually reserved for graduate-level reading. By the end, you may have

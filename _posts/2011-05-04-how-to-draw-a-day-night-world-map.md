@@ -7,6 +7,7 @@ date: 2011-05-04 14:05:00.011000+00:00
 ![](/assets/images/posts/how-to-draw-a-day-night-world-map/img-01.png)
 
 Actually, there is nothing too hard, especially if you have a good astronomical algorithm library. Nowadays we could do this using only plain JavaScript and HTML5 canvas.
+<!--more-->
 
 ![](/assets/images/posts/how-to-draw-a-day-night-world-map/img-02.png)
 Display the current sunlight map¹

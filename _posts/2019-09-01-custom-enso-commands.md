@@ -7,6 +7,7 @@ categories: [Enso Launcher, Python]
 This post discusses the creation of a non-trivial [Enso Launcher](https://gchristensen.github.io/enso-portable/) custom command that allows to automate routine actions.
 Enso Launcher - is a text command interface developed by the design principles outlined by [Jef Raskin](https://en.wikipedia.org/wiki/Jef_Raskin), 
 which allow to perform actions more quickly by eliminating the use of mouse and search of objects on the screen.
+<!--more-->
 
 Command interfaces - an integral part of life in the 1980s - gain a new breath with
 the advent of [Enso Launcher](https://gchristensen.github.io/enso-portable/) and

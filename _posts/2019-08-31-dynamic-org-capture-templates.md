@@ -12,6 +12,7 @@ page to your org capture files from a browser. [Org](https://orgmode.org/) - is 
 notes. The command uses a Windows Emacs distribution
 called [RHO Emacs]([&rho;Emacs](https://gchristensen.github.io/rho-emacs/)), that already integrates org interapp
 communication protocol into the operating system, so no additional setup is necessary.
+<!--more-->
 
 [org-protocol](https://orgmode.org/manual/Protocols.html) offers a nice
 possibility to capture URLs along with some selected text from various apps

@@ -8,6 +8,7 @@ Despite that there are gigabytes of writings on this topic, ranging
 from the recipes for managing a bunch of markdown files on GitHub to
 the manuals for setting up a local MediaWiki server, I will describe 
 the solution that works for me.
+<!--more-->
 
 Any note-taking tool with the following four features is suitable 
 for establishing a pretty usable knowledge base:
