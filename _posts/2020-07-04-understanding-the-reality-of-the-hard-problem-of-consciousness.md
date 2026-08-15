@@ -7,8 +7,8 @@ date: 2020-07-04 15:24:00.010000+00:00
 ![]({{ site.url }}/posts/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-01.jpg)   
 
 <div style="text-align: right;">
-Where consciousness is concerned, the appearance is the reality.  
-<br><b>- John Searle</b>
+<i>Where consciousness is concerned, the appearance is the reality.</i>  
+<br><i>- John Searle</i>
 </div>
 
 Consciousness is a permanently hot topic in the philosophy of mind
@@ -241,7 +241,7 @@ domain. It may be populated with entities to which qualia are reducible. As in t
 mentioned above, such entities may also be just relations between the "atomic" elements of our hypothetical neuronal
 grid. They are real in the sense that the automata of the brain can react to them.
 
-How this grid is constructed? What entities may exist there? These are the questions for future researchers. Judging
+How this grid is constructed? Which entities may exist there? These are the questions for future researchers. Judging
 from the pattern of neuronal connections, for example, in
 the [visual area](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4912377/), and from the nature of qualia, the space
 defined by this grid may be not just 3-dimensional. Qualia may be projections of some hyper-dimensional objects. Note
