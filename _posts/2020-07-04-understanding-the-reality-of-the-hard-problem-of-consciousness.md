@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Understanding the reality of the hard problem of consciousness
-date: 2022-07-04 15:24:00.010000+00:00
+date: 2020-07-04 15:24:00.010000+00:00
 ---
 
 ![]({{ site.url }}/posts/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-01.jpg)   
@@ -16,6 +16,8 @@ since [Rene Descartes](https://en.wikipedia.org/wiki/Ren%C3%A9_Descartes). Below
 consciousness, encounter the famous [explanatory gap](https://en.wikipedia.org/wiki/Explanatory_gap) that makes
 consciousness so elusive, find why [the hard problem](https://en.wikipedia.org/wiki/Mind%E2%80%93body_problem) of
 consciousness is real, and point out a novel way for its solution.
+
+<!--more-->
 
 ## Knowledge About Reality
 
