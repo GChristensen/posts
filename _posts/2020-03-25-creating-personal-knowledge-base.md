@@ -12,7 +12,7 @@ the solution that works for me.
 Any note-taking tool with the following four features is suitable 
 for establishing a pretty usable knowledge base:
 
-* Hierarchical data organization
+* Hierarchical or graph-based data organization
 * Hyperlinking and cross-referencing
 * Tagging
 * Search

@@ -1,8 +1,12 @@
 ---
 layout: post
-title: The new life of command interfaces
+title: Creating custom Enso Launcher commands.
 categories: [Enso Launcher, Python]
 ---
+
+This post discusses the creation of a non-trivial [Enso Launcher](https://gchristensen.github.io/enso-portable/) custom command that allows to automate routine actions.
+Enso Launcher - is a text command interface developed by the design principles outlined by [Jef Raskin](https://en.wikipedia.org/wiki/Jef_Raskin), 
+which allow to perform actions more quickly by eliminating the use of mouse and search of objects on the screen.
 
 Command interfaces - an integral part of life in the 1980s - gain a new breath with
 the advent of [Enso Launcher](https://gchristensen.github.io/enso-portable/) and
@@ -16,16 +20,16 @@ commands that will free you from routine GUI interactions.
 
 Let's assume that you have a large random dump of music videos that you want to
 sort to watch on your media-center PC. Normally, to sort files you open a video
-in a player, assess it, stop playback, close the video, and navigate to the file explorer
+in a player, evaluate it, stop playback, close the video, and navigate to the file explorer
 to move the video into the corresponding destination directory. Obviously, this
 takes a fair amount of manual actions.
 
-Enso Launcher (v0.4.5+) allows you to make a command, let's call it
+Enso Launcher allows to make a command, let's call it
 **mv**, that will automatically move a file opened in [Media Player
 Classic](https://en.wikipedia.org/wiki/Media_Player_Classic) to the directory
 specified as a command argument. Moreover, by using Enso
-[mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes) you can
-populate MPC playlist from the filesystem with no more than one command.
+[mediaprobes](https://github.com/GChristensen/enso-portable#Mediaprobes) you can easily
+open any m3u playlist in MPC.
 
 To be more specific, let's assume that you have made the following directory
 tree of the destination music video categories:
@@ -62,7 +66,7 @@ Since there are two levels of video categories, we need to pack both into a
 single argument name. Let's take the first letter of the first level (for
 example 'l' for 'live) and prepend it to the full name of the second level, so
 we get 'lclassical', 'mclassical', etc. as command arguments. The same approach
-is applicable if there are more levels, but it may utilize some separator
+is applicable if there are more levels, but it may be improved by use of some separator
 character.
 
 ```python
@@ -138,7 +142,7 @@ def cmd_rm(ensoapi):
     mpcapi.MpcAPI(host=MPC_HOST, port=MPC_PORT).move_to_recycle_bin()
 ```
 
-#### Creating mediaprobes for 'd:/music' subfolders
+#### Opening directories in MPC with a mediaprobe command
 
 In the snippet below we create two commands named: 'live' and 'music videos'.
 These commands automatically obtain subcategories from the corresponding folders as

@@ -1,27 +1,23 @@
 ---
 layout: post
-title: How to Design Software Systems?
+title: How to Design Software?
 categories: [Software, Systems, Design]
 ---
 
-The notion of software design may imply a multitude of various aspects. For
-example, it may be concerned with the quality of user experience or subtle
-intricacies of project management. If you are asking yourself more mundane
-questions, such as: "How should I assign responsibilities to these classes?" or
-"How to implement API of the service layer?" this post is for you. We begin with
-well-known basic concepts that you may have encountered elsewhere, but not
-suspected that they are all parts of a larger picture, and finish with
-rarely-read graduate-level literature. Maybe in the end, you will find your own
-answer to the question - how to design software systems?
+"Software design" can mean a lot of different things. It might be about the quality of the user experience, or the finer
+points of managing a project. But if you are facing more concrete questions, for example, "How should I divide responsibilities among
+these classes?" or "How do I design the API for my service layer?" - this post is for you.
 
-In its essence, software engineering is the art of creating abstractions.
-Quality and elaboration of the used abstractions separate failed and
-successfully designed software. The code of a well-designed system is easily
-comprehensible, such systems are easy to extend and maintain, and have a
-minimum amount of defects. So, how should we design quality systems?
-As in other engineering disciplines, modeling, prototyping, measurement and iteration
-are important elements of the development cycle.
-We can approach the question of design from the several following perspectives:
+We'll start with basic ideas you've probably encountered before, without realizing they're all pieces of one larger
+picture, and work our way up to material that's usually reserved for graduate-level reading. By the end, you may have
+found your own answer to the question: how do you design good software?
+
+At its core, software engineering is the art of building abstractions. What separates a successful design from a failed
+one is the quality of those abstractions. A well-designed system is easy to understand, easy to extend, and easy to
+maintain - and it tends to have far fewer defects. So how do we get there?
+
+As in any engineering discipline, the answer involves modeling, prototyping, measuring, and iterating. We can look at
+software design from several angles:
 
 * Software modeling
 * Software design in General
@@ -37,11 +33,10 @@ We can approach the question of design from the several following perspectives:
 * Software quality attributes
 * Software architecture
 
-As the introductory paragraph suggests, there are many more additional facets of
-the trade. By taking all the discussed principles seriously enough, you will
-undoubtedly be able to design quality software.
+As suggested by the introduction, there are many more facets to this craft than we've listed here. But if you take these
+principles seriously, you'll be well on your way.
 
-### Software Modelling
+### Software Modeling
 
 To build quality systems it is customary to model software before its
 implementation. Modeling begins with the formulation of [functional system
@@ -80,6 +75,9 @@ by some other authors), where the most important aspects of the system are
 implemented and integrated to test the validity of the developed model, initial
 knowledge of which may be sparse.
 
+But there is also the growing wave of criticism of the agile practices, stating
+that it has hollowed to a theater of empty ceremonies and discourages long-term vision by its short spritns.
+
 It is recommended to select the riskiest aspects of the system for the initial
 modeling and implementation. It is also often advised that modeling should be
 performed with the vision of the future evolution of the system. This may help
@@ -92,24 +90,23 @@ Many excellent books are written on this topic. Please, check the recommended li
 
 To explain the essence of a good design, authors usually insert an image of a
 craftsman with a chisel and tell how it is important to name variables in a
-consistent and obvious way, write literary-inspired comments, create small
+consistent and obvious way, write literary-inspired comments, create reasonably small
 functions, and so on. Although code quality is a significant matter,
 design is concerned with more grandeur goals. Namely, how to prevent system 
-rot under the pressure of the omnipresent second law of thermodynamics that 
+rot under the pressure of the omnipresent entropy that 
 strives to turn everything into an incorrigible mess? How to minimize the impact 
 of possible changes? How to make the system easily extensible and comprehensible at 
 the same time?
 
 At the level of design, we have all its basic elements at our full disposal:
 functions, methods, classes, packages, and modules. The trick is to arrange them
-just in the right way under a hierarchy of maximally-decoupled layers of
+in a right way under a hierarchy of deliberately decoupled layers of
 abstractions. Several design principles discussed below, accompanied by a range
-of well-established design patterns, will greatly help with this task. The sad
+of well-established design patterns, will provide a great help. The sad
 truth is that these aspects of design still remain more art than science and
-require a profound knowledge of the practice of pattern application for any
-success.
+require a profound practice of pattern application for any success.
 
-It is a sign of skill, if after a look at the model you say: "To properly
+It is a sign of skill, when looking at the model you say: "To properly
 separate concerns I should implement the core functionality as a set of
 fine-grained classes and use decorators for optional features". But the task of
 design is so cognitively daunting, that it is rarely done in the right way from
@@ -150,8 +147,8 @@ aggregates, which consist of entities and value objects stored in repositories,
 and so on. Each term here implies its own profound semantics. Who knows, maybe
 this helps to think better about domain models. The key principle here is that
 the units of abstraction should closely correspond to the entities of the
-domain, which makes it easier to keep the minimal gap between the domain model and
-implementation.
+domain, and use same language everywhere (e.g. in design docs, class names) which makes it easier
+to keep the minimal gap between the domain model and its actual implementation.
 
 The domain-driven design methodology is described in the book "Domain-Driven Design: Tackling Complexity in
 the Heart of Software" by Eric Evans. 
@@ -228,8 +225,7 @@ Several principles help to write well-modularized code:
   is as simple as it is powerful. By not duplicating code you minimize the area
   for potential changes and errors.
 
-* [Single responsibility
-  principle](https://en.wikipedia.org/wiki/Single-responsibility_principle) - a
+* [Single responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle) - a
   component should have only one reason to change.
 
 * Decoupling - this concept implies that modules, for example, classes in
@@ -373,7 +369,7 @@ This resulted in barely intelligible code and frequent errors.
 
 #### Structured Programming: GOTO Considered Harmful
 
-To help this gloomy state of affairs, [Edsger
+To help this, [Edsger
 Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra) wholeheartedly promoted [structured
 programming](https://en.wikipedia.org/wiki/Structured_programming) as a
 discipline to adhere only to the structured control flow constructs. This was
@@ -435,11 +431,11 @@ logging or transaction management, that dangle from here and there, and pollute
 your code. Let's take them into a single place using
 [advices](https://en.wikipedia.org/wiki/Advice_(programming)) (this is a
 technical term that may be familiar to Lisp programmers), which will result in a
-better separation of concerns. Other programmers are shrugging, and consider
+better separation of concerns. Other programmers are shrugging, considering
 this paradigm if not harmful, but of limited use, since pointcuts (this is yet
 another technical term, denoting the places where advices are applied) often do not
 provide the same granularity as the direct use of the functionality being
-abstracted away. So, it may be appropriate primarily in monstrous enterprise
+abstracted away. So, it still may be appropriate primarily in monstrous enterprise
 systems with a large number of coarse-grained cross-cutting concerns.
 
 #### Metaprogramming
@@ -519,10 +515,9 @@ exactly in the order listed (the list may be a little opinionated):
   Programming](https://github.com/MostlyAdequate/mostly-adequate-guide) which
   demonstrates how to do things in a purely functional way in JavaScript.
 
-* If all this does not help, try reading [this](https://gchristensen.github.io/posts/understand-functional-programming-in-20-minutes/), 
-  and start over again, if necessary. 
+* If all this does not help, try reading [this](https://gchristensen.github.io/posts/understand-functional-programming-in-20-minutes/), starting over again if needed. 
 
-Now, after you have learned how to compose comonads and write interpreters for
+After you have learned how to compose comonads and write interpreters for
 domain-specific languages based on algebraic types, you are ready to obtain
 the black belt of functional programming. But if there are tools that allow
 achieving the same with much less headache and with much more fun, such as
@@ -545,16 +540,16 @@ to maintain.
 #### Reactive Programming
 
 Originally, this approach was a sprinkle of programming language magic, 
-where change-observation event handlers of selected variables were created and
+where change-observation event handlers of some selected variables were created and
 maintained automatically by the programming environment. 
 In the modern days, reactive programming is essentially a message-passing 
 architecture maintained by a framework, where whole event streams could be 
 functionally composed, throttled, and harnessed by the [back-pressure](https://en.wikipedia.org/wiki/Backpressure_routing).
 
-Because it often employs parallelism, and the lion's share of parallelism-related
+Because it often employs concurrency, and the lion's share of concurrency-related
 complexity is hidden beneath the libraries or language constructs, [reactive
 programming](https://en.wikipedia.org/wiki/Reactive_programming) is often sold
-as a separate paradigm on the complexity-management and related markets, which
+as a separate paradigm on the complexity-management markets, which
 allows for improving overall application responsivity.
 
 Parallelized reactive programming is where you offload multiple complex tasks
@@ -565,12 +560,6 @@ promises](https://en.wikipedia.org/wiki/Futures_and_promises) or a
 subscriber/publisher framework that utilizes a message queue called a
 reactive event stream. You can filter, modify or combine event streams together.
 
-While events are processed, it is possible to display beautiful ads to the user
-in full-HD and 60 FPS, until the results are ready. Unfortunately, if your
-business is ad-based, this approach may harm it, since a parallelized set of
-tasks usually executes faster than the same set of sequential ones. So, there are
-places where reactive programming may be considered harmful. In other areas, it
-may be considered harmful because of unnecessary bloat.
 
 #### Domain-Specific Languages
 
@@ -718,7 +707,23 @@ it may be constrained or evaluated, we need more examples:
 * Scalability - the extent to which the system is capable of growing after its initial deployment.
 * Elasticity - the ability of a system to add and remove capacity based on demand.
 * Availability - addresses system failure and its impact on users or other systems.
+* Consistency - addresses whether all nodes hold the same data at the same time.
 * Resilience -  the ability to provide and maintain an acceptable level of service in the face of faults and challenges to normal operation.
+
+The CAP theorem (Brewer's theorem, proposed by Eric Brewer in 2000 and formally proven by Gilbert and Lynch in 2002) is
+a foundational result about the limits of distributed data stores. In any distributed system, when a network partition 
+(break) occurs, you can guarantee at most two of these three properties at once:
+
+Consistency (C) — every read returns the most recent write (or an error); all nodes see the same data at the same time.
+Availability (A) — every request gets a non-error response, even if it isn't the latest data. Partition tolerance (P) —
+the system keeps working even when network messages between nodes are lost or delayed.
+
+In any real distributed system spanning more than one machine, network partitions will happen eventually (a switch
+fails, a link drops packets). So, in practice the meaningful choice is between CP and AP, and only during an actual partition:
+
+CP systems refuse to answer (or return an error) on the minority side of a partition, rather than risk serving stale or
+conflicting data. AP systems keep answering on both sides of the partition, accepting that reads may be stale or that conflicting
+writes will need to be reconciled later.
 
 ### Software Architecture
 
@@ -854,9 +859,9 @@ at some degree, to important foundational concepts in software design.
 * Michael Fogus, Chris Houser - The Joy of Clojure
 * Scott Wlaschin - Domain Modeling Made Functional: Tackle Software Complexity with Domain-Driven Design and F#
 * Martin Fowler - Domain-Specific Languages
+* Riichiro Inagaki - Dr. Stone
 * Ryan D. Kelker - Clojure for Domain-Specific Languages
 * Markus Voelter - DSL Engineering: Designing, Implementing and Using Domain-Specific Languages
 * Tomasz Nurkiewicz, Ben Christensen - Reactive Programming with RxJava
-* Riichiro Inagaki - Dr. Stone
 
 The devil is in the details. Happy studying!

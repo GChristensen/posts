@@ -1,27 +1,39 @@
 ---
 layout: post
-title: Create dynamic capture templates to use with org-protocol. In Windows!
+title: Creating complex iShell commands.
 categories: [iShell Extension, Emacs, elisp, JavaScript]
 ---
 
+This post offers an example of a complex [iShell](https://gchristensen.github.io/ishell)
+command that might be practically useful. iShell is a UI tool that allows to perform various browser actions using text
+commands. The command below links [Firefox](https://www.firefox.com/en-US/)
+and [Emacs](https://emacs.org) text editor, providing a way to conveniently save the text selected on a web
+page to your org capture files from a browser. [Org](https://orgmode.org/) - is a library which many Emacs users employ to keep their
+notes. The command uses a Windows Emacs distribution
+called [RHO Emacs]([&rho;Emacs](https://gchristensen.github.io/rho-emacs/)), that already integrates org interapp
+communication protocol into the operating system, so no additional setup is necessary.
 
 [org-protocol](https://orgmode.org/manual/Protocols.html) offers a nice
-possibility to capture URLs along with some selected text from many web-browsers
+possibility to capture URLs along with some selected text from various apps
 into Emacs [org-mode](https://orgmode.org/). But most of the tools you can find
 out there allow a little control over the process - usually, it is
-only possible to put just plain text into some hard-coded org file. Below we develop an
+only possible to put just plain text into some hard-coded destination. Below we develop an
 [iShell Extension](https://gchristensen.github.io/ishell/) command which allows to
 capture org-formatted text under any
 [headline](https://orgmode.org/manual/Headlines.html) in one of the several 
 user-specified org files. If you are interested only in iShell or only in Org
-(or only in Windows), you may still skim through the code to find out how things
+(or org-protocol in Windows), you may still skim through the code to find out how things
 work.
 
 <video src="/posts/videos/ishell-demo.webm" width="100%" type="video/webm" controls></video>
 
 ### Creating an iShell command
 
-In the following command we refer to two fictional org files: `~/org/foo.org` and
+The command (what you enter in iShell) looks like this: **org-capture** *New article* **at** *bar* **in** *Widgets* **with** *todo*
+
+iShell offers nice autocompletion so you usually not typying all of this verbatim.
+
+In the command being developed we refer to two fictional org files: `~/org/foo.org` and
 `~/org/bar.org` (relative to the user home directory) available through the `foo` and `bar`
 autocompletion shortcuts from iShell. There are also three fictional org headlines: "Items", "Things" 
 and "Widgets" available to autocompletion. The noun-type `noun_org_headline`
@@ -32,10 +44,10 @@ to automatically maintain an index of all org-files and headlines and
 it in iShell, this is a work for real aficionados.
 
 By default, the command extracts selection as plain text, but it could be
-marked for processing to org-formatted text, if the value of `format` parameter is specified in
-command arguments.
+processed as org-formatted text, if the value of `format` parameter is specified in
+command arguaments.
 
-Paste the following code into iShell command editor: 
+To create a command just paste the following code into iShell command editor: 
 
 ```javascript
 // the list of target org files
@@ -185,7 +197,7 @@ class OrgCapture {
 
 Because we have several arbitrary-text arguments, we also need `getArgumentText` helper function to go around two iShell parser quirks:
 - It passes the current selection, if it presents, as an argument value to the custom [noun-types](https://gchristensen.github.io/ishell/addon/ui/options/tutorial.html#Introduction_to_Noun_Types).
-- It requires special `this` [anaphoric pronoun](https://gchristensen.github.io/ishell/addon/ui/options/tutorial.html#Anaphora)
+- It requires special `this` [anaphoric pronoun](https://gchristensen.github.io//ishelladdon/ui/options/tutorial.html#Anaphora)
   in place of the first arbitrary-text argument value
   if there is an active selection and values of other arbitrary-text arguments contain spaces. 
   If there is no selection, `this` is considered as the literal value of an argument.
@@ -194,50 +206,6 @@ Thanks to `getArgumentText` and `this` parser predefined keyword it is possible 
 no selection) under any custom headline with spaces in its name.
 The process is shown in the video above.
 
-
-### org-protocol in Windows
-
-org-protocol URL is altered in various ways on its path to Emacs when capturing
-from a browser in Windows:
-
-- A slash is appended to the subprotocol name. For an example:<br> `org-protocol://capture?url=...`
-becomes `org-protocol://capture/?url=...`<br> Because of this Emacs may not recognize a
-subprotocol.
-- The URL is encoded into the local unibyte system character set, so Emacs will get single byte characters
-instead of UTF-8.
-
-In addition, the URL should be no longer than 32kb. All this makes setup of org-protocol
-in Windows a non-trivial task.
-
-To address the problem with URL you may advice `org-protocol-check-filename-for-protocol` function:
-
-```clojure
-(defun advice-org-protocol-check-filename (orig-fun &rest args)
-  (let ((fname (car args)))
-    (let ((correct-url
-           (replace-regexp-in-string (regexp-quote "/?")
-                                     "?" fname nil 'literal)))
-      (apply orig-fun (cons correct-url (cdr args))))))
-  
-(advice-add 'org-protocol-check-filename-for-protocol
-            :around #'advice-org-protocol-check-filename) 
-```
-
-The character set problem requires recoding of the obtained URL components:
-
-```clojure
-(defun decode-capture-component (c)
-  (decode-coding-string (plist-get org-store-link-plist c) 
-                         locale-coding-system))
-
-(add-to-list 'org-capture-templates
-             '("p" "Protocol" entry (file "")
-               "* %?[[%(decode-capture-component :link)]\
-[%(decode-capture-component :description)]] %U\n\
-%(decode-capture-component :initial)\n")) 
-``` 
- 
-But you may just install [&rho;Emacs](https://gchristensen.github.io/rho-emacs/) which does all this automatically.
 
 ### Configuring Emacs
 
@@ -366,5 +334,49 @@ Paste the following code into your `.emacs` configuration file:
         :body ,(capture-decode-base64-utf-8 (plist-get args :body))))
       capture-decoded-org-protocol-query))
 ```
+
+### org-protocol in Windows
+
+In Windows org-protocol URL is altered in various ways on its path to Emacs when capturing
+the text from a browser:
+
+- A slash is appended to the subprotocol name. For an example:<br> `org-protocol://capture?url=...`
+  becomes `org-protocol://capture/?url=...`<br> Because of this Emacs may not recognize a
+  subprotocol.
+- The URL is encoded into the local unibyte system character set, so Emacs will get single byte characters
+  instead of UTF-8.
+
+The URL size also should be no longer than 32kb. All this makes all the setup a non-trivial task.
+
+To address the problem with URL you may advice `org-protocol-check-filename-for-protocol` function:
+
+```clojure
+(defun advice-org-protocol-check-filename (orig-fun &rest args)
+  (let ((fname (car args)))
+    (let ((correct-url
+           (replace-regexp-in-string (regexp-quote "/?")
+                                     "?" fname nil 'literal)))
+      (apply orig-fun (cons correct-url (cdr args))))))
+  
+(advice-add 'org-protocol-check-filename-for-protocol
+            :around #'advice-org-protocol-check-filename) 
+```
+
+The character set problem requires recoding of the obtained URL components:
+
+```clojure
+(defun decode-capture-component (c)
+  (decode-coding-string (plist-get org-store-link-plist c) 
+                         locale-coding-system))
+
+(add-to-list 'org-capture-templates
+             '("p" "Protocol" entry (file "")
+               "* %?[[%(decode-capture-component :link)]\
+[%(decode-capture-component :description)]] %U\n\
+%(decode-capture-component :initial)\n")) 
+``` 
+
+But you may just install [&rho;Emacs](https://gchristensen.github.io/rho-emacs/) which does all this automatically.
+
 
 Now you have everything set up for the command to work.

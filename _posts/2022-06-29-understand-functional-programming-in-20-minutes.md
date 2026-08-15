@@ -4,17 +4,16 @@ title: Understand Functional Programming in 20 Minutes
 categories: [Software, Design, Functional programming]
 ---
 
-Functional programming has a reputation for being notoriously hard to understand.
-In this post, we examine its basic principles, abstractions,
-and building blocks. Hopefully, after reading this, you will be able to decide for
-yourself whether you really want to embark on a trip into this wonderland.
+Functional programming has a reputation for being hard to grasp. In this post, we'll look at its core principles,
+abstractions, and building blocks - so that by the end, you can decide for yourself whether you really want to embark 
+on a trip into this wonderland.
 
 # Down the Rabbit Hole: The Foundational Principles
 
 The principles discussed below have a profound impact on how the functional 
 programs are designed. Traditional object-oriented design is focused on 
 entities, their behaviors, and the relations between them.
-On the other hand, the functional world data is completely separated from
+On the other hand, in the functional world data is completely separated from
 behavior. Programs written with the functional approach are designed as workflow pipelines 
 of data transformations. The functional composition is 
 probably the central principle here, on which most of functional abstractions are based.
@@ -112,8 +111,9 @@ composition](https://en.wikipedia.org/wiki/Function_composition_(computer_scienc
 becomes the crucial primitive used to make abstractions in the functional world.
 
 Functional programmers invented many ways to compose various 
-things with each other. For example, Haskell has
-the following compositional operators: `. $ <$ <$> $> <> <* <*> *> >> >>= =<< >=> <=< <|>`.
+things with each other. For example, being a statically-typed language, Haskell has
+the following compositional operators: `. $ <$ <$> $> <> <* <*> *> >> >>= =<< >=> <=< <|>` that apply to functions typed 
+in particular ways. Because of static types you can't simply compose anything with anything else.
 By using them, it is possible to conveniently make an abstraction by saying `f3 = f2 . f1`
 which is equivalent to 
 `f3 = f2(f1())` in the *[point free](https://en.wikipedia.org/wiki/Tacit_programming) notation*. 
@@ -172,8 +172,8 @@ called "algebraic" because they have algebraic
 similar to normal integers.
 
 In practice, the sum types are often employed as containers or tags that wrap some
-values which then are processed with pattern matching. Such wrappers are called "*contexts*". 
-For example, the following listing defines the `Maybe` sum type with two value constructors used
+values which then are processed with pattern matching (discussed in the next section). Such wrappers are called "*contexts*". 
+For example, the following listing defines the `Maybe` Haskell sum type with two value constructors used
 as tags. `Just` takes a parameter and `Nothing` appears as is.
 
 ```haskell
@@ -192,8 +192,8 @@ dubbed as the billion-dollar mistake.
 values stored in ADTs. 
 
 ```haskell
-add :: Int -> Int -> Int        -- Hindley-Milner signatrue declaration
-add x y = x + y                 -- add takes two Ints and returns an Int 
+add :: Int -> Int -> Int        -- Hindley-Milner function signatrue declaration
+add x y = x + y                 -- the function add takes two Ints and returns an Int 
 
 addmb :: Maybe Int -> Maybe Int -- addmb takes an Int packed into a Maybe 
 addmb x =                       -- and also returns an Int packed into a Maybe
@@ -203,18 +203,19 @@ addmb x =                       -- and also returns an Int packed into a Maybe
 ```
 
 It is important to note, that each branch of a pattern-matching expression
-spawns its own *path of execution*. Because exceptions disrupt the control flow
-of a program, functional languages use pattern matching based on contexts to
-process errors. Being returned somewhere in the middle of the chain of composed
-functions that use pattern matching, `Nothing` will short-circuit the
-computation - only the branch with `Nothing` will be chosen. Such change of a
-computational path or of a context is called an "*effect*" (not to be confused
+spawns its own *path of execution* which is hard to achieve by using bare functional composition.
+Functional languages also use pattern matching based on contexts to
+process errors, so the execution flow is not disrupted by exceptions. 
+
+In the example above, `Nothing` being returned somewhere in the middle of the chain of composed
+functions will short-circuit the computation - only the branch with `Nothing` will be chosen in the remaining chain.
+In this case there is no need of exceptional stack unwinding and the abrupt termination of the flow.
+Such change of a computational path or of a context is called an "*effect*" (not to be confused
 with side effects). More precisely, effect is a computation that transforms 
 something into something other (probably of some other type) wrapped in a context ADT.
 Such ADTs are called *effect types*.
 
 The two following sections contain some highly condensed abstract stuff, but it is important.
-Please, do not switch the channel.
 
 ## Some Category Theory 
 
@@ -271,7 +272,9 @@ constructs, such as monoid, modad or functor. For instance, a monoid has the fol
 2. Associativity: (1 + 2) + 3 = 1 + (2 + 3)
 3. Identity: 0 + &lt;a number&gt; = &lt;the number&gt; + 0 = &lt;the number&gt;
 
-Addition of integers is a monoid, so it could be used, for example, in folding without the fear of an incorrect result. 
+Addition of integers is a monoid, so it could be used, for example, in folding without the fear of an incorrect result
+caused by noncommutativity. In general, the category theory is used as a framework of the type system that allows
+to statically check the correctness of the program.
 
 ## Abstractions Based on ADTs
 
@@ -281,7 +284,8 @@ Here you are entering the territory of the functional plumbing with morphisms.
 Unfortunately, the constraints imposed by static typying could not be satisfied automatically.
 Your task is to choose the right morphisms to make the chain of composed functions to work 
 as intended. The morphisms are usually implemented as methods of the typeclass implementation
-for the particular context type.
+for the particular context type. A typeclass is a way of defining a set of functions (an interface)
+that a type must implement to belong to that class.
 
 Let's assume that `mayb` returns an integer result of some
 computation wrapped in `Maybe`.
@@ -333,8 +337,8 @@ addcomp y = mayb (+ y) <*> pure 1 -- this implementation of addcomp produces
 ```
 
 All compositional operators in Haskell are intended for such plumbing.
-To become a skilled functional plumber, it is necessary to understand the
-meaning of the bottomless crevasse of such magical words as functor, bifunctor,
+Probably, to become a skilled functional plumber, it is necessary to understand the
+meaning of such magical technical terms as functor, bifunctor,
 profunctor, applicative functor, invariant, contravariant, lens, Kleisli arrow,
 monad, and, save the Lord, comonad. In theory, all plumbing should be checked for
 consistency with the corresponding algebraical laws 
@@ -415,10 +419,9 @@ OOP programmers just declare properties in their classes to maintain state.
 In functional programming, state is avoided whenever possible. But when it is impossible,
 functional programmers are bound to [pass monads](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/State)
 in and out. They usually stash state somewhere
-in tuples along with the results of their computations. Does this help to create
-clear, comprehensible, and maintainable designs? It is for you to decide. And
-users of the dynamically-typed functional languages do not learn category
-theory. They just use the `comp` function to compose. It is barely imaginable, 
-how they are able to write working programs with this.
+in tuples along with the results of their computations as some kind of byproducts. It is also may be worthy to mention
+that users of the dynamically-typed functional languages do not learn category
+theory. They just use the `comp` function to compose dynamically or weakly typed functions blindly rejecting all the beauty of the category theory. 
+It is barely imaginable, how they are able to write working programs with this.
 
 ![Party](/posts/images/understand-fp-2.png)
