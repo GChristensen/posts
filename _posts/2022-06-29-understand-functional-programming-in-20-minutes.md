@@ -8,6 +8,8 @@ Functional programming has a reputation for being hard to grasp. In this post, w
 abstractions, and building blocks - so that by the end, you can decide for yourself whether you really want to embark 
 on a trip into this wonderland.
 
+<!--more-->
+
 # Down the Rabbit Hole: The Foundational Principles
 
 The principles discussed below have a profound impact on how the functional 

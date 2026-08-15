@@ -13,7 +13,7 @@ date: 2015-08-09 16:43:00.016000+00:00
 
 If you ever thought about the ultimate question of Life, the Universe, and Everything, you probably have noticed such weird things as the [temporal paradox](https://en.wikipedia.org/wiki/Temporal_paradox), the [wave-particle duality](https://en.wikipedia.org/wiki/Wave%E2%80%93particle_duality), and the [Copenhagen interpretation](https://en.wikipedia.org/wiki/Copenhagen_interpretation). You may also has been puzzled by the question of why they cannot unify general relativity and quantum mechanics. All this has happened because quantum mechanics has [gone astray](https://en.wikipedia.org/wiki/Interpretations_of_quantum_mechanics), and no one wants to admit this. Although it is possible to construct a picture of the world without the strange things mentioned above, no one still gives a shift (a paradigm shift). Below you may find an answer to the question of why quantum mechanics may be incomplete.
 
-<!-- more -->  
+<!--more-->  
 
 ### What exists?
 
