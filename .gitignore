@@ -10,3 +10,5 @@ node_modules
 package.json
 .idea
 *.iml
+/.claude/settings.local.json
+/.claude/
