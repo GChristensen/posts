@@ -11,7 +11,7 @@ There should be nothing too hard, especially if you have a good astronomical alg
 
 Display the current sunlight map¹
 
-<canvas height="180" id="map" width="360"><img src="{{ site.url }}/posts/assets/images/posts/how-to-draw-a-day-night-world-map/img-02.png" style="border: none; box-shadow: none; padding: 0;" /></canvas>
+<canvas height="180" id="map" width="360"-><img src="{{ site.url }}/posts/assets/images/posts/how-to-draw-a-day-night-world-map/img-02.png" style="border: none; box-shadow: none; padding: 0;" /></canvas>
 <button onclick="displayEvent()">Display the current sunlight map¹</button>
 <br />
 <br />
