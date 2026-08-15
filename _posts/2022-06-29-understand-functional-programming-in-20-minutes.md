@@ -205,7 +205,7 @@ addmb x =                       -- and also returns an Int packed into a Maybe
 ```
 
 It is important to note, that each branch of a pattern-matching expression
-spawns its own *path of execution* which is hard to achieve by using bare functional composition.
+spawns its own *path of execution* which is hard to achieve by using bare functional composition and referential transparency.
 Functional languages also use pattern matching based on contexts to
 process errors, so the execution flow is not disrupted by exceptions. 
 
@@ -281,11 +281,11 @@ to statically check the correctness of the program.
 ## Abstractions Based on ADTs
 
 Let's imagine that you decided to create some abstractions by composing some functions that
-accept and return some ADTs. During the course of execution, they may produce some effects.
-Here you are entering the territory of the functional plumbing with morphisms. 
-Unfortunately, the constraints imposed by static typying could not be satisfied automatically.
-Your task is to choose the right morphisms to make the chain of composed functions to work 
-as intended. The morphisms are usually implemented as methods of the typeclass implementation
+accept and return some ADTs. During the course of execution, they may produce some effects. And because effect types may differ and
+the constraints imposed by static typying could not be satisfied automatically,
+you are entering the territory of the functional plumbing with morphisms.
+Your task is to choose the right morphisms to make the chain of composed functions to compose and work 
+as intended. The morphisms are usually implemented as methods of the typeclass 
 for the particular context type. A typeclass is a way of defining a set of functions (an interface)
 that a type must implement to belong to that class.
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Creating custom Enso Launcher commands.
+title: Creating custom Enso Launcher commands
 categories: [Enso Launcher, Python]
 ---
 

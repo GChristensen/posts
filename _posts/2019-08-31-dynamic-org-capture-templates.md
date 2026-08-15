@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Creating complex iShell commands.
+title: Creating complex iShell commands
 categories: [iShell Extension, Emacs, elisp, JavaScript]
 ---
 
