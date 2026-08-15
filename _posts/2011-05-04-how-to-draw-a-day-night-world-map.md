@@ -15,8 +15,8 @@ Display the current sunlight map¹
 <button onclick="displayEvent()">Display the current sunlight map¹</button>
 <br />
 <br />
+
 <script>
-<!--
 // Source: Henning Umland, http://www.celnav.de/longterm.htm
 
 var dtr = Math.PI / 180;
