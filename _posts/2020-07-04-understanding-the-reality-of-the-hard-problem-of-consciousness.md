@@ -141,7 +141,7 @@ the [fusiform area](https://en.wikipedia.org/wiki/Fusiform_face_area) of the bra
 There are also may be even [Jennifer Aniston cells](https://en.wikipedia.org/wiki/Grandmother_cell), which fire when a
 Jennifer Aniston image is demonstrated to an observer.
 
-*![]({{ site.url }}/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-02.png)*
+![]({{ site.url }}/posts/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-02.png)
 
 *A neural network tries to distinguish a duck from a rabbit.*
 
@@ -227,7 +227,7 @@ atomic entities and
 "physical" laws governing them. In a poetic stance, we can imagine it as an interference pattern on the fundamental
 grid of reality.
 
-![]({{ site.url }}/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-03.jpg)
+![]({{ site.url }}/posts/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-03.jpg)
 
 *Brain structure compared to the structure of the Universe. Although the picture looks a little bit New Agey, 
 the [connectome](https://en.wikipedia.org/wiki/Connectome) of the brain includes a
@@ -255,7 +255,7 @@ This explains why qualia are non-conceptual. Because they are confined to the pe
 person could make a reference to them. To an external observer, they may look like meaninglessly waving folds of matter.
 Because of that, methods that can interfere with these processes are required to explore them.
 
-![]({{ site.url }}/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-04.png)
+![]({{ site.url }}/posts/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-04.png)
 
 *The existence of the process of frequency modulation captured as a time series graph.*
 
@@ -277,7 +277,7 @@ through our perception, the simulated fabric of which is embedded in the matter 
 produce some states based on the perceptual input and automata that make sense of these states in the context of their
 models of reality.
 
-![]({{ site.url }}/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-05.png)
+![]({{ site.url }}/posts/assets/images/posts/understanding-the-reality-of-the-hard-problem-of-consciousness/img-05.png)
 
 *[Ray-tracing](https://en.wikipedia.org/wiki/Ray_tracing_(graphics))
 a [Calabi-Yau manifold](https://en.wikipedia.org/wiki/Calabi%E2%80%93Yau_manifold) may be a good metaphor of a model of
