@@ -111,6 +111,9 @@ functions. For instance, while imperative programmers write `f1(); f2();`,
 functional programmers write `f2(f1());`. Thus, the *[function
 composition](https://en.wikipedia.org/wiki/Function_composition_(computer_science))*
 becomes the crucial primitive used to make abstractions in the functional world.
+The other way to achieve sequential execution is a chain of variable definitions.
+The whole point of you can not write `f1(); f2();` is to make you to thread the value
+returned by a function through the all chain of computations.
 
 Functional programmers invented many ways to compose various 
 things with each other. For example, being a statically-typed language, Haskell has
@@ -264,7 +267,7 @@ everywhere.
 set of laws or constraints specifying relationships between these functions. For
 example, the [magma](https://en.wikipedia.org/wiki/Magma_(algebra)) is defined
 as a set that is [closed](https://en.wikipedia.org/wiki/Closure_(mathematics))
-under a binary operator. Functional programmers use
+under a binary operator. Functional programmers (should) use
 algebras to formalize and verify the design of their programs.
 
 All this "complex" algebraic stuff is actually what you learned in elementary school arithmetics:

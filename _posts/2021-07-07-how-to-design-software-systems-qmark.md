@@ -516,7 +516,7 @@ exactly in the order listed (the list may be a little opinionated):
   Programming](https://github.com/MostlyAdequate/mostly-adequate-guide) which
   demonstrates how to do things in a purely functional way in JavaScript.
 
-* If all this does not help, try reading [this](https://gchristensen.github.io/posts/understand-functional-programming-in-20-minutes/), starting over again if needed. 
+* If all this does not help, try reading [this](https://gchristensen.github.io/posts/understand-functional-programming-in-20-minutes/). 
 
 After you have learned how to compose comonads and write interpreters for
 domain-specific languages based on algebraic types, you are ready to obtain
