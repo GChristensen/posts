@@ -27,10 +27,10 @@ Despite a widespread belief, it is not the presence of
 calculus](https://en.wikipedia.org/wiki/Lambda_calculus)*, that makes programming
 functional. The truth is embarrassingly simple. In a purely functional program,
 all data structures should be
-*[immutable](https://en.wikipedia.org/wiki/Persistent_data_structure)*, and
+*[immutable](https://en.wikipedia.org/wiki/Persistent_data_structure)* (free of
+side effects), and
 functions must be *[referentially
-transparent](https://en.wikipedia.org/wiki/Referential_transparency)* (free of
-side effects). A referentially transparent expression could always be replaced
+transparent](https://en.wikipedia.org/wiki/Referential_transparency)*. A referentially transparent expression could always be replaced
 with its value without changing the result of the program. This means that, like
 mathematical functions, such functions should always return the same value when
 called with the same set of arguments. But there is a little quirk.
@@ -116,10 +116,10 @@ Functional programmers invented many ways to compose various
 things with each other. For example, being a statically-typed language, Haskell has
 the following compositional operators: `. $ <$ <$> $> <> <* <*> *> >> >>= =<< >=> <=< <|>` that apply to functions typed 
 in particular ways. Because of static types you can't simply compose anything with anything else.
-By using them, it is possible to conveniently make an abstraction by saying `f3 = f2 . f1`
+By using, for example, the point operator, it is possible to conveniently make an abstraction by saying `f3 = f2 . f1`
 which is equivalent to 
 `f3 = f2(f1())` in the *[point free](https://en.wikipedia.org/wiki/Tacit_programming) notation*. 
-And if this is not enough, you can always create your own operators. 
+And if all of these is not enough, you can always create your own operators. 
 What a splendid language!
 
 ## Currying and Partial Application
@@ -154,39 +154,54 @@ design may look like.
 
 ## Algebraic Data Types
 
-Although functional languages may be *dynamically typed*, there are plenty of
-*statically-typed* ones. At first glance, *[functional type
-systems](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)* with
-their *[typeclasses](https://en.wikipedia.org/wiki/Type_class)* (templates that define
-possible operations on types) may seem complex and unwieldy. It is because they may 
-really be complex and unwieldy.
+Although functional languages may be dynamically typed, there are plenty of statically-typed ones. At first
+glance, [functional type systems](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) with
+their [typeclasses](https://en.wikipedia.org/wiki/Type_class) (templates that define possible operations on types) may
+seem complex and unwieldy. It is because they may really be complex and unwieldy. The way such systems *define* types,
+however, is remarkably simple, and rests on just two building blocks.
 
-There are two kinds of *[algebraic data
-types](https://en.wikipedia.org/wiki/Algebraic_data_type)* (ADTs): *sum types* and
-*product types*. They vary in the way by which their number of inhabiting values
-is calculated. For example, the number of possible inhabiting values of
-2-[tuple](https://en.wikipedia.org/wiki/Tuple) of bytes, which is a product
-type, is 256x256 = 65536. It includes all possible combinations from `[0, 0]` to
-`[255, 255]`. On the other hand, the number of inhabitants of the Boolean, a sum
-type, is 2: `true` and `false`. Product types and sum types are collectively
-called "algebraic" because they have algebraic
-[properties](https://stanford-cs242.github.io/f19/lectures/03-2-algebraic-data-types.html)
-similar to normal integers.
+There are two kinds of [algebraic data types](https://en.wikipedia.org/wiki/Algebraic_data_type) (ADTs): sum types and
+product types. They vary in the way by which their number of inhabiting values is calculated. A product type holds a
+value of one type *and* a value of another, so its inhabitants are multiplied: the number of possible inhabiting values
+of a 2-[tuple](https://en.wikipedia.org/wiki/Tuple) of bytes is 256x256 = 65536. It includes all possible combinations
+from `[0, 0]` to `[255, 255]`. A sum type holds a value of one type *or* a value of another, so its inhabitants are
+added: a type that is either a byte or a Boolean has 256 + 2 = 258 inhabitants. Product types and sum types are
+collectively called "algebraic" because they have
+algebraic [properties](https://stanford-cs242.github.io/f19/lectures/03-2-algebraic-data-types.html) similar to normal
+integers: a pair of a value and the single-inhabitant type `()` carries exactly as much information as the value alone,
+just as `a x 1 = a`.
 
-In practice, the sum types are often employed as containers or tags that wrap some
-values which then are processed with pattern matching (discussed in the next section). Such wrappers are called "*contexts*". 
-For example, the following listing defines the `Maybe` Haskell sum type with two value constructors used
-as tags. `Just` takes a parameter and `Nothing` appears as is.
+Product types are already familiar from imperative languages - structs, records, classes and tuples are all products.
+Sums are what is usually missing. A tagged C union is a sum type in spirit, but nothing prevents reading the wrong
+member; in a language with ADTs the tag and the payload are inseparable and the compiler tracks them. The two kinds also
+nest freely, and a sum of products is the ordinary shape of everyday data:
 
-```haskell
-data Maybe a = Just a | Nothing
-x = Just 10 -- wrap an Int into the Maybe container 
+```
+data Shape = Circle Double | Rect Double Double
+-- Double + (Double x Double)
+
 ```
 
-Similar to a null-reference, the `Maybe` type may be used to distinguish between the
-absent and fulfilled results of a computation. Because in pattern matching compiler will
-enforce the implementation of the `Nothing` branch, it is generally more safe than the use of `null`,
-dubbed as the billion-dollar mistake.
+In practice, the sum types are often employed as containers or tags that wrap some values which then are processed with
+pattern matching (discussed in the next section). For example, the following listing defines the `Maybe` Haskell sum
+type with two value constructors used as tags. `Just` takes a parameter and `Nothing` appears as is.
+
+```
+data Maybe a = Just a | Nothing
+x = Just 10 -- wrap an Int into the Maybe container
+
+describe :: Maybe Int -> String
+describe (Just n) = "got " ++ show n
+describe Nothing  = "got nothing"   -- omit this line and the compiler complains
+
+```
+
+Similar to a null-reference, the `Maybe` type above may be used to distinguish between the absent and fulfilled results of a
+computation. Because in pattern matching compiler will enforce the implementation of the `Nothing` branch, it is
+generally more safe than the use of `null`, dubbed as the billion-dollar mistake. The deeper difference is that absence
+becomes visible: in Java any reference may be `null` and no signature tells you which, whereas a Haskell
+value of type `Int` is always an `Int`, and only `Maybe Int` may be missing. This is the general payoff of ADTs — states
+that make no sense simply cannot be written down.
 
 ## Pattern matching
 
@@ -205,7 +220,7 @@ addmb x =                       -- and also returns an Int packed into a Maybe
 ```
 
 It is important to note, that each branch of a pattern-matching expression
-spawns its own *path of execution* which is hard to achieve by using bare functional composition and referential transparency.
+spawns its own *path of execution* which otherwise may be hard to achieve by using only functional composition and referential transparency.
 Functional languages also use pattern matching based on contexts to
 process errors, so the execution flow is not disrupted by exceptions. 
 
@@ -221,10 +236,12 @@ The two following sections contain some highly condensed abstract stuff, but it 
 
 ## Some Category Theory 
 
-A *category* consists of a set of objects and a set of
+A thing named *category* consists of a set of objects and a set of
 *[morphisms](https://en.wikipedia.org/wiki/Morphism)* between the objects.
 Morphism `f` between objects `a` and `b` is written as `f: a -> b`. Morphisms
-compose. In the context of functional programming, objects are types and
+compose. 
+
+In the context of functional programming, objects are types and
 morphisms are functions. Morphisms that map to the same type (`f: a -> a`) are
 called *endomorphisms*. Morphisms may map not only between types, but also between
 categories, for example:
@@ -235,14 +252,11 @@ categories, for example:
 F :: (a -> b) -> (Maybe a -> Maybe b)
 ```
 
-Such higher-order morphisms are called
-*[functors](https://en.wikipedia.org/wiki/Lift_(mathematics))*, and mapping into
-some other category (context) is called
-*[lifting](https://en.wikipedia.org/wiki/Lift_(mathematics))*. Morphisms that
-preserve the algebraic structure of the objects, as in the definition above, are
-called *homomorphisms*. There are also *[morphisms of
-functors](https://en.wikipedia.org/wiki/Natural_transformation)*. Nothing complex,
-just arrows everywhere.
+Such higher-order morphisms are called *[functors](https://en.wikipedia.org/wiki/Lift_(mathematics))*, and mapping into
+some other category (context) is called *[lifting](https://en.wikipedia.org/wiki/Lift_(mathematics))*. Morphisms that
+preserve the algebraic structure of the objects, as in the definition above, are called *homomorphisms*. There are also
+*[morphisms of functors](https://en.wikipedia.org/wiki/Natural_transformation)*. Nothing complex, just arrows
+everywhere.
 
 ## Algebras
 
@@ -250,10 +264,10 @@ just arrows everywhere.
 set of laws or constraints specifying relationships between these functions. For
 example, the [magma](https://en.wikipedia.org/wiki/Magma_(algebra)) is defined
 as a set that is [closed](https://en.wikipedia.org/wiki/Closure_(mathematics))
-under a binary operator. Functional programmers create
+under a binary operator. Functional programmers use
 algebras to formalize and verify the design of their programs.
 
-All this "complex" algebraic stuff is actually what you learned in elementary school:
+All this "complex" algebraic stuff is actually what you learned in elementary school arithmetics:
 
 * A [semigroup](https://en.wikipedia.org/wiki/Semigroup) is a magma where the binary operator is [associative](https://en.wikipedia.org/wiki/Associative_property).
 * A [monoid](https://en.wikipedia.org/wiki/Monoid) is a semigroup where the set has a [identity element](https://en.wikipedia.org/wiki/Identity_element).
