@@ -540,26 +540,55 @@ to maintain.
 
 #### Reactive Programming
 
-Originally, this approach was a sprinkle of programming language magic, 
-where change-observation event handlers of some selected variables were created and
-maintained automatically by the programming environment. 
-In the modern days, reactive programming is essentially a message-passing 
-architecture maintained by a framework, where whole event streams could be 
-functionally composed, throttled, and harnessed by the [back-pressure](https://en.wikipedia.org/wiki/Backpressure_routing).
+The core idea is *automatic change propagation*: you declare how values depend
+on each other, and the runtime keeps them in sync for you. A spreadsheet is the
+canonical example - write `C1 = A1 + B1` and `C1` recomputes itself whenever
+`A1` changes. You never write the update logic; the environment derives it from
+the dependency graph and re-runs it.
 
-Because it often employs concurrency, and the lion's share of concurrency-related
-complexity is hidden beneath the libraries or language constructs, [reactive
-programming](https://en.wikipedia.org/wiki/Reactive_programming) is often sold
-as a separate paradigm on the complexity-management markets, which
-allows for improving overall application responsivity.
+Originally this was a sprinkle of programming language magic: the compiler or
+runtime silently created and maintained change-observation handlers for selected
+variables. In modern practice, [reactive
+programming](https://en.wikipedia.org/wiki/Reactive_programming) is mostly a
+message-passing architecture provided by a framework, and the unit of
+composition is no longer a variable but an *event stream* - a potentially
+infinite sequence of values arriving over time. Streams are first-class values,
+so you can filter, transform, merge, and throttle them with the same combinator
+vocabulary you would use on a list, except the elements arrive later. Because a
+fast producer can outrun a slow consumer, stream frameworks also implement
+**back-pressure**: a signal sent upstream that says "slow down", which the
+producer answers by pausing, buffering, or dropping events (see [Reactive
+Streams](https://en.wikipedia.org/wiki/Reactive_Streams)).
+
+The usual vocabulary:
+
+- Publisher / Observable - the source of the stream.
+- Subscriber / Observer - the consumer that reacts to each event.
+- Operator - a pure function that turns a stream into another stream
+  (`map`, `filter`, `merge`, `debounce`, …).
+- Scheduler - decides which thread or pool each stage runs on.
+
+Reactive programming does not strictly require concurrency; a single-threaded UI
+event loop is reactive too. But it pairs naturally with it, and because the
+lion's share of concurrency-related complexity - scheduling, synchronization,
+buffering, cancellation - is hidden beneath the libraries or language
+constructs, reactive programming is often sold as a separate paradigm on the
+complexity-management markets, with improved application responsivity as the
+headline feature. That responsivity has a concrete mechanism behind it: no
+thread ever sits blocked waiting for a result. Work is registered as a callback,
+the thread goes back to the pool, and the callback fires when the value arrives.
 
 Parallelized reactive programming is where you offload multiple complex tasks
 from the main thread of execution to a thread pool (or a
 [multiprocessing](https://en.wikipedia.org/wiki/Multiprocessing) environment)
-and wait for their completion by using [futures or
-promises](https://en.wikipedia.org/wiki/Futures_and_promises) or a
-subscriber/publisher framework that utilizes a message queue called a
-reactive event stream. You can filter, modify or combine event streams together.
+and collect the results asynchronously. Two shapes are common, and the
+difference is cardinality:
+
+- [Futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises) -
+  a placeholder for *exactly one* result that will exist later.
+- A publisher/subscriber framework over a message queue - a *reactive event
+  stream* carrying many results over time, which you can filter, modify, or
+  combine with other streams.
 
 
 #### Domain-Specific Languages
